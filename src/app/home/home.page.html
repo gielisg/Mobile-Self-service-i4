@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar mode="ios" color="success">
+    <ion-buttons mode="ios" slot="secondary">
+      <ion-button>
+        <ion-icon slot="icon-only" name="ios-contact"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button color="secondary">
+        <ion-icon slot="icon-only" name="ios-more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Default Buttons </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  The world is your oyster.
+  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be
+    your guide.</p>
+  <ion-row>
+    <img src="assets/icon/favicon.png" />
+  </ion-row>
+
+  <h3>Basic Buttons</h3>
+  <div class="example-button-row">
+    <button mat-button (click)="gotoSignIn()">Basic</button>
+    <button mat-button color="primary">Primary</button>
+    <button mat-button color="accent">Accent</button>
+    <button mat-button color="warn">Warn</button>
+    <button mat-button disabled>Disabled</button>
+    <a mat-button routerLink=".">Link</a>
+  </div>
+
+</ion-content>

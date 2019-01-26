@@ -1,0 +1,116 @@
+<ion-header class="header-class">
+
+  <!-- <ion-row mode="ios" class="header-row1">
+      <ion-col col-2>
+        <ion-row class="full-height">
+          <ion-icon name="ios-arrow-back" (click)="goto_signin()" class="header_back_icon"></ion-icon>
+        </ion-row>
+      </ion-col>
+      <ion-col col-8>
+        <ion-row class="full-height">
+          <span class="header-span">
+            {{ 'sign_up' | translate }}
+          </span>
+        </ion-row>
+      </ion-col>
+    </ion-row> -->
+
+
+  <ion-toolbar mode="ios">
+    <ion-buttons mode="ios" slot="secondary">
+      <ion-button (click)="gotoSignin()">
+        <ion-icon slot="icon-only" color="dark" size="small" name="ios-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title size="large">{{ 'sign_up' | translate }}</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-row class="logo-row">
+    <img src="assets/imgs/titlebar_logo.png" />
+  </ion-row>
+
+  <form #signUpData="ngForm" id="signUpData" (ngSubmit)="signUpSubmit(signUpData)" novalidate>
+    <ion-row class="username-row">
+      <mat-form-field class="example-full-width">
+        <input matInput type="text" placeholder="{{ 'username' | translate }}" [(ngModel)]="userData.username" required
+          name="username">
+        <mat-error>
+          {{ 'username_is_required' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </ion-row>
+
+    <ion-row class="password-row">
+      <mat-form-field class="example-full-width">
+        <input matInput type="email" placeholder="{{ 'email' | translate }}" [formControl]="emailFormControl"
+          [(ngModel)]="userData.email" required name="username">
+
+        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+          {{ 'valid_email_address' | translate }}
+        </mat-error>
+
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          {{ 'email_is_required' | translate }}
+        </mat-error>
+
+      </mat-form-field>
+    </ion-row>
+
+    <ion-row class="password-row">
+      <mat-form-field class="example-full-width">
+        <input matInput type="number" [(ngModel)]="userData.phone" [formControl]="phoneFormControl" required
+          placeholder="{{ 'phone_number' | translate }}" name="password" />
+
+        <mat-error *ngIf="phoneFormControl.hasError('required')">
+          <span>{{ 'phone_number_is_required' | translate }}</span>
+        </mat-error>
+
+      </mat-form-field>
+    </ion-row>
+
+    <ion-row class="password-row">
+      <mat-form-field class="example-full-width">
+        <input matInput type="password" [(ngModel)]="userData.password" required placeholder="{{ 'password' | translate }}"
+          name="password" />
+
+        <mat-error>
+          <span>{{ 'password_is_required' | translate }}</span>
+        </mat-error>
+
+      </mat-form-field>
+    </ion-row>
+
+    <ion-row class="password-row">
+      <mat-form-field class="example-full-width">
+        <input matInput type="text" [(ngModel)]="userData.address" required placeholder="{{ 'address' | translate }}"
+          name="address" />
+
+        <mat-error>
+          <span>{{ 'address_is_required' | translate }}</span>
+        </mat-error>
+
+      </mat-form-field>
+    </ion-row>
+
+    <ion-row class="login-row">
+      <button mat-mini-fab>
+        {{ 'signup' | translate }}
+      </button>
+    </ion-row>
+  </form>
+
+  <ion-row class="signup-row">
+    <span class="sign-up-span">
+      {{ 'already_have' | translate }}?
+      <span class="sign-up-page" (click)="gotoSignin()">
+        &nbsp;{{ 'sign_in' | translate }}
+      </span>
+    </span>
+  </ion-row>
+
+</ion-content>

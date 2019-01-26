@@ -1,0 +1,46 @@
+<ion-content padding mode="ios" class="background-color1">
+
+  <ion-row class="logo-row">
+    <img src="assets/imgs/titlebar_logo.png" />
+  </ion-row>
+  <form #signInData="ngForm" id="signInData" (ngSubmit)="signInSubmit(signInData)" novalidate>
+    <ion-row class="username-row">
+      <mat-form-field class="example-full-width">
+        <input matInput type="text" placeholder="{{ 'username' | translate }}" [(ngModel)]="userData.username"
+          required name="username">
+        <mat-error>
+          {{ 'username_is_required' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </ion-row>
+
+    <ion-row class="password-row">
+      <mat-form-field class="example-full-width">
+        <input matInput type="password" #title="ngModel" id="password" [(ngModel)]="userData.password" required
+          placeholder="{{ 'password' | translate }}" i18n-placeholder="@@password" name="password" />
+
+        <mat-error id="matLoginError2">
+          <span>{{ 'password_is_required' | translate }}</span>
+        </mat-error>
+
+      </mat-form-field>
+    </ion-row>
+    <ion-row class="login-row">
+      <button mat-mini-fab>
+        {{ 'login' | translate }}
+      </button>
+    </ion-row>
+  </form>
+
+  <ion-row class="signup-row">
+    <span class="sign-up-span">
+      {{ 'not_a_member' | translate }}?
+      <span class="sign-up-page" (click)="gotoSignup()">
+        &nbsp;{{ 'create_account' | translate }}
+      </span>
+    </span>
+  </ion-row>
+
+
+
+</ion-content>
