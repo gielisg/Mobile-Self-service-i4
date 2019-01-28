@@ -18,6 +18,15 @@ export class BillService {
 
   }
 
+  getServiceDisplay() {
+    let param = { "SessionKey": (localStorage.getItem("sessionKey")) };
+    return this.httpclient.post(
+      this.config.apiEndpoint + 'Bill.svc/rest/BillList',
+      JSON.stringify(param))
+      .pipe(
+      );
+  }
+
   getBill(): Observable<any> {
     let request_param = {
       'SessionKey': (localStorage.getItem('sessionKey')),
@@ -37,4 +46,38 @@ export class BillService {
     ).pipe(
     );
   }
+
+  getBillList() {
+    let request_param = {
+      "SessionKey": (localStorage.getItem("sessionKey")),
+      "PagingSortsAndFilters": {
+        "SkipRecords": 0,
+        "PropertyName": {},
+        "Sort": {
+          "Direction": "Descending",
+          "TargetProperty": "Id",
+        },
+        "TakeRecords": 50,
+      }
+    };
+    return this.httpclient.post(
+      this.config.apiEndpoint + 'Bill.svc/rest/BillList',
+      JSON.stringify(request_param))
+      .pipe(
+      );
+  }
+
+  getBillFile(billNumber) {
+    return this.httpclient.get(
+      this.config.apiEndpoint +
+      'Bill.svc/rest/BillFile?SessionKey=' +
+      encodeURIComponent(localStorage.getItem("sessionKey")) +
+      "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username +
+      "&BillNumber=" + billNumber + "&BillType=pdf")
+      .pipe(
+
+      );
+  }
+
+
 }

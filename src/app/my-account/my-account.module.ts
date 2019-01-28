@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
 
-import { HomePage } from './home.page';
+import { IonicModule } from '@ionic/angular';
+
+import { MyAccountPage } from './my-account.page';
 import { MaterialShareModule } from '../materialshare.module';
 
 
@@ -15,11 +16,19 @@ import { TranslateServiceService } from 'src/service/translate-service.service';
 import { AuthService } from 'src/service/auth.service';
 
 import { File } from '@ionic-native/file/ngx';
+import { BillService } from 'src/service/bill.service';
 
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
+
+const routes: Routes = [
+  {
+    path: '',
+    component: MyAccountPage
+  }
+];
 
 @NgModule({
   imports: [
@@ -28,6 +37,7 @@ export function createTranslateLoader(http: HttpClient) {
     IonicModule,
     MaterialShareModule,
     HttpClientModule,
+    ReactiveFormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -35,18 +45,14 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    RouterModule.forChild([
-      {
-        path: '',
-        component: HomePage
-      }
-    ])
+    RouterModule.forChild(routes)
   ],
+  declarations: [MyAccountPage],
   providers: [
-    TranslateServiceService,
     AuthService,
+    TranslateServiceService,
     File,
-  ],
-  declarations: [HomePage]
+    BillService,
+  ]
 })
-export class HomePageModule { }
+export class MyAccountPageModule { }

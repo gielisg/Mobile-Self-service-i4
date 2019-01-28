@@ -1,0 +1,120 @@
+<ion-header class="header-class">
+  <ion-toolbar color="dark" mode="ios">
+    <ion-buttons mode="ios" slot="secondary">
+      <ion-button (click)="openMenu()">
+        <ion-icon slot="icon-only" color="light" size="default" name="md-menu"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title size="large">
+      {{ 'my_account' | translate }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-row class="first-row">
+    <ion-col size="1"></ion-col>
+    <ion-col size="5">
+      <ion-row class="normal-margin">
+        <span class="amount-span">
+          {{ 'account_number' | translate }}
+        </span>
+      </ion-row>
+      <ion-row class="normal-margin">
+        <span class="dollar-amount-span">
+          {{billData.accountNumber}}
+        </span>
+      </ion-row>
+    </ion-col>
+    <ion-col size="5">
+      <ion-row class="normal-margin">
+        <span class="amount-span">
+          {{ 'amount_owing' | translate }}
+        </span>
+      </ion-row>
+      <ion-row class="normal-margin">
+        <span class="dollar-amount-span">
+          ${{billData.billAmount}}
+        </span>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="first-row">
+    <ion-row class="normal-margin">
+      <span class="amount-span">
+        {{ 'due_date' | translate }}
+      </span>
+    </ion-row>
+    <ion-row class="normal-margin">
+      <span class="dollar-amount-span">
+        {{billData.billDate}}
+      </span>
+    </ion-row>
+  </ion-row>
+
+  <ion-row [ngClass]="{'download-pay':switchMode == true, 'rus-pay':switchMode == false}">
+    <!-- <ion-col size="1">
+    </ion-col> -->
+    <ion-col size="6">
+      <ion-row class="button-row">
+        <button mat-button class="button-style1" (click)="clickDownload()">
+          {{ 'download_bill' | translate }}
+        </button>
+      </ion-row>
+    </ion-col>
+    <ion-col size="6">
+      <ion-row class="button-row">
+        <button mat-button class="button-style2" (click)="gotoPayNow()">
+          {{ 'pay_now' | translate }}
+        </button>
+      </ion-row>
+    </ion-col>
+    <!-- <ion-col size="1">
+    </ion-col> -->
+  </ion-row>
+
+  <ion-row class="my-detail">
+    <ion-col size="1">
+    </ion-col>
+    <ion-col size="10">
+      <ion-row class="button-row">
+        <button mat-button class="button-style1" (click)="gotoBillHistory()">
+          {{ 'bill_history' | translate }}
+        </button>
+      </ion-row>
+    </ion-col>
+    <ion-col size="1">
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="my-normal">
+    <ion-col size="1">
+    </ion-col>
+    <ion-col size="10">
+      <ion-row class="button-row">
+        <button mat-button class="button-style1" (click)="gotoTransactionHistory()">
+          {{ 'transaction_history' | translate }}
+        </button>
+      </ion-row>
+    </ion-col>
+    <ion-col size="1">
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="my-normal">
+    <ion-col size="1">
+    </ion-col>
+    <ion-col size="10">
+      <ion-row class="button-row">
+        <button mat-button class="button-style1" (click)="gotoPaymentHistory()">
+          {{ 'payment_method' | translate }}
+        </button>
+      </ion-row>
+    </ion-col>
+    <ion-col size="1">
+    </ion-col>
+  </ion-row>
+
+</ion-content>

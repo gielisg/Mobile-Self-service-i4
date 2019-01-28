@@ -20,8 +20,11 @@ import { TranslaterModule } from './translater.module';
 
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [
+    AppComponent,
+  ],
+  entryComponents: [
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

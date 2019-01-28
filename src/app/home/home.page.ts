@@ -7,7 +7,7 @@ import { TranslateServiceService } from 'src/service/translate-service.service';
 import { AuthService } from 'src/service/auth.service';
 import { BillService } from 'src/service/bill.service';
 
-// import { File } from '@ionic-native/file';
+import { File } from '@ionic-native/file/ngx';
 
 
 @Component({
@@ -26,7 +26,7 @@ export class HomePage implements OnInit {
     public rooter: Router,
     public loading: LoadingService,
     public toast: ToastService,
-    // public file: File,
+    public file: File,
     public translate: TranslateServiceService,
     public menu: MenuController,
     public authservice: AuthService,
@@ -49,17 +49,18 @@ export class HomePage implements OnInit {
   }
 
   gotoMyaccount() {
-    // this.navCtrl.push(MyaccountPage);
+    this.navCtrl.navigateForward('my-account');
   }
 
   gotoMyservice() {
-    // this.navCtrl.push(MyServicesPage);
+    this.navCtrl.navigateForward('my-service');
   }
 
 
   gotoPaynow() {
     // this.navCtrl.push(PayNowPage, { navParams: this.billData.billAmount });
   }
+
   download_bill() {
 
   }

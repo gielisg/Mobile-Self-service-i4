@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
 
-import { HomePage } from './home.page';
+import { IonicModule } from '@ionic/angular';
+
+import { MyServicePage } from './my-service.page';
 import { MaterialShareModule } from '../materialshare.module';
 
 
@@ -13,21 +14,40 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateServiceService } from 'src/service/translate-service.service';
 import { AuthService } from 'src/service/auth.service';
+import { ChangeStatusPage } from '../change-status/change-status.page';
+import { ChangePlanPage } from '../change-plan/change-plan.page';
+import { BillService } from 'src/service/bill.service';
 
-import { File } from '@ionic-native/file/ngx';
 
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
+const routes: Routes = [
+  {
+    path: '',
+    component: MyServicePage
+  }
+];
+
 @NgModule({
+  declarations: [
+    MyServicePage,
+    ChangeStatusPage,
+    ChangePlanPage,
+  ],
+  entryComponents: [
+    ChangeStatusPage,
+    ChangePlanPage,
+  ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     MaterialShareModule,
     HttpClientModule,
+    ReactiveFormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -35,18 +55,12 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    RouterModule.forChild([
-      {
-        path: '',
-        component: HomePage
-      }
-    ])
+    RouterModule.forChild(routes)
   ],
   providers: [
-    TranslateServiceService,
     AuthService,
-    File,
-  ],
-  declarations: [HomePage]
+    TranslateServiceService,
+    BillService,
+  ]
 })
-export class HomePageModule { }
+export class MyServicePageModule { }
