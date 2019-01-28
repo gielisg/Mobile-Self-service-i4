@@ -42,7 +42,6 @@ export class SigninPage implements OnInit {
   ionicInit() {
     this.menu.enable(false, 'first');
     this.translate.translaterService();
-    this.toast.present('asdhofiaushdofiuasdhfoiuhdo');
   }
 
   signInSubmit(signInData) {
@@ -58,7 +57,7 @@ export class SigninPage implements OnInit {
           data => {
             if (data) {
               console.log(data);
-              // localStorage.setItem("logged", JSON.stringify(this.userData));
+              localStorage.setItem("logged", JSON.stringify(this.userData));
               this.authservice.fillLoggedUser(this.userData.username, this.userData.password, data);
               this.navCtrl.navigateForward('home');
             }
@@ -66,9 +65,12 @@ export class SigninPage implements OnInit {
 
           },
           error => {
-
             this.userData.username = "";
             this.userData.password = "";
+            console.log(error);
+            if(error.message != null){
+              this.toast.present(error.message);
+            }
             this.loading.dismiss();
           });
 

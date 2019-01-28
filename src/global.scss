@@ -31,7 +31,7 @@ ion-row {
     background-color: #fafafa;
 }
 
-.logo_class {
+.logo-class {
     width: 70%;
     height: 100%;
     margin: auto;
@@ -107,7 +107,7 @@ ion-row {
             font-weight: bold;
         }
     }
-    ion-title{
+    ion-title {
         font-size: 20px;
     }
 }
@@ -119,4 +119,117 @@ ion-row {
     box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
     margin-left: -16px;
     background-color: white;
+}
+
+.first-row {
+    margin-top: 10%;
+    .normal-margin {
+        margin-top: 2%;
+        .amount-span {
+            margin: auto;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .dollar-amount-span {
+            margin: auto;
+            font-size: 23px;
+            font-weight: bold;
+        }
+        .dollar-date-span {
+            margin: auto;
+            font-size: 15px;
+            font-weight: bold;
+        }
+    }
+}
+
+.download-pay {
+    margin-top: 15%;
+    font-size: 1.3rem !important;
+}
+
+.rus-pay {
+    margin-top: 15%;
+    font-size: 1.3rem !important;
+    ion-col {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: unset !important;
+    }
+}
+
+.button-row {
+    width: 100%;
+    .button-style1 {
+        border-radius: 25px;
+        width: 100%;
+        font-weight: bold;
+        background-color: #3982a3;
+        height: 46px;
+        color: white;
+        text-align: center;
+        margin: auto;
+    }
+    .button-style2 {
+        border-radius: 25px;
+        width: 100%;
+        font-weight: bold;
+        background-color: #3ba464;
+        height: 46px;
+        color: white;
+    }
+}
+
+.my-detail {
+    margin-top: 10%;
+}
+
+.main-body {
+    margin-top: 15%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    .normal-row {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        .title-span {
+            width: 100%;
+            color: #3982a3;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .detail-span {
+            width: 100%;
+            margin-top: 5px;
+            color: #414141;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .change-span {
+            width: 100%;
+            color: #3982a3;
+            font-size: 18px;
+            font-weight: bold;
+            margin: auto;
+            background: transparent !important;
+            text-align: center;
+        }
+        .pencil-class {
+            width: 16px;
+            height: 16px;
+            margin: auto;
+        }
+    }
+}
+
+.border-row {
+    border: 1px solid #ddd;
+}
+
+form,
+input,
+optgroup,
+select {
+    width: 100%;
 }

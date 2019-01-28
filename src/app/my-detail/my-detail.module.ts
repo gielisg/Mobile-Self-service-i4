@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SigninPage } from './signin.page';
+import { MyDetailPage } from './my-detail.page';
 import { MaterialShareModule } from '../materialshare.module';
-import { TranslaterModule } from '../translater.module';
 
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -16,15 +15,16 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateServiceService } from 'src/service/translate-service.service';
 import { AuthService } from 'src/service/auth.service';
 
+
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
-
 const routes: Routes = [
   {
     path: '',
-    component: SigninPage
+    component: MyDetailPage
   }
 ];
 
@@ -35,6 +35,7 @@ const routes: Routes = [
     IonicModule,
     MaterialShareModule,
     HttpClientModule,
+    ReactiveFormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -44,10 +45,10 @@ const routes: Routes = [
     }),
     RouterModule.forChild(routes)
   ],
+  declarations: [MyDetailPage],
   providers: [
-    TranslateServiceService,
     AuthService,
-  ],
-  declarations: [SigninPage]
+    TranslateServiceService,
+  ]
 })
-export class SigninPageModule { }
+export class MyDetailPageModule { }

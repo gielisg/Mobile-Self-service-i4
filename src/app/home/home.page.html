@@ -1,35 +1,93 @@
-<ion-header>
-  <ion-toolbar mode="ios" color="success">
-    <ion-buttons mode="ios" slot="secondary">
-      <ion-button>
-        <ion-icon slot="icon-only" name="ios-contact"></ion-icon>
+<ion-header class="header-class">
+  <ion-toolbar color="dark" mode="ios">
+    <!-- <ion-buttons mode="ios" slot="secondary">
+      <ion-button (click)="gotoSignin()">
+        <ion-icon slot="icon-only" color="light" size="default" name="ios-menu"></ion-icon>
       </ion-button>
-    </ion-buttons>
-    <ion-buttons slot="primary">
-      <ion-button color="secondary">
-        <ion-icon slot="icon-only" name="ios-more"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>Default Buttons </ion-title>
+    </ion-buttons> -->
+    <ion-title size="large">{{ 'home' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be
-    your guide.</p>
-  <ion-row>
-    <img src="assets/icon/favicon.png" />
+  <ion-row class="first-row">
+    <ion-row class="normal-margin">
+      <span class="amount-span">
+        {{ 'amount_owing' | translate }}
+      </span>
+    </ion-row>
+    <ion-row class="normal-margin">
+      <span class="dollar-amount-span">
+        ${{billData.billAmount}}
+      </span>
+    </ion-row>
+    <ion-row class="normal-margin">
+      <span class="dollar-date-span">
+        {{ 'due' | translate }} {{billData.billDate}}
+      </span>
+    </ion-row>
+  </ion-row>
+  <ion-row [ngClass]="{'download-pay':switchMode == true, 'rus-pay':switchMode == false}">
+    <!-- <ion-col col-1>
+    </ion-col> -->
+    <ion-col size="6">
+      <ion-row class="button-row">
+        <button mat-button class="button-style1" (click)="clickDownload()">
+          {{ 'download_bill' | translate }}
+        </button>
+      </ion-row>
+    </ion-col>
+    <ion-col size="6">
+      <ion-row class="button-row">
+        <button mat-button class="button-style2" (click)="gotoPaynow()">
+          {{ 'pay_now' | translate }}
+        </button>
+      </ion-row>
+    </ion-col>
+    <!-- <ion-col col-1>
+    </ion-col> -->
   </ion-row>
 
-  <h3>Basic Buttons</h3>
-  <div class="example-button-row">
-    <button mat-button (click)="gotoSignIn()">Basic</button>
-    <button mat-button color="primary">Primary</button>
-    <button mat-button color="accent">Accent</button>
-    <button mat-button color="warn">Warn</button>
-    <button mat-button disabled>Disabled</button>
-    <a mat-button routerLink=".">Link</a>
-  </div>
+  <ion-row class="my-detail">
+    <ion-col size="1">
+    </ion-col>
+    <ion-col size="10">
+      <ion-row class="button-row">
+        <button mat-button class="button-style1" (click)="gotoMydetail()">
+          {{ 'my_details' | translate }}
+        </button>
+      </ion-row>
+    </ion-col>
+    <ion-col size="1">
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="my-normal">
+    <ion-col size="1">
+    </ion-col>
+    <ion-col size="10">
+      <ion-row class="button-row">
+        <button mat-button class="button-style1" (click)="gotoMyaccount()">
+          {{ 'my_account' | translate }}
+        </button>
+      </ion-row>
+    </ion-col>
+    <ion-col size="1">
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="my-normal">
+    <ion-col size="1">
+    </ion-col>
+    <ion-col size="10">
+      <ion-row class="button-row">
+        <button mat-button class="button-style1" (click)="gotoMyservice()">
+          {{ 'my_services' | translate }}
+        </button>
+      </ion-row>
+    </ion-col>
+    <ion-col size="1">
+    </ion-col>
+  </ion-row>
 
 </ion-content>

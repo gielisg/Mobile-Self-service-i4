@@ -1,0 +1,181 @@
+<ion-header class="header-class">
+  <ion-toolbar color="dark" mode="ios">
+    <ion-buttons mode="ios" slot="secondary">
+      <ion-button (click)="openMenu()">
+        <ion-icon slot="icon-only" color="light" size="default" name="md-menu"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title size="large">
+      {{ 'my_detail' | translate }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-row class="main-body main-row">
+    <ion-row class="normal-row">
+      <ion-col size="10">
+        <ion-row class="full-height">
+          <span class="title-span">
+            {{ 'name' | translate }}
+          </span>
+          <span class="detail-span" *ngIf="!changeState.username">
+            {{userData.username}}
+          </span>
+          <mat-form-field class="example-full-width" *ngIf="changeState.username">
+            <input matInput type="text" placeholder="{{ 'username' | translate }}" [(ngModel)]="userData.username"
+              required name="username">
+            <mat-error>
+              {{ 'username_is_required' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </ion-row>
+      </ion-col>
+      <ion-col size="2">
+        <ion-row class="full-height" *ngIf="!changeState.username" (click)="changeUser('username')">
+          <img src="assets/imgs/pencil.png" class="pencil-class" />
+        </ion-row>
+        <ion-row class="full-height" *ngIf="changeState.username" (click)="changeUser('username')">
+          <span class="change-span">
+            {{ 'ok' | translate }}
+          </span>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="border-row">
+    </ion-row>
+
+    <ion-row class="normal-row">
+      <ion-col size="10">
+        <ion-row class="full-height">
+          <span class="title-span">
+            {{ 'address' | translate }}
+          </span>
+          <span class="detail-span" *ngIf="!changeState.address">
+            {{userData.address}}
+          </span>
+          <mat-form-field class="example-full-width" *ngIf="changeState.address">
+            <input matInput type="text" placeholder="{{ 'address' | translate }}" [(ngModel)]="userData.address"
+              required name="address">
+            <mat-error>
+              {{ 'address_is_required' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </ion-row>
+      </ion-col>
+      <ion-col size="2">
+        <ion-row class="full-height" *ngIf="!changeState.address" (click)="changeUser('address')">
+          <img src="assets/imgs/pencil.png" class="pencil-class" />
+        </ion-row>
+        <ion-row class="full-height" *ngIf="changeState.address" (click)="changeUser('address')">
+          <span class="change-span">
+            {{ 'ok' | translate }}
+          </span>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="border-row">
+    </ion-row>
+
+    <ion-row class="normal-row" *ngIf="!changeState.email">
+      <ion-col size="10">
+        <ion-row class="full-height">
+          <span class="title-span">
+            {{ 'email' | translate }}
+          </span>
+          <span class="detail-span">
+            {{userData.email}}
+          </span>
+        </ion-row>
+      </ion-col>
+      <ion-col size="2">
+        <ion-row class="full-height" (click)="changeUser('email')">
+          <img src="assets/imgs/pencil.png" class="pencil-class" />
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="normal-row" *ngIf="changeState.email">
+      <form #comProfileForm="ngForm" id="comProfileForm" (ngSubmit)="completeAddCompany(comProfileForm)" novalidate>
+        <ion-row>
+          <ion-col size="10">
+            <ion-row class="full-height">
+              <span class="title-span">
+                {{ 'email' | translate }}
+              </span>
+              <mat-form-field class="example-full-width">
+                <input matInput type="email" placeholder="{{ 'email' | translate }}" [formControl]="emailFormControl"
+                  [(ngModel)]="userData.email" required name="email">
+
+                <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                  {{ 'valid_email_address' | translate }}
+                </mat-error>
+
+                <mat-error *ngIf="emailFormControl.hasError('required')">
+                  {{ 'email_is_required' | translate }}
+                </mat-error>
+
+              </mat-form-field>
+            </ion-row>
+          </ion-col>
+          <ion-col size="2">
+            <ion-row class="full-height button">
+              <button class="change-span">
+                {{ 'ok' | translate }}
+              </button>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-row>
+
+    <ion-row class="border-row">
+    </ion-row>
+
+    <ion-row class="normal-row">
+      <form #userPhone="ngForm" id="userPhone" (ngSubmit)="changePhone()" novalidate>
+        <ion-row>
+          <ion-col size="10">
+            <ion-row class="full-height">
+              <span class="title-span">
+                {{ 'contact' | translate }}
+              </span>
+              <span class="detail-span" *ngIf="!changeState.phone">
+                +{{userData.phone}}
+              </span>
+              <mat-form-field class="example-full-width" *ngIf="changeState.phone">
+                <input matInput type="number" [formControl]="phoneFormCtrl" placeholder="{{ 'phone_number' | translate }}"
+                  [(ngModel)]="userData.phone" required name="phone">
+                <!-- <mat-error>
+                {{ 'phone_number_is_required' | translate }}
+              </mat-error> -->
+
+                <mat-error *ngIf="phoneFormCtrl.hasError('pattern') && !phoneFormCtrl.hasError('required')">
+                  {{ 'valid_phone_number' | translate }}
+                </mat-error>
+
+                <mat-error *ngIf="phoneFormCtrl.hasError('required')">
+                  {{ 'phone_number_is_required' | translate }}
+                </mat-error>
+
+              </mat-form-field>
+            </ion-row>
+          </ion-col>
+          <ion-col size="2">
+            <ion-row class="full-height" *ngIf="!changeState.phone" (click)="changeUser('phone')">
+              <img src="assets/imgs/pencil.png" class="pencil-class" />
+            </ion-row>
+            <ion-row class="full-height" *ngIf="changeState.phone">
+              <button class="change-span">
+                {{ 'ok' | translate }}
+              </button>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-row>
+  </ion-row>
+</ion-content>

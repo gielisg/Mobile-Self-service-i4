@@ -13,8 +13,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { APP_CONFIG, AppConfig } from '../model';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslaterModule } from './translater.module';
+
+
+
 
 
 @NgModule({
