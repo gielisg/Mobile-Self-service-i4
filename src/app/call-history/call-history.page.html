@@ -1,0 +1,77 @@
+<ion-header class="header-class">
+  <ion-toolbar color="secondary" mode="ios">
+    <ion-buttons mode="ios" slot="secondary">
+      <ion-button (click)="goback()">
+        <ion-icon slot="icon-only" size="default" name="ios-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title text-wrap size="large">
+      {{ 'call_history' | translate }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding class="bill-content">
+
+  <ion-row *ngFor="let list of callHistoryData; let i = index" [ngClass]="{'main-row':i == 0, 'other-row': i != 0}">
+    <ion-row class="first-row">
+      <ion-col size="4" text-left>
+        <ion-row class="full-height">
+          <span class="name-span">
+            {{ 'number_called' | translate }}
+          </span>
+          <span class="detail-span">
+            {{list.callNum}}
+          </span>
+        </ion-row>
+      </ion-col>
+
+      <ion-col size="8" text-right>
+        <ion-row class="full-height">
+          <span class="name-span">
+            {{ 'date' | translate }}
+          </span>
+          <span class="receipt-span" text-right>
+            {{list.date}}
+          </span>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="bill-second-row">
+      <ion-col size="4" text-left>
+        <ion-row class="full-height">
+          <span class="name-span">
+            {{ 'duration' | translate }}
+          </span>
+          <span class="detail-span">
+            {{list.duration}}
+          </span>
+        </ion-row>
+      </ion-col>
+      <ion-col size="4">
+        <ion-row class="full-height">
+          <span class="name-span" text-center>
+            {{ 'tariff' | translate }}
+          </span>
+          <span class="detail-span" text-center>
+            {{list.tariff}}
+          </span>
+        </ion-row>
+      </ion-col>
+
+      <ion-col size="4" text-right>
+        <ion-row class="full-height">
+          <span class="name-span">
+            {{ 'cost' | translate }}
+          </span>
+          <span class="detail-span">
+            ${{list.cost}}
+          </span>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-row>
+
+</ion-content>

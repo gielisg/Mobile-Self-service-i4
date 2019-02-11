@@ -1,0 +1,81 @@
+<ion-header class="header-class">
+  <ion-toolbar color="secondary" mode="ios">
+    <ion-buttons mode="ios" slot="secondary">
+      <ion-button (click)="openMenu()">
+        <ion-icon slot="icon-only" size="default" name="ios-menu"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title text-wrap size="large">
+      {{ 'settings' | translate }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="setting-content">
+
+  <ion-row class="main-row each-seting">
+    <ion-col size="2">
+      <ion-row class="full-height">
+        <img src="assets/imgs/lock.png" class="lock-image" alt="">
+      </ion-row>
+    </ion-col>
+    <ion-col size="10">
+      <ion-row class="full-height" (click)="gotoChangePass()">
+        <span class="change-password">{{ 'change_password' | translate }}</span>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="each-seting">
+    <ion-col size="2">
+      <ion-row class="full-height">
+        <img src="assets/imgs/pin_code.png" class="lock-image" alt="">
+      </ion-row>
+    </ion-col>
+    <ion-col size="10">
+      <ion-row class="full-height">
+        <span class="change-password">{{ 'change_pin' | translate }}</span>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="each-seting">
+    <ion-col size="6">
+      <ion-row class=" full-height">
+        <span class="change-password sel-lng">{{ 'select_language' | translate }}</span>
+      </ion-row>
+    </ion-col>
+    <ion-col size="6">
+      <ion-row class="full-height lng-setmode">
+        <!-- <mat-form-field class="select-class">
+          <mat-select [formControl]="selectFormControl" [(ngModel)]="selectLng" required>
+            <mat-option value="en" (click)="selectedLng()">
+              {{ 'english' | translate }}
+            </mat-option>
+
+            <mat-option value="ru" (click)="selectedLng()">
+              {{ 'russian' | translate }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="selectFormControl.hasError('required')">
+            {{ 'choose_type_of_payment' | translate }}
+          </mat-error>
+        </mat-form-field> -->
+        <!-- <mat-form-field class="select-class"> -->
+        <ion-select class="select-class" (ionChange)="selectedLng()" [formControl]="selectFormControl" [(ngModel)]="selectLng"
+          required>
+          <ion-select-option value="en" (click)="selectedLng()">
+            {{ 'english' | translate }}
+          </ion-select-option>
+
+          <ion-select-option value="ru" (click)="selectedLng()">
+            {{ 'russian' | translate }}
+          </ion-select-option>
+        </ion-select>
+        <!-- </mat-form-field> -->
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

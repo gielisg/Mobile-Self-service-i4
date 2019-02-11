@@ -1,0 +1,96 @@
+<ion-header class="header-class">
+  <ion-toolbar color="secondary" mode="ios">
+    <ion-buttons mode="ios" slot="secondary">
+      <ion-button (click)="goback()">
+        <ion-icon slot="icon-only" size="default" name="ios-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title text-wrap size="large">
+      {{ 'payment_method' | translate }}
+      <br>
+      <span size="small">
+        {{accountNumber}}
+      </span>
+    </ion-title>
+    <ion-buttons mode="ios" slot="primary">
+      <ion-button (click)="gotoNewPayment()">
+        +{{ 'new' | translate }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding class="bill-content">
+
+
+  <ion-row [ngClass]="{'main-row':i == 0, 'other-row':i != 0}" *ngFor="let list of detailData; let i = index">
+    <ion-row class="first-row">
+      <ion-col size="4" text-left>
+        <ion-row class="full-height">
+          <span class="name-span">
+            {{ 'name' | translate }}
+          </span>
+          <span class="detail-span">
+            {{list.name}}
+          </span>
+        </ion-row>
+      </ion-col>
+
+      <ion-col size="4">
+        <ion-row class="full-height">
+          <span class="name-span">
+            {{ 'type' | translate }}
+          </span>
+          <span class="detail-span">
+            {{list.type}}
+          </span>
+        </ion-row>
+      </ion-col>
+
+      <ion-col size="4" text-right>
+        <ion-row class="full-height">
+          <span class="name-span">
+            {{ 'number' | translate }}
+          </span>
+          <span class="detail-span">
+            {{list.number}}
+          </span>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="bill-second-row">
+      <ion-col size="4" text-left>
+        <ion-row class="full-height">
+          <span class="name-span">
+            {{ 'expiry' | translate }}
+          </span>
+          <span class="detail-span">
+            {{list.expiry}}
+          </span>
+        </ion-row>
+      </ion-col>
+      <ion-col size="4">
+        <ion-row class="full-height">
+          <span class="name-span">
+            {{ 'status' | translate }}
+          </span>
+          <span class="detail-span">
+            {{ list.status | translate }}
+          </span>
+        </ion-row>
+      </ion-col>
+
+      <ion-col size="4" text-right>
+        <ion-row class="full-height">
+          <button mat-button class="down-button-class" (click)="deleteItem(i)">
+            {{ 'delete' | translate }}
+          </button>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+  </ion-row>
+
+</ion-content>

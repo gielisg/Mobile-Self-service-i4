@@ -1,0 +1,56 @@
+<ion-header class="header-class">
+  <ion-toolbar color="secondary" mode="ios">
+    <ion-buttons mode="ios" slot="secondary">
+      <ion-button (click)="goback()">
+        <ion-icon slot="icon-only" size="default" name="ios-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title text-wrap size="large">
+      {{ 'service_detail' | translate }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding class="bill-content">
+
+  <ion-row class="main-row">
+    <ion-row class="first-row">
+      <span class="name-span">
+        {{ 'number' | translate }}
+      </span>
+      <span class="detail-span">
+        3GB {{ 'unlimited' | translate }}
+      </span>
+    </ion-row>
+
+    <ion-row class="first-row">
+      <span class="name-span">
+        {{ 'date' | translate }}
+      </span>
+      <span class="detail-span">
+        12, March 2017 10:15 am
+      </span>
+    </ion-row>
+
+    <ion-row class="first-row">
+      <span class="name-span">
+        {{ 'plan' | translate }}
+      </span>
+      <span class="detail-span">
+        {{ 'super_saver' | translate }} 32
+      </span>
+    </ion-row>
+
+    <ion-row class="first-row last_row">
+      <span class="name-span">
+        {{ 'status' | translate }}
+      </span>
+      <span class="detail-span">
+        {{ 'open' | translate }}
+      </span>
+    </ion-row>
+
+  </ion-row>
+
+</ion-content>

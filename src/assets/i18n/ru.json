@@ -123,6 +123,9 @@
     "saver4": "Бережливый человек 4",
     "save": "Спасать",
     "more": "Более",
+    "menu": "Меню",
+    "payment_submit_successfully": "Платеж успешно отправлен",
+    "open_new_payment": "Открыть новый платеж",
     "unlimited1": "3GB Неограниченный",
     "unlimited2": "4GB Неограниченный"
 }

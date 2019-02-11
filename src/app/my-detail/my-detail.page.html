@@ -1,5 +1,5 @@
 <ion-header class="header-class">
-  <ion-toolbar color="dark" mode="ios">
+  <ion-toolbar color="secondary" mode="ios">
     <ion-buttons mode="ios" slot="secondary">
       <ion-button (click)="openMenu()">
         <ion-icon slot="icon-only" color="light" size="default" name="md-menu"></ion-icon>
@@ -9,6 +9,22 @@
       {{ 'my_detail' | translate }}
     </ion-title>
   </ion-toolbar>
+
+  <!-- <ion-row mode="ios" color="secondary" class="header-row1">
+    <ion-col size="2">
+      <ion-row class="full-height">
+        <ion-icon name="md-menu" size="default" (click)="openMenu()" class="header-icon"></ion-icon>
+      </ion-row>
+    </ion-col>
+    <ion-col size="8">
+      <ion-row class="full-height">
+        <span class="header-span">
+          {{ 'my_detail' | translate }}
+        </span>
+      </ion-row>
+    </ion-col>
+  </ion-row> -->
+
 </ion-header>
 
 <ion-content padding>

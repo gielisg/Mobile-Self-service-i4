@@ -33,6 +33,7 @@ export class SigninPage implements OnInit {
     // this.ionicInit();
     console.log(localStorage.getItem("logged"));
     if (localStorage.getItem("logged") != null && localStorage.getItem("logged") != "") {
+      this.translate.translaterService();
       this.navCtrl.navigateForward('home');
     } else {
       this.ionicInit();
@@ -56,7 +57,6 @@ export class SigninPage implements OnInit {
         .subscribe(
           data => {
             if (data) {
-              console.log(data);
               localStorage.setItem("logged", JSON.stringify(this.userData));
               this.authservice.fillLoggedUser(this.userData.username, this.userData.password, data);
               this.navCtrl.navigateForward('home');
@@ -68,7 +68,7 @@ export class SigninPage implements OnInit {
             this.userData.username = "";
             this.userData.password = "";
             console.log(error);
-            if(error.message != null){
+            if (error.message != null) {
               this.toast.present(error.message);
             }
             this.loading.dismiss();

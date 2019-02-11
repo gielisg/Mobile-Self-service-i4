@@ -123,6 +123,9 @@
     "saver4": "Saver4",
     "save": "Save",
     "more": "More",
+    "menu": "Menu",
+    "payment_submit_successfully": "Payment successfully submitted",
+    "open_new_payment": "Open New Payment",
     "unlimited1": "3GB Unlimited",
     "unlimited2": "4GB Unlimited"
 }

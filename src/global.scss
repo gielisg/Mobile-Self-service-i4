@@ -95,20 +95,30 @@ ion-row {
 }
 
 .header-class {
-    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
-    background-color: white;
-    height: 60px;
+    // box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
+    // background-color: white;
+    // height: 60px;
     .header-row1 {
         padding-top: 20px;
-        height: 40px;
+        height: 60px;
         margin: auto;
         .header-span {
-            color: black;
+            color: white;
             font-weight: bold;
+            margin: auto;
+            font-size: 20px;
+        }
+        .header-icon {
+            margin: auto;
+            font-size: 25px;
         }
     }
     ion-title {
         font-size: 20px;
+        text-overflow: ellipsis !important;
+        span {
+            font-size: 13px;
+        }
     }
 }
 
@@ -213,6 +223,7 @@ ion-row {
             width: 100%;
             color: #3982a3;
             font-size: 18px;
+            cursor: pointer;
             font-weight: bold;
             margin: auto;
             background: transparent !important;
@@ -221,6 +232,7 @@ ion-row {
         .pencil-class {
             width: 16px;
             height: 16px;
+            cursor: pointer;
             margin: auto;
         }
     }
@@ -249,7 +261,7 @@ select {
         margin-top: 5px;
     }
     .change-button {
-        height: 25px;
+        // height: 25px;
         color: white;
         font-weight: bold;
         background-color: #3c82a3;
@@ -313,4 +325,393 @@ select {
 .margin-top {
     margin-top: 5%;
     margin-bottom: 3%;
+}
+
+.bill-content {
+    background-color: #fafafa;
+    .main-row {
+        margin-top: 0%;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 5px;
+        background-color: white;
+    }
+    .other-row {
+        margin-top: 5%;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 5px;
+        background-color: white;
+    }
+    .name-span {
+        width: 100%;
+        font-size: 17px;
+        color: #3982a3;
+        font-weight: bold;
+    }
+    .detail-span {
+        width: 100%;
+        font-size: 17px;
+        margin-top: 5px;
+        font-weight: bold;
+    }
+    .bill-second-row {
+        .down-button-class {
+            background-color: #3881a2;
+            color: white;
+            border-radius: 10px;
+            text-transform: initial;
+            width: 80%;
+            margin-left: auto;
+            margin-top: auto;
+            margin-bottom: auto;
+            .download-image {
+                width: 20px;
+                height: 20px;
+                margin: auto;
+                margin-right: auto;
+            }
+            .button-span-name {
+                margin: auto;
+                font-size: 15px;
+            }
+        }
+    }
+}
+
+#changePlan {
+    width: 100%;
+    .payment-title-span {
+        width: 100%;
+        font-size: 17px;
+        color: #3982a3;
+        font-weight: bold;
+    }
+    .select-class {
+        width: 100%;
+        max-width: 100%;
+        font-size: 16px;
+    }
+    .mat-form-field {
+        width: 100%;
+    }
+    .add-cancel {
+        margin-top: 5%;
+        .button-row {
+            width: 100%;
+            .button-style1 {
+                border-radius: 25px;
+                width: 100%;
+                font-weight: bold;
+                background-color: #3982a3;
+                height: 40px;
+                font-size: 16px;
+            }
+            .button-style2 {
+                border-radius: 25px;
+                width: 100%;
+                font-weight: bold;
+                background-color: #3ba464;
+                height: 40px;
+            }
+        }
+    }
+}
+
+.non-padding {
+    padding: 0px;
+}
+
+.button-name {
+    margin-left: -15px;
+}
+
+.button-row {
+    width: 100%;
+}
+
+.pay-now-row {
+    margin-top: 5%;
+    .payment-title-span {
+        width: 100%;
+        font-size: 17px;
+        color: #3982a3;
+        font-weight: bold;
+    }
+    .select-class {
+        width: 100%;
+        max-width: 100%;
+        font-size: 16px;
+    }
+    .payment-amount-span {
+        color: #aaaaaa;
+        font-weight: bold;
+        width: 100%;
+        font-size: 17px;
+    }
+    mat-form-field {
+        width: 100%;
+    }
+}
+
+.add-cancel {
+    margin-top: 5%;
+    .button-row {
+        width: 100%;
+        .button-style1 {
+            border-radius: 25px;
+            width: 100%;
+            font-weight: bold;
+            background-color: #3982a3;
+            height: 40px;
+            font-size: 16px;
+        }
+        .button-style2 {
+            border-radius: 25px;
+            width: 100%;
+            font-weight: bold;
+            background-color: #3ba464;
+            height: 40px;
+        }
+    }
+}
+
+.content-class {
+    background: rgba(0, 0, 0, 0.7);
+    .main-row {
+        margin-top: 50%;
+        background-color: white;
+        padding-top: 0px !important;
+        border: none;
+    }
+    .title-row {
+        height: 60px;
+        background-color: #080808;
+    }
+    .title-span {
+        color: white;
+        margin: auto;
+        font-size: 17px;
+    }
+    .button-row {
+        background: #717171;
+        height: 50px;
+    }
+    .button-class {
+        background: #a7a7a7;
+        box-shadow: unset;
+        width: 40%;
+        margin: auto;
+        color: black;
+        text-transform: initial;
+        height: 30px;
+    }
+}
+
+.payment-id {
+    text-align: center;
+    width: 100%;
+    margin: auto;
+    font-weight: bold;
+}
+
+.payment-row {
+    margin-top: 5%;
+}
+
+.payment-input {
+    width: 100%;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+.expire-select {
+    max-width: 100%;
+}
+
+.normal-row {
+    margin-top: 0%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: white;
+}
+
+.bill-relative {
+    position: relative;
+    padding-bottom: 50px;
+    .more-button-Row {
+        position: absolute;
+        bottom: 5px;
+        width: 100%;
+        margin-left: -16px;
+        .more-button {
+            width: 50%;
+            margin: auto;
+            text-transform: initial;
+            background-color: #3880ff;
+            color: black; // height: 30px;
+            z-index: 200;
+            border-radius: 5px;
+        }
+    }
+}
+
+.receipt-span {
+    text-align: right;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+}
+
+.payment-row {
+    margin-top: 5%;
+    .payment-title-span {
+        width: 100%;
+        font-size: 17px;
+        color: #3982a3;
+        font-weight: bold;
+    }
+    .select-class {
+        width: 100%;
+        max-width: 100%;
+        font-size: 16px;
+    }
+    .error-border {
+        border-bottom: 1px solid #f44336 !important;
+    }
+    .normal-border {
+        border-bottom: 1px solid #ddd;
+    }
+}
+
+.cal-error {
+    span {
+        color: #f44336;
+        font-size: 75%;
+        margin-top: .66667em;
+    }
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+.button-style1 {
+    border-radius: 25px !important;
+    width: 100%;
+    font-weight: bold;
+    background-color: #3982a3;
+    height: 40px;
+}
+
+.add-button {
+    width: 50%;
+    margin: auto;
+    text-transform: initial;
+    margin-top: 5%;
+}
+
+.topup-calender {
+    ion-col {
+        padding: 0px;
+    }
+    ion-datetime {
+        padding-left: 0px !important;
+        border-bottom: 1px solid #ddd;
+    }
+}
+
+.setting-content {
+    .each-seting {
+        background-color: white;
+        border-bottom: 2px solid #ddd;
+        height: 50px;
+    }
+    .other-row {
+        background-color: white;
+        height: 50px;
+    }
+    .left-align {
+        text-align: right;
+    }
+    .lock-image {
+        width: 20px;
+        height: 20px;
+        margin: auto;
+        opacity: 0.5;
+    }
+    .change-password {
+        margin-top: auto;
+        margin-bottom: auto;
+        font-size: 17px;
+        cursor: pointer;
+        color: black;
+        opacity: 0.5;
+        width: 100%;
+    }
+    .app-version-span {
+        padding-left: 15px;
+        margin-top: auto;
+        margin-bottom: auto;
+        width: 100%;
+        opacity: 0.5;
+        font-size: 17px;
+    }
+    .app-version {
+        margin-top: auto;
+        margin-bottom: auto;
+        padding-right: 10px;
+        width: 100%;
+        opacity: 0.5;
+        font-size: 17px;
+    }
+    .select-class {
+        width: 100%;
+        max-width: 100%;
+        font-size: 16px;
+        .mat-form-field-infix {
+            padding: 0px !important;
+        }
+    }
+    .mat-select-trigger {
+        margin-top: 10px;
+    }
+    .sel-lng {
+        padding-left: 10px;
+    }
+}
+
+.menu-content {
+    background-color: #3883a4;
+    color: white;
+    .first-menu {
+        top: 5%;
+        position: absolute;
+    }
+    .second-row {
+        bottom: 2%;
+        position: absolute;
+    }
+    .bottom-menu-content {
+        margin-top: 3%;
+        margin-bottom: 3%;
+        cursor: pointer;
+    }
+    .menu-imageList {
+        height: 25px;
+        width: 25px;
+        margin: auto;
+    }
+    .menu-list {
+        font-size: 17px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    .top-menu-content {
+        margin-top: 5%;
+        cursor: pointer;
+    }
 }

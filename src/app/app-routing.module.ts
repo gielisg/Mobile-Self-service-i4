@@ -11,6 +11,19 @@ const routes: Routes = [
   { path: 'my-service', loadChildren: './my-service/my-service.module#MyServicePageModule' },
   { path: 'change-status', loadChildren: './change-status/change-status.module#ChangeStatusPageModule' },
   { path: 'change-plan', loadChildren: './change-plan/change-plan.module#ChangePlanPageModule' },
+  { path: 'bill-history', loadChildren: './bill-history/bill-history.module#BillHistoryPageModule' },
+  { path: 'transaction-history', loadChildren: './transaction-history/transaction-history.module#TransactionHistoryPageModule' },
+  { path: 'pay-now', loadChildren: './pay-now/pay-now.module#PayNowPageModule' },
+  { path: 'pay-now-check', loadChildren: './pay-now-check/pay-now-check.module#PayNowCheckPageModule' },
+  { path: 'payment-method', loadChildren: './payment-method/payment-method.module#PaymentMethodPageModule' },
+  { path: 'new-payment', loadChildren: './new-payment/new-payment.module#NewPaymentPageModule' },
+  { path: 'call-history', loadChildren: './call-history/call-history.module#CallHistoryPageModule' },
+  { path: 'change-password', loadChildren: './change-password/change-password.module#ChangePasswordPageModule' },
+  { path: 'service-bundle', loadChildren: './service-bundle/service-bundle.module#ServiceBundlePageModule' },
+  { path: 'service-detail', loadChildren: './service-detail/service-detail.module#ServiceDetailPageModule' },
+  { path: 'settings', loadChildren: './settings/settings.module#SettingsPageModule' },
+  { path: 'topup-history', loadChildren: './topup-history/topup-history.module#TopupHistoryPageModule' },
+  { path: 'top-up', loadChildren: './top-up/top-up.module#TopUpPageModule' },
 ];
 
 @NgModule({

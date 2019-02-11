@@ -1,0 +1,76 @@
+<ion-header class="header-class">
+  <ion-toolbar color="secondary" mode="ios">
+    <ion-buttons mode="ios" slot="secondary">
+      <ion-button (click)="goback()">
+        <ion-icon slot="icon-only" size="default" name="ios-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title text-wrap size="large">
+      {{ 'topup' | translate }}-04155188882
+      <!-- <br>
+      <span size="small">
+        {{accountNumber}}
+      </span> -->
+    </ion-title>
+    <ion-buttons mode="ios" slot="primary">
+      <ion-button (click)="gotoNewPayment()">
+        +{{ 'new' | translate }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding class="bill-content">
+
+  <ion-row class="main-row" *ngFor="let list of topData; let i = index" [ngClass]="{'main-row':i == 0, 'other-row': i != 0}">
+    <ion-row class="first-row">
+      <ion-col col-6 text-left>
+        <ion-row class="full-height">
+          <span class="name-span">
+            {{ 'topup' | translate }}
+          </span>
+          <span class="detail-span">
+            {{ list.top | translate }}
+          </span>
+        </ion-row>
+      </ion-col>
+
+      <ion-col col-6 text-right>
+        <ion-row class="full-height">
+          <span class="name-span">
+            {{ 'date' | translate }}
+          </span>
+          <span class="receipt-span" text-right>
+            {{list.date}}
+          </span>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="bill-second-row">
+      <ion-col col-6 text-left>
+        <ion-row class="full-height">
+          <span class="name-span">
+            {{ 'expiry' | translate }}
+          </span>
+          <span class="detail-span">
+            {{list.expiry}}
+          </span>
+        </ion-row>
+      </ion-col>
+      <ion-col col-6 text-right>
+        <ion-row class="full-height">
+          <span class="name-span">
+            {{ 'status' | translate }}
+          </span>
+          <span class="detail-span">
+            {{ list.status | translate }}
+          </span>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+  </ion-row>
+
+</ion-content>

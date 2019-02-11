@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, MenuController } from '@ionic/angular';
+import { NavController, MenuController, Platform } from '@ionic/angular';
 import { LoadingService } from 'src/service/loading.service';
 import { ToastService } from 'src/service/toast.service';
 import { AuthService } from 'src/service/auth.service';
@@ -17,7 +17,7 @@ export class MyAccountPage implements OnInit {
 
   public switchMode: boolean;
 
-  public billData = { "billAmount": "", "billDate": "", "accountNumber": "" };
+  public billData = { "billAmount": "", "billDate": "", "accountNumber": "", 'billNumber': '' };
 
   constructor(
     public navCtrl: NavController,
@@ -26,6 +26,7 @@ export class MyAccountPage implements OnInit {
     public authService: AuthService,
     public billService: BillService,
     public file: File,
+    public plt: Platform,
     public translate: TranslateServiceService,
     public menu: MenuController,
   ) { }
@@ -36,6 +37,7 @@ export class MyAccountPage implements OnInit {
 
   ionicInit() {
 
+    this.translate.translaterService();
     this.loading.present();
 
     this.billService.getBillList()
@@ -45,7 +47,7 @@ export class MyAccountPage implements OnInit {
           this.billData.billAmount = Object(data).Items[0].AmountDue;
           this.billData.billDate = this.setDate(Object(data).Items[0].DueDate.split("T")[0]);
           this.billData.accountNumber = Object(data).Items[0].ContactCode;
-          this.translate.translaterService();
+          this.billData.billNumber = Object(data).Items[0].Number;
           if (localStorage.getItem("set_lng") == "en") {
             this.switchMode = true;
           } else {
@@ -58,13 +60,13 @@ export class MyAccountPage implements OnInit {
       },
         error => {
           console.log(error);
-          let errorBody = JSON.parse(error._body);
+          let errorBody = error.error;
           console.log(errorBody);
           if (errorBody.Code.Name == 'InvalidSessionKeyException') {
             this.authService.createRandomSessionKey().subscribe(result => {
               if (result) {
                 console.log(result);
-                // localStorage.setItem('sessionKey', result);
+                localStorage.setItem('sessionKey', result);
                 this.ionicInit();
               }
             }, error => {
@@ -76,17 +78,22 @@ export class MyAccountPage implements OnInit {
         });
   }
   gotoBillHistory() {
-    // this.navCtrl.push(BillHistoryPage);
+    this.navCtrl.navigateForward('bill-history');
   }
   gotoTransactionHistory() {
-    // this.navCtrl.push(TransactionHistoryPage);
+    this.navCtrl.navigateForward('transaction-history');
   }
   gotoPaymentHistory() {
-    // this.navCtrl.push(PaymentMethodPage);
+    this.navCtrl.navigateForward('payment-method');
   }
   gotoPayNow() {
+    console.log(this.billData.billAmount);
+    localStorage.setItem('paynowAmount', this.billData.billAmount)
+    // console.log('paynowAmount', this.billData.billAmount);
     // this.navCtrl.push(PayNowPage, { navParams: this.billData.billAmount });
+    this.navCtrl.navigateForward('pay-now');
   }
+  
   download_bill() {
 
     // const url = "http://localhost/test_php/MyPDF.pdf";
@@ -121,24 +128,29 @@ export class MyAccountPage implements OnInit {
 
     this.loading.present();
 
-    this.billService.getBillList()
-      .subscribe(data => {
-        console.log(data);
-        if (data) {
-          this.billData.billAmount = Object(data).Items[0].AmountDue;
-          this.billData.billDate = this.setDate(Object(data).Items[0].DueDate.split("T")[0]);
+    this.billService.getBillFile(this.billData.billNumber)
+      .subscribe(result => {
+        console.log(result);
+
+        if (Object(result).Content != null && typeof (Object(result).Content) != "undefined") {
+          console.log("here");
+          var pdf = 'data:application/pdf;base64,' + Object(result).Content.$value;
+          let pdfName = Object(result).FileName;
+          console.log("here");
+          this.downloadPdf(pdf, pdfName);
         }
+
         this.loading.dismiss();
 
       }, error => {
         console.log(error);
-        let errorBody = JSON.parse(error._body);
+        let errorBody = error.error;
         console.log(errorBody);
         if (errorBody.Code.Name == 'InvalidSessionKeyException') {
           this.authService.createRandomSessionKey().subscribe(result => {
             if (result) {
               console.log(result);
-              // localStorage.setItem('sessionKey', result);
+              localStorage.setItem('sessionKey', result);
               this.clickDownload();
             }
           }, error => {
@@ -159,6 +171,56 @@ export class MyAccountPage implements OnInit {
   openMenu() {
     this.menu.open('first');
   }
+
+  downloadPdf(pdfByte, pdfName) {
+
+    let pathDirect = "";
+    let pathFile = "";
+
+    console.log(this.file);
+
+    if (this.plt.is('android')) {
+      pathDirect = this.file.externalApplicationStorageDirectory;
+      pathFile = this.file.externalApplicationStorageDirectory + "Self_Service/";
+    } else if (this.plt.is('ios')) {
+      pathDirect = this.file.tempDirectory;
+      pathFile = this.file.tempDirectory + "Self_Service/";
+    }
+
+    if (!this.plt.is('desktop')) {
+      this.file.checkDir(pathDirect, 'Self_Service').then((resultCheck) => {
+        console.log(resultCheck);
+        this.file.writeFile(pathFile, pdfName, this.convertBaseb64ToBlob(pdfByte, 'data:application/pdf;base64'), { replace: true });
+      }, (error) => {
+        this.file.createDir(pathDirect, 'Self_Service', false).then((DirectoryEntry) => {
+          this.file.writeFile(pathFile, pdfName, this.convertBaseb64ToBlob(pdfByte, 'data:application/pdf;base64'), { replace: true });
+        }, (error) => {
+          console.log("Create error");
+        });
+      });
+    }
+
+  }
+
+  convertBaseb64ToBlob(b64Data, contentType): Blob {
+    contentType = contentType || '';
+    const sliceSize = 512;
+    b64Data = b64Data.replace(/^[^,]+,/, '');
+    b64Data = b64Data.replace(/\s/g, '');
+    const byteCharacters = window.atob(b64Data);
+    const byteArrays = [];
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+    return new Blob(byteArrays, { type: contentType });
+  }
+
 
 
 }

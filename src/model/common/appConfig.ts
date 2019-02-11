@@ -12,10 +12,10 @@ export interface IAppConfig {
 }
 
 export const AppConfig: IAppConfig = {
-    apiEndpoint: "https://ua.selcomm.com/SelcommWS/1.0267/",
+    apiEndpoint: "https://cors-anywhere.herokuapp.com/https://ua.selcomm.com/SelcommWS/1.0267/",
     WebPrivateKey: "1234567890",
     DatabaseUserCode: "webuser",
     DatabasePassword: "resubew",
-    Usercode: "40000560",
-    Password: "1234"
+    Usercode: "40001304",
+    Password: "sct910"
 };

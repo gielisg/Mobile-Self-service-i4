@@ -13,7 +13,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateServiceService } from 'src/service/translate-service.service';
 import { AuthService } from 'src/service/auth.service';
-import { TranslaterModule } from '../translater.module';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -33,8 +32,6 @@ const routes: Routes = [
     ReactiveFormsModule,
     IonicModule,
     MaterialShareModule,
-    // TranslateModule.forRoot(),
-    // TranslaterModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

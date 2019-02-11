@@ -1,0 +1,122 @@
+<ion-header class="header-class">
+  <ion-toolbar color="secondary" mode="ios">
+    <ion-buttons mode="ios" slot="secondary">
+      <ion-button (click)="goback()">
+        <ion-icon slot="icon-only" size="default" name="ios-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title text-wrap size="large">
+      {{ 'new_topup' | translate }}
+      <br>
+      <span size="small">
+        [2132]
+      </span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-row class="main-row">
+
+    <form #topup="ngForm" id="topup" (ngSubmit)="completeAddCompany(topup)" novalidate>
+      <ion-row class="payment-row">
+        <span class="payment-title-span">
+          {{ 'topup' | translate }}
+        </span>
+      </ion-row>
+
+      <ion-row class="payment-row">
+        <ion-col>
+          <mat-form-field>
+            <mat-select placeholder="{{ 'select' | translate }}" [formControl]="selType" [(ngModel)]="topData.topup"
+              class="select-class" required>
+              <mat-option value="unlimited1">
+                3GB {{ 'unlimited' | translate }}
+              </mat-option>
+              <mat-option value="unlimited2">
+                4GB {{ 'unlimited' | translate }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="selType.hasError('required')">
+              {{ 'choose_type_of_payment' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="payment-row">
+        <span class="payment-title-span">
+          {{ 'startDate' | translate }}
+        </span>
+      </ion-row>
+
+      <ion-row class="payment-row topup-calender">
+        <ion-col>
+          <ion-datetime [ngClass]="{'error-border':showError == true, 'normal-border':showError == false}"
+            displayFormat="MM/DD/YYYY hh:mm a" (ionChange)="ionchangeDate()" [(ngModel)]="topData.startDate" name="startDate"></ion-datetime>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="cal-error" *ngIf="showError">
+        <span>
+          {{ 'startDate_required' | translate }}
+        </span>
+      </ion-row>
+
+      <ion-row class="payment-row">
+        <span class="payment-title-span">
+          {{ 'payment_method' | translate }}
+        </span>
+      </ion-row>
+
+      <ion-row class="payment-row">
+        <ion-col>
+          <mat-form-field>
+            <mat-select placeholder="{{ 'debit_card' | translate }}" [formControl]="setMethod" [(ngModel)]="topData.method"
+              class="select-class" required>
+              <mat-option value="Visa">
+                {{ 'visa' | translate }}
+              </mat-option>
+              <mat-option value="Paypal">
+                {{ 'paypal' | translate }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="setMethod.hasError('required')">
+              {{ 'choose_type_of_payment' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="add-new-button">
+        <button ion-button class="button-style1 add-button" (click)="addNew()">
+          + {{ 'add_new' | translate }}
+        </button>
+      </ion-row>
+
+      <ion-row class="add-cancel">
+        <ion-col size="1">
+        </ion-col>
+        <ion-col size="5">
+          <ion-row class="button-row">
+            <button ion-button class="button-style1">
+              {{ 'create' | translate }}
+            </button>
+          </ion-row>
+        </ion-col>
+        <ion-col size="5">
+          <ion-row class="button-row">
+            <button ion-button class="button-style2" (click)="goback()">
+              {{ 'cancel_UP' | translate }}
+            </button>
+          </ion-row>
+        </ion-col>
+        <ion-col size="1">
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-row>
+
+</ion-content>

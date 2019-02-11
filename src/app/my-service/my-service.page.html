@@ -1,5 +1,5 @@
 <ion-header class="header-class">
-  <ion-toolbar color="dark" mode="ios">
+  <ion-toolbar color="secondary" mode="ios">
     <ion-buttons mode="ios" slot="secondary">
       <ion-button (click)="openMenu()">
         <ion-icon slot="icon-only" color="light" size="default" name="md-menu"></ion-icon>
@@ -116,7 +116,7 @@
       </ion-col>
       <ion-col size="5" class="right-col">
         <ion-row class="full-height">
-          <button ion-button class="mat-button change-button" (click)="changePlan(i)">
+          <button mat-button class="mat-button change-button" (click)="changePlan(i)">
             {{ 'change_UP' | translate }}
           </button>
 

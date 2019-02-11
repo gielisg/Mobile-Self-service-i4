@@ -92,13 +92,13 @@ export class MyDetailPage implements OnInit {
     }, error => {
       console.log("error");
       console.log(error);
-      let errorBody = JSON.parse(error._body);
+      let errorBody = error.error;
       console.log(errorBody);
       if (errorBody.Code.Name == 'InvalidSessionKeyException') {
         this.authService.createRandomSessionKey().subscribe(result => {
           if (result) {
             console.log(result);
-            // localStorage.setItem('sessionKey', result);
+            localStorage.setItem('sessionKey', result);
             this.ionicInit();
           }
         }, error => {
@@ -266,12 +266,12 @@ export class MyDetailPage implements OnInit {
     }, error => {
       console.log("error");
       console.log(error);
-      let errorBody = JSON.parse(error._body);
+      let errorBody = error.error;
       console.log(errorBody);
       if (errorBody.Code.Name == 'InvalidSessionKeyException') {
         var user = this.authService.getLoggedUser();
         this.authService.login(user.username, user.password).subscribe(result => {
-          // localStorage.setItem('sessionKey', result);
+          localStorage.setItem('sessionKey', result);
           this.updatePhone();
         }, error => {
           this.loading.dismiss();
@@ -294,12 +294,12 @@ export class MyDetailPage implements OnInit {
     }, error => {
       console.log("error");
       console.log(error);
-      let errorBody = JSON.parse(error._body);
+      let errorBody = error.error;
       console.log(errorBody);
       if (errorBody.Code.Name == 'InvalidSessionKeyException') {
         var user = this.authService.getLoggedUser();
         this.authService.login(user.username, user.password).subscribe(result => {
-          // localStorage.setItem('sessionKey', result);
+          localStorage.setItem('sessionKey', result);
           this.updateEmail();
         }, error => {
           this.loading.dismiss();
@@ -322,12 +322,12 @@ export class MyDetailPage implements OnInit {
     }, error => {
       console.log("error");
       console.log(error);
-      let errorBody = JSON.parse(error._body);
+      let errorBody = error.error;
       console.log(errorBody);
       if (errorBody.Code.Name == 'InvalidSessionKeyException') {
         var user = this.authService.getLoggedUser();
         this.authService.login(user.username, user.password).subscribe(result => {
-          // localStorage.setItem('sessionKey', result);
+          localStorage.setItem('sessionKey', result);
           this.updateAddress();
         }, error => {
           this.loading.dismiss();
@@ -353,12 +353,12 @@ export class MyDetailPage implements OnInit {
     }, error => {
       console.log("error");
       console.log(error);
-      let errorBody = JSON.parse(error._body);
+      let errorBody = error.error;
       console.log(errorBody);
       if (errorBody.Code.Name == 'InvalidSessionKeyException') {
         var user = this.authService.getLoggedUser();
         this.authService.login(user.username, user.password).subscribe(result => {
-          // localStorage.setItem('sessionKey', result);
+          localStorage.setItem('sessionKey', result);
           this.changeUserState();
         }, error => {
           this.loading.dismiss();

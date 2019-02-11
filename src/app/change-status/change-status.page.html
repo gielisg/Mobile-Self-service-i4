@@ -1,9 +1,140 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>change-status</ion-title>
+<ion-header class="header-class">
+  <ion-toolbar color="secondary" mode="ios">
+    <ion-buttons mode="ios" slot="secondary">
+      <ion-button (click)="goback()">
+        <ion-icon slot="icon-only" size="default" name="ios-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title size="large">
+      {{ 'change_state' | translate }}
+      <br>
+      <span size="small">
+        [0415518882]
+      </span>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content padding>
+
+  <ion-row class="main-row">
+
+    <form #changePlan="ngForm" id="changePlan" (ngSubmit)="changeStatusSubmit(changePlan)" novalidate>
+      <ion-row class="payment-row">
+        <span class="payment-title-span">
+          {{ 'new_status' | translate }}
+        </span>
+      </ion-row>
+
+      <ion-row class="payment-row">
+        <ion-col>
+          <mat-form-field>
+            <mat-select placeholder="{{ 'select' | translate }}" [formControl]="newState" [(ngModel)]="changeState.newState"
+              class="select-class" required>
+
+
+              <mat-option value="open">
+                {{ 'open' | translate }}
+              </mat-option>
+              <mat-option value="close">
+                {{ 'close' | translate }}
+              </mat-option>
+
+            </mat-select>
+            <mat-error *ngIf="newState.hasError('required')">{{ 'choose_type_of_payment' | translate }}</mat-error>
+          </mat-form-field>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="payment-row">
+        <span class="payment-title-span">
+          {{ 'reason' | translate }}
+        </span>
+      </ion-row>
+
+      <ion-row class="payment-row">
+        <ion-col>
+          <mat-form-field>
+            <mat-select placeholder="{{ 'select' | translate }}" [formControl]="Reason" [(ngModel)]="changeState.reason"
+              class="select-class" required>
+              <mat-option value="Visa">
+                {{ 'visa' | translate }}
+              </mat-option>
+              <mat-option value="Paypal">
+                {{ 'paypal' | translate }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="Reason.hasError('required')">
+              {{ 'choose_type_of_payment' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="payment-row">
+        <span class="payment-title-span">
+          {{ 'effective_date' | translate }}
+        </span>
+      </ion-row>
+
+      <ion-row class="payment-row">
+        <ion-col>
+          <mat-form-field>
+            <input matInput [matDatepicker]="myDatepicker" [formControl]="changeDate">
+            <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #myDatepicker></mat-datepicker>
+
+            <mat-error *ngIf="changeDate.hasError('required')">
+              <span>{{ 'effective_date_required' | translate }}</span>
+            </mat-error>
+
+          </mat-form-field>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="payment-row">
+        <span class="payment-title-span">
+          {{ 'note' | translate }}
+        </span>
+      </ion-row>
+
+      <ion-row class="payment-row">
+        <ion-col>
+          <mat-form-field class="example-full-width">
+            <input matInput class="payment-input" type="text" #title="ngModel" [(ngModel)]="changeState.note"
+              placeholder="{{ 'type_here' | translate }}." name="Note" />
+
+            <!-- <mat-error id="matLoginError2">
+            <span>Creadit Card Number is required</span>
+          </mat-error> -->
+
+          </mat-form-field>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="add-cancel">
+        <ion-col size="1">
+        </ion-col>
+        <ion-col size="5">
+          <ion-row class="button-row">
+            <button ion-button class="button-style1">
+              {{ 'change_UP' | translate }}
+            </button>
+          </ion-row>
+        </ion-col>
+        <ion-col size="5">
+          <ion-row class="button-row">
+            <button ion-button class="button-style2" (click)="goback()">
+              {{ 'cancel_UP' | translate }}
+            </button>
+          </ion-row>
+        </ion-col>
+        <ion-col size="1">
+        </ion-col>
+      </ion-row>
+    </form>
+
+  </ion-row>
 
 </ion-content>

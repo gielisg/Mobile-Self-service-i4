@@ -49,30 +49,30 @@ export class MyServicePage implements OnInit {
   }
 
   gotoCallHistory() {
-    // this.navCtrl.push(CallHistoryPage);
+    this.navCtrl.navigateForward('call-history');
   }
 
   gotoTopupHistory() {
-    // this.navCtrl.push(TopupHistoryPage);
+    this.navCtrl.navigateForward('topup-history');
   }
 
   gotoServiceDetail() {
-    // this.navCtrl.push(ServiceDetailPage);
+    this.navCtrl.navigateForward('service-detail');
   }
 
   gotoServiceBundle() {
-    // this.navCtrl.push(ServiceBundlePage);
+    this.navCtrl.navigateForward('service-bundle');
   }
 
   ionicInit() {
 
     this.serviceData = new Array();
     this.loading.present();
+    this.translate.translaterService();
 
     this.billService.getServiceDisplay().subscribe(data => {
       console.log(data);
       if (data) {
-        this.translate.translaterService();
         for (let list of Object(data).Items) {
           let arrayData = { "type": "GSM", "number": "", "date": "", "status": "open", "plan": "saver1", "changeState": false, "changePlan": false };
           arrayData.type = this.getTypeSV(list.$type.split(",")[0]);
@@ -87,7 +87,7 @@ export class MyServicePage implements OnInit {
 
     }, error => {
       console.log(error);
-      let errorBody = JSON.parse(error._body);
+      let errorBody = error.error;
       console.log(errorBody);
       if (errorBody.Code.Name == 'InvalidSessionKeyException') {
         this.authService.createRandomSessionKey().subscribe(result => {
@@ -115,9 +115,14 @@ export class MyServicePage implements OnInit {
       component: ChangeStatusPage,
     });
 
-    profileModal.onDidDismiss().then((data) => {
-      if (typeof (data) != "undefined" && data != "") {
-        this.serviceData[index].plan = data;
+    profileModal.onDidDismiss().then((result) => {
+      // if (typeof (data) != "undefined" && data != "") {
+      //   this.serviceData[index].status = data;
+      // }
+      console.log(result.data);
+      if (typeof (result.data.data) != "undefined" && result.data.data != "") {
+        this.serviceData[index].status = result.data.data;
+        console.log(this.serviceData[index]);
       }
     });
     await profileModal.present();
@@ -141,9 +146,11 @@ export class MyServicePage implements OnInit {
       component: ChangePlanPage,
     });
 
-    profileModal.onDidDismiss().then((data) => {
-      if (typeof (data) != "undefined" && data != "") {
-        this.serviceData[index].plan = data;
+    profileModal.onDidDismiss().then((result) => {
+      console.log(result.data);
+      if (typeof (result.data.data) != "undefined" && result.data.data != "") {
+        this.serviceData[index].plan = result.data.data;
+        console.log(this.serviceData[index]);
       }
     });
     await profileModal.present();

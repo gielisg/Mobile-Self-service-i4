@@ -1,0 +1,107 @@
+<ion-header class="header-class">
+  <ion-toolbar color="secondary" mode="ios">
+    <ion-buttons mode="ios" slot="secondary">
+      <ion-button (click)="goback()">
+        <ion-icon slot="icon-only" color="light" size="default" name="ios-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title size="large">
+      {{ 'transaction_history' | translate }}
+    </ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content padding class="bill-content">
+
+  <ion-row class="bill-relative">
+    <ion-row [ngClass]="{'normal-row': i == 0, 'other-row': i != 0}" *ngFor="let list of transactionList; let i =  index;">
+      <ion-row class="first-row">
+        <ion-col size="6" text-left>
+          <ion-row class="full-height">
+            <span class="name-span">
+              {{ 'transaction_number' | translate }}
+            </span>
+          </ion-row>
+        </ion-col>
+
+        <ion-col size="3">
+          <ion-row class="full-height">
+            <span class="name-span">
+              {{ 'type' | translate }}
+            </span>
+          </ion-row>
+        </ion-col>
+
+        <ion-col size="3" text-right>
+          <ion-row class="full-height">
+            <span class="name-span">
+              {{ 'date' | translate }}
+            </span>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="first-row">
+        <ion-col size="6" text-left>
+          <ion-row class="full-height">
+            <span class="tran-num-span">
+              {{list.tranNum}}
+            </span>
+          </ion-row>
+        </ion-col>
+
+        <ion-col size="3">
+          <ion-row class="full-height">
+            <span class="receipt-span">
+              {{ list.type | translate }}
+            </span>
+          </ion-row>
+        </ion-col>
+
+        <ion-col size="3" text-right>
+          <ion-row class="full-height">
+            <span class="date-span">
+              {{list.date}}
+            </span>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="bill_second_row">
+        <ion-col size="4" text-left>
+          <ion-row class="full-height">
+            <span class="name-span">
+              {{ 'amount' | translate }}
+            </span>
+            <span class="detail-span">
+              {{list.amount}}
+            </span>
+          </ion-row>
+        </ion-col>
+        <ion-col size="4">
+        </ion-col>
+
+        <ion-col size="4" text-right>
+          <ion-row class="full-height">
+            <span class="name-span">
+              {{ 'status' | translate }}
+            </span>
+            <span class="detail-span">
+              {{ list.status | translate }}
+            </span>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+    </ion-row>
+
+    <ion-row class="more-button-Row" *ngIf="showMoreState">
+      <button mat-button class="more-button" color="primary" (click)="addMoreAction()">
+        {{'more' | translate}}
+      </button>
+    </ion-row>
+  </ion-row>
+
+</ion-content>

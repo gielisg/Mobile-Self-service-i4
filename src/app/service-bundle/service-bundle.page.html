@@ -1,0 +1,175 @@
+<ion-header class="header-class">
+  <ion-toolbar color="secondary" mode="ios">
+    <ion-buttons mode="ios" slot="secondary">
+      <ion-button (click)="goback()">
+        <ion-icon slot="icon-only" size="default" name="ios-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title text-wrap size="large">
+      {{ 'service_bundle' | translate }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-row class="main-row">
+    <!-- <canvas class="pie_chart_class" width=250 height=200 #barCanvas>
+      </canvas> -->
+    <!-- <fusioncharts class="pie_class" [id]="id" [width]="width" [height]="height" [type]="type" [dataFormat]="dataFormat" [dataSource]="dataSource"></fusioncharts> -->
+
+    <canvas baseChart style="width:100%; height:200px; margin:30px auto;" [data]="pieChartData" [labels]="pieChartLabels"
+      [chartType]="pieChartType" [options]="pieChartOptions" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+    </canvas>
+
+  </ion-row>
+
+  <ion-row class="other-row">
+    <ion-row class="normal-row">
+      <ion-col size="3">
+        <ion-row class="full-height">
+          <span class="other-head-col" text-left>
+            {{ 'narratives' | translate }}
+          </span>
+        </ion-row>
+      </ion-col>
+      <ion-col size="3">
+        <ion-row class="full-height">
+          <span class="other-head-col" text-center>
+            {{ 'amt_used' | translate }}
+          </span>
+        </ion-row>
+      </ion-col>
+      <ion-col size="3">
+        <ion-row class="full-height">
+          <span class="other-head-col" text-center>
+            {{ 't_amt_used' | translate }}
+          </span>
+        </ion-row>
+      </ion-col>
+      <ion-col size="3">
+        <ion-row class="full-height">
+          <span class="other-head-col" text-right>
+            {{ 't_avlbe_used' | translate }}
+          </span>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="normal-row">
+      <ion-col size="3">
+        <ion-row class="full-height">
+          <span class="other-body-col" text-left>
+            {{ 'calls' | translate }}
+          </span>
+        </ion-row>
+      </ion-col>
+      <ion-col size="3">
+        <ion-row class="full-height">
+          <span class="other-body-col" text-center>
+            $89.33
+          </span>
+        </ion-row>
+      </ion-col>
+      <ion-col size="3">
+        <ion-row class="full-height">
+          <span class="other-body-col" text-center>
+            $100.00
+          </span>
+        </ion-row>
+      </ion-col>
+      <ion-col size="3">
+        <ion-row class="full-height">
+          <span class="other-body-col" text-right>
+            $11.07
+          </span>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="normal-row">
+      <ion-col size="3">
+        <ion-row class="full-height">
+          <span class="other-body-col" text-left>
+            {{ 'data' | translate }}
+          </span>
+        </ion-row>
+      </ion-col>
+      <ion-col size="3">
+        <ion-row class="full-height">
+          <span class="other-body-col" text-center>
+            400MB
+          </span>
+        </ion-row>
+      </ion-col>
+      <ion-col size="3">
+        <ion-row class="full-height">
+          <span class="other-body-col" text-center>
+            800MB
+          </span>
+        </ion-row>
+      </ion-col>
+      <ion-col size="3">
+        <ion-row class="full-height">
+          <span class="other-body-col" text-right>
+            400MB
+          </span>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="normal-row">
+      <ion-col size="3">
+        <ion-row class="full-height">
+          <span class="other-body-col" text-left>
+            SMS
+          </span>
+        </ion-row>
+      </ion-col>
+      <ion-col size="3">
+        <ion-row class="full-height">
+          <span class="other-body-col" text-center>
+            156
+          </span>
+        </ion-row>
+      </ion-col>
+      <ion-col size="3">
+        <ion-row class="full-height">
+          <span class="other-body-col" text-center>
+            200
+          </span>
+        </ion-row>
+      </ion-col>
+      <ion-col size="3">
+        <ion-row class="full-height">
+          <span class="other-body-col" text-right>
+            44
+          </span>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="normal-row">
+      <ion-col size="3">
+        <ion-row class="full-height">
+          <span class="other-body-col" text-left>
+            {{ 'left' | translate }}
+          </span>
+        </ion-row>
+      </ion-col>
+      <ion-col size="3">
+        <ion-row class="full-height">
+          <span class="other-body-col" text-center>
+            $38.01
+          </span>
+        </ion-row>
+      </ion-col>
+      <ion-col size="3">
+      </ion-col>
+      <ion-col size="3">
+      </ion-col>
+    </ion-row>
+
+
+  </ion-row>
+
+</ion-content>

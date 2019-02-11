@@ -2,17 +2,39 @@
   <ion-menu side="start" menuId="first" contentId="content">
     <ion-header>
       <ion-toolbar mode="ios" color="primary">
-        <ion-title>Start Menu</ion-title>
+        <ion-title>{{menuTitle}}</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content mode="ios">
-      <ion-list>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-      </ion-list>
+
+    <ion-content class="menu-content" mode="ios" color="charcoal">
+      <ion-row class="first-menu">
+        <ion-row *ngFor="let p of pages; let i = index;" class="top-menu-content" (click)="openPage(p)">
+          <ion-col size="2" *ngIf="i != 5">
+            <ion-row class="full-height">
+              <img src="assets/imgs/{{p.image}}.png" class="menu-imageList" alt="" />
+            </ion-row>
+          </ion-col>
+          <ion-col size="8" *ngIf="i != 5">
+            <ion-row class="full-height">
+              <span class="menu-list">{{p.title}}</span>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-row>
+      <ion-row class="second-row">
+        <ion-row *ngFor="let p of bottomPages" class="bottom-menu-content" (click)="openPage(p)">
+          <ion-col size="2">
+            <ion-row class="full-height">
+              <img src="assets/imgs/{{p.image}}.png" class="menu-imageList" alt="" />
+            </ion-row>
+          </ion-col>
+          <ion-col size="8">
+            <ion-row class="full-height">
+              <span class="menu-list">{{p.title}}</span>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-row>
     </ion-content>
   </ion-menu>
 

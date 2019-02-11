@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { User, APP_CONFIG, IAppConfig } from '../model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 
@@ -17,12 +17,20 @@ export class AuthService {
 
   login(username, password): Observable<any> {
 
+    let headers = new HttpHeaders();
+    headers = headers.set('Access-Control-Allow-Origin', '*')
+      .set('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+
+    // let header = new HttpHeaders();
+
+    // header.append("Access-Control-Allow-Origin: *"); // Allow all request Url eg. http://localhost:8080, http://127.0.0.1:8080, http://192.168.0.1:8080 etc.
+    // header.append('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS'); // Allow API methods
+
     return this.httpclient.post(this.config.apiEndpoint + 'Authentication.svc/rest/AuthenticateSimpleCreateSessionAndAuthenticateContact', JSON.stringify({
       PrivateKey: this.config.WebPrivateKey, DatabaseUserCode: this.config.DatabaseUserCode, DatabasePassword: this.config.DatabasePassword,
       UserCode: username, Password: password
-    }))
-      .pipe(
-      );
+    })).pipe(
+    );
   }
 
   fillLoggedUser(username, password, token) {
