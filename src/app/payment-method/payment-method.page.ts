@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoadingService } from 'src/service/loading.service';
 import { ToastService } from 'src/service/toast.service';
 import { AuthService } from 'src/service/auth.service';
@@ -29,7 +29,8 @@ export class PaymentMethodPage implements OnInit {
     public navCtrl: NavController,
     public alertCtrl: AlertController,
 
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.ionicInit();
@@ -78,7 +79,8 @@ export class PaymentMethodPage implements OnInit {
 
     this.loading.present();
 
-    this.paymentService.getPaymentAvailList().subscribe(data => {
+    this.paymentService.getPaymentAvailList().then(data => {
+      console.log(data);
       for (let list of Object(data)) {
         let arraySam = { "name": "", "type": "", "number": "", "expiry": "", "status": "open", "paymentId": 0 };
         arraySam.paymentId = list.Id;
@@ -95,18 +97,15 @@ export class PaymentMethodPage implements OnInit {
 
     }, error => {
       console.log(error);
-      let errorBody = error.error;
-      console.log(errorBody);
-      if (errorBody.Code.Name == 'InvalidSessionKeyException') {
-        this.authService.createRandomSessionKey().subscribe(result => {
+      if (Object(error).Code.Name == 'InvalidSessionKeyException') {
+        this.authService.createRandomSessionKey().then(result => {
           if (result) {
             console.log(result);
-            localStorage.setItem('sessionKey', result);
+            // localStorage.setItem('sessionKey', result);
             this.ionicInit();
           }
         }, error => {
           console.log(error);
-          this.loading.dismiss();
         });
       }
       this.loading.dismiss();
@@ -117,23 +116,20 @@ export class PaymentMethodPage implements OnInit {
 
     this.loading.present();
 
-    this.paymentService.accountPaymentMethodCancel(this.detailData[index].paymentId).subscribe(data => {
+    this.paymentService.accountPaymentMethodCancel(this.detailData[index].paymentId).then(data => {
       this.detailData.splice(index, 1);
       this.loading.dismiss();
     }, error => {
       console.log(error);
-      let errorBody = error.error;
-      console.log(errorBody);
-      if (errorBody.Code.Name == 'InvalidSessionKeyException') {
-        this.authService.createRandomSessionKey().subscribe(result => {
+      if (Object(error).Code.Name == 'InvalidSessionKeyException') {
+        this.authService.createRandomSessionKey().then(result => {
           if (result) {
             console.log(result);
-            localStorage.setItem('sessionKey', result);
+            // localStorage.setItem('sessionKey', result);
             this.deleteItem(index);
           }
         }, error => {
           console.log(error);
-          this.loading.dismiss();
         });
       }
       this.loading.dismiss();

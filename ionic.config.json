@@ -3,5 +3,11 @@
   "integrations": {
     "cordova": {}
   },
+  "proxies": [
+    {
+      "path": "/SelcommWS",
+      "proxyUrl": "https://ua.selcomm.com/SelcommWS/"
+    }
+  ],
   "type": "angular"
 }

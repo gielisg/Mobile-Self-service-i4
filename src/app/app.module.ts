@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { APP_CONFIG, AppConfig } from '../model';
 import { TranslaterModule } from './translater.module';
 import { TranslateService } from '@ngx-translate/core';
+import { HTTP } from '@ionic-native/http/ngx';
 
 
 
@@ -39,6 +40,7 @@ import { TranslateService } from '@ngx-translate/core';
     StatusBar,
     SplashScreen,
     TranslateService,
+    HTTP,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: APP_CONFIG, useValue: AppConfig },
   ],

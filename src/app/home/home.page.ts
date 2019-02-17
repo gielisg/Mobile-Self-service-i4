@@ -76,7 +76,7 @@ export class HomePage implements OnInit {
     this.loading.present();
 
     this.billservice.getBillFile(this.billData.billNumber)
-      .subscribe(result => {
+      .then(result => {
         console.log(result);
 
         if (Object(result).Content != null && typeof (Object(result).Content) != "undefined") {
@@ -91,20 +91,18 @@ export class HomePage implements OnInit {
 
       }, error => {
         console.log(error);
-        let errorBody = error.error;
-        console.log(errorBody);
-        if (errorBody.Code.Name == 'InvalidSessionKeyException') {
-          this.authservice.createRandomSessionKey().subscribe(result => {
+        if (Object(error).Code.Name == 'InvalidSessionKeyException') {
+          this.authservice.createRandomSessionKey().then(result => {
             if (result) {
               console.log(result);
-              localStorage.setItem('sessionKey', result);
+              // localStorage.setItem('sessionKey', Object(result));
               this.clickDownload();
             }
           }, error => {
             console.log(error);
-            this.loading.dismiss();
           });
         }
+        this.loading.dismiss();
       });
   }
 
@@ -117,7 +115,7 @@ export class HomePage implements OnInit {
   ionicInit() {
     this.translate.translaterService();
     this.loading.present();
-    this.billservice.getBill().subscribe(data => {
+    this.billservice.getBill().then(data => {
       if (data) {
         // console.log(data);
         this.menu.enable(true, 'first');
@@ -130,32 +128,28 @@ export class HomePage implements OnInit {
             this.switchMode = false;
           }
         }
-        this.billData.billAmount = data.Items[0].AmountDue;
-        this.billData.billNumber = data.Items[0].Number;
-        this.billData.billDate = this.set_date(data.Items[0].DueDate.split('T')[0]);
+        this.billData.billAmount = Object(data).Items[0].AmountDue;
+        this.billData.billNumber = Object(data).Items[0].Number;
+        this.billData.billDate = this.set_date(Object(data).Items[0].DueDate.split('T')[0]);
       }
       this.loading.dismiss();
 
     }, error => {
       console.log(error);
-      let errorBody = error.error;
-      console.log(errorBody);
-      if (errorBody.Code.Name == 'InvalidSessionKeyException') {
+      if (Object(error).Code.Name == 'InvalidSessionKeyException') {
         console.log('aslidfuhalsiudfhaliusd');
-        this.authservice.createRandomSessionKey().subscribe(result => {
+        this.authservice.createRandomSessionKey().then(result => {
           if (result) {
             console.log(result);
-            localStorage.setItem('sessionKey', result);
+            // localStorage.setItem('sessionKey', Object(result));
             this.ionicInit();
           }
         }, error => {
-          console.log(error);
-          this.loading.dismiss();
         });
       } else {
-        this.loading.dismiss();
-        this.toast.present(errorBody.Code.Name);
+        this.toast.present(Object(error).Code.Name);
       }
+      this.loading.dismiss();
     });
 
   }

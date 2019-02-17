@@ -70,7 +70,7 @@ export class MyServicePage implements OnInit {
     this.loading.present();
     this.translate.translaterService();
 
-    this.billService.getServiceDisplay().subscribe(data => {
+    this.billService.getServiceDisplay().then(data => {
       console.log(data);
       if (data) {
         for (let list of Object(data).Items) {
@@ -87,17 +87,14 @@ export class MyServicePage implements OnInit {
 
     }, error => {
       console.log(error);
-      let errorBody = error.error;
-      console.log(errorBody);
-      if (errorBody.Code.Name == 'InvalidSessionKeyException') {
-        this.authService.createRandomSessionKey().subscribe(result => {
+      if (Object(error).Code.Name == 'InvalidSessionKeyException') {
+        this.authService.createRandomSessionKey().then(result => {
           if (result) {
             console.log(result);
             this.ionicInit();
           }
         }, error => {
           console.log(error);
-          this.loading.dismiss();
         });
       }
       this.loading.dismiss();

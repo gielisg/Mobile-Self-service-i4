@@ -63,7 +63,7 @@ export class MyDetailPage implements OnInit {
     this.loading.present();
     let status = "get_detail";
     this.userData.status = status;
-    this.authService.getAccountDetail().subscribe(result => {
+    this.authService.getAccountDetail().then(result => {
       if (result) {
         console.log(result);
         this.userData.username = Object(result).FullName;
@@ -92,18 +92,15 @@ export class MyDetailPage implements OnInit {
     }, error => {
       console.log("error");
       console.log(error);
-      let errorBody = error.error;
-      console.log(errorBody);
-      if (errorBody.Code.Name == 'InvalidSessionKeyException') {
-        this.authService.createRandomSessionKey().subscribe(result => {
+      if (Object(error).Code.Name == 'InvalidSessionKeyException') {
+        this.authService.createRandomSessionKey().then(result => {
           if (result) {
             console.log(result);
-            localStorage.setItem('sessionKey', result);
+            // localStorage.setItem('sessionKey', result);
             this.ionicInit();
           }
         }, error => {
           console.log(error);
-          this.loading.dismiss();
         });
       }
       this.loading.dismiss();
@@ -260,26 +257,23 @@ export class MyDetailPage implements OnInit {
   updatePhone() {
     this.loading.present();
     console.log(this.userData);
-    this.authService.updatePhone(this.userData.phone).subscribe(result => {
+    this.authService.updatePhone(this.userData.phone).then(result => {
       console.log(result);
       this.loading.dismiss();
     }, error => {
       console.log("error");
       console.log(error);
-      let errorBody = error.error;
-      console.log(errorBody);
-      if (errorBody.Code.Name == 'InvalidSessionKeyException') {
+      if (Object(error).Code.Name == 'InvalidSessionKeyException') {
         var user = this.authService.getLoggedUser();
-        this.authService.login(user.username, user.password).subscribe(result => {
-          localStorage.setItem('sessionKey', result);
+        this.authService.login(user.username, user.password).then(result => {
+          // localStorage.setItem('sessionKey', result);
           this.updatePhone();
         }, error => {
-          this.loading.dismiss();
         });
       }
       else {
-        this.loading.dismiss();
       }
+      this.loading.dismiss();
     });
   }
 
@@ -288,26 +282,23 @@ export class MyDetailPage implements OnInit {
     let status = "get_detail";
     this.userData.status = status;
     console.log(this.userData);
-    this.authService.updateEmail(this.userData.email).subscribe(result => {
+    this.authService.updateEmail(this.userData.email).then(result => {
       console.log(result);
       this.loading.dismiss();
     }, error => {
       console.log("error");
       console.log(error);
-      let errorBody = error.error;
-      console.log(errorBody);
-      if (errorBody.Code.Name == 'InvalidSessionKeyException') {
+      if (Object(error).Code.Name == 'InvalidSessionKeyException') {
         var user = this.authService.getLoggedUser();
-        this.authService.login(user.username, user.password).subscribe(result => {
-          localStorage.setItem('sessionKey', result);
+        this.authService.login(user.username, user.password).then(result => {
+          // localStorage.setItem('sessionKey', result);
           this.updateEmail();
         }, error => {
-          this.loading.dismiss();
         });
       }
       else {
-        this.loading.dismiss();
       }
+      this.loading.dismiss();
     });
   }
 
@@ -316,26 +307,23 @@ export class MyDetailPage implements OnInit {
     let status = "get_detail";
     this.userData.status = status;
     console.log(this.userData);
-    this.authService.updateAddress(this.userData.address).subscribe(result => {
+    this.authService.updateAddress(this.userData.address).then(result => {
       console.log(result);
       this.loading.dismiss();
     }, error => {
       console.log("error");
       console.log(error);
-      let errorBody = error.error;
-      console.log(errorBody);
-      if (errorBody.Code.Name == 'InvalidSessionKeyException') {
+      if (Object(error).Code.Name == 'InvalidSessionKeyException') {
         var user = this.authService.getLoggedUser();
-        this.authService.login(user.username, user.password).subscribe(result => {
-          localStorage.setItem('sessionKey', result);
+        this.authService.login(user.username, user.password).then(result => {
+          // localStorage.setItem('sessionKey', result);
           this.updateAddress();
         }, error => {
-          this.loading.dismiss();
         });
       }
       else {
-        this.loading.dismiss();
       }
+      this.loading.dismiss();
     });
   }
 
@@ -347,26 +335,23 @@ export class MyDetailPage implements OnInit {
     this.tempData.status = status;
 
 
-    this.authService.updateName(this.userData.username).subscribe(result => {
+    this.authService.updateName(this.userData.username).then(result => {
       console.log(result);
       this.loading.dismiss();
     }, error => {
       console.log("error");
       console.log(error);
-      let errorBody = error.error;
-      console.log(errorBody);
-      if (errorBody.Code.Name == 'InvalidSessionKeyException') {
+      if (Object(error).Code.Name == 'InvalidSessionKeyException') {
         var user = this.authService.getLoggedUser();
-        this.authService.login(user.username, user.password).subscribe(result => {
-          localStorage.setItem('sessionKey', result);
+        this.authService.login(user.username, user.password).then(result => {
+          // localStorage.setItem('sessionKey', result);
           this.changeUserState();
         }, error => {
-          this.loading.dismiss();
         });
       }
       else {
-        this.loading.dismiss();
       }
+      this.loading.dismiss();
 
     });
 

@@ -64,29 +64,25 @@ export class NewPaymentPage implements OnInit {
       };
 
       this.loading.present();
-      this.paymentService.accountPaymentMethodAdd(add_param).subscribe(data => {
+      this.paymentService.accountPaymentMethodAdd(add_param).then(data => {
         console.log(data);
         this.loading.dismiss();
-        this.navCtrl.pop();
         // this.navCtrl.push(PaymentMethodPage);
-        this.navCtrl.navigateForward('payment-method');
+        this.navCtrl.navigateRoot('my-account');
       }, error => {
         console.log(error);
-        let errorBody = error.error;
-        console.log(errorBody);
-        if (errorBody.Code.Name == 'InvalidSessionKeyException') {
-          this.authService.createRandomSessionKey().subscribe(result => {
+        if (Object(error).Code.Name == 'InvalidSessionKeyException') {
+          this.authService.createRandomSessionKey().then(result => {
             if (result) {
               console.log(result);
-              localStorage.setItem('sessionKey', result);
+              // localStorage.setItem('sessionKey', Object(result));
               this.paymentSubmit(comProfileForm);
             }
           }, error => {
             console.log(error);
-            this.loading.dismiss();
           });
         } else {
-          this.toast.present(errorBody.Message);
+          this.toast.present(Object(error).Message);
         }
 
         this.loading.dismiss();

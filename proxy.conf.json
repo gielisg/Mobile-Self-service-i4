@@ -1,0 +1,11 @@
+{
+    "/SelcommWS/*": {
+        "target": "https://ua.selcomm.com",
+        "changeOrigin": true,
+        "secure": false,
+        "logLevel": "debug",
+        "headers": {
+            "Connection": "keep-alive"
+        }
+    }
+}

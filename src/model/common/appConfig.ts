@@ -3,7 +3,8 @@ import { InjectionToken } from "@angular/core";
 export let APP_CONFIG = new InjectionToken("app.config");
 
 export interface IAppConfig {
-    apiEndpoint: string;
+    apiEndpointWeb: string;
+    apiEndpointMobile: string;
     WebPrivateKey: string;
     DatabaseUserCode: string;
     DatabasePassword: string;
@@ -12,7 +13,8 @@ export interface IAppConfig {
 }
 
 export const AppConfig: IAppConfig = {
-    apiEndpoint: "https://cors-anywhere.herokuapp.com/https://ua.selcomm.com/SelcommWS/1.0267/",
+    apiEndpointWeb: "/SelcommWS/1.0267/",
+    apiEndpointMobile: "https://ua.selcomm.com/SelcommWS/1.0267/",
     WebPrivateKey: "1234567890",
     DatabaseUserCode: "webuser",
     DatabasePassword: "resubew",

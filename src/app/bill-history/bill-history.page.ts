@@ -43,7 +43,7 @@ export class BillHistoryPage implements OnInit {
     this.translate.translaterService();
 
     this.billService.getBillList()
-      .subscribe(
+      .then(
         data => {
           if (data) {
             // this.userData.email = localStorage.getItem("user_email");
@@ -62,18 +62,15 @@ export class BillHistoryPage implements OnInit {
         },
         error => {
           console.log(error);
-          let errorBody = error.error;
-          console.log(errorBody);
-          if (errorBody.Code.Name == 'InvalidSessionKeyException') {
-            this.authService.createRandomSessionKey().subscribe(result => {
+          if (Object(error).Code.Name == 'InvalidSessionKeyException') {
+            this.authService.createRandomSessionKey().then(result => {
               if (result) {
                 console.log(result);
-                localStorage.setItem('sessionKey', result);
+                // localStorage.setItem('sessionKey', Object(result));
                 this.ionicInit();
               }
             }, error => {
               console.log(error);
-              this.loading.dismiss();
             });
           }
           this.loading.dismiss();
@@ -99,12 +96,13 @@ export class BillHistoryPage implements OnInit {
     this.loading.present();
 
 
-    this.billService.getBillFile(this.detailData[index].billNum).subscribe(result => {
+    this.billService.getBillFile(this.detailData[index].billNum).then(result => {
       console.log(result);
 
       if (Object(result).Content != null && typeof (Object(result).Content) != "undefined") {
         console.log("here");
         var pdf = 'data:application/pdf;base64,' + Object(result).Content.$value;
+        console.log(Object(result).Content.$value);
         let pdfName = Object(result).FileName;
         console.log("here");
         this.downloadPdf(pdf, pdfName);
@@ -112,17 +110,14 @@ export class BillHistoryPage implements OnInit {
       this.loading.dismiss();
     }, error => {
       console.log(error);
-      let errorBody = error.error;
-      console.log(errorBody);
-      if (errorBody.Code.Name == 'InvalidSessionKeyException') {
-        this.authService.createRandomSessionKey().subscribe(result => {
+      if (Object(error).Code.Name == 'InvalidSessionKeyException') {
+        this.authService.createRandomSessionKey().then(result => {
           if (result) {
             console.log(result);
             this.download(index);
           }
         }, error => {
           console.log(error);
-          this.loading.dismiss();
         });
       }
       this.loading.dismiss();
@@ -216,6 +211,7 @@ export class BillHistoryPage implements OnInit {
       const byteArray = new Uint8Array(byteNumbers);
       byteArrays.push(byteArray);
     }
+    console.log(new Blob(byteArrays, { type: contentType }));
     return new Blob(byteArrays, { type: contentType });
   }
 

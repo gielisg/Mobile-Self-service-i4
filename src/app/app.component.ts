@@ -31,6 +31,10 @@ export class AppComponent {
 
     console.log(this.navCtrl);
 
+    let sessionKey = "l+NEJBIcQ47YZO3A|+PkL8Q+GIxxSdW//X35ZSQ==|UIVrThW3kmVtCtEuSCYAVbEpRopK8OVUSbVO4dIz/Tjk0H1/pyI=";
+
+    localStorage.setItem('sessionKey', sessionKey);
+
     events.subscribe('user:created', (user, time) => {
       this.ionicInit();
     });

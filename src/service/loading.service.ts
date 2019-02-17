@@ -18,8 +18,9 @@ export class LoadingService {
 
   async present() {
     this.isLoading = true;
+    console.log(this.loading);
     return await this.loadingCtrl.create({
-      message:'Please wait...'
+      message: 'Please wait...'
     }).then(a => {
       a.present().then(() => {
         console.log('presented');

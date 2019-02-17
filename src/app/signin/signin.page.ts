@@ -54,7 +54,7 @@ export class SigninPage implements OnInit {
 
       this.authservice.login(this.userData.username, this.userData.password)
 
-        .subscribe(
+        .then(
           data => {
             if (data) {
               localStorage.setItem("logged", JSON.stringify(this.userData));
