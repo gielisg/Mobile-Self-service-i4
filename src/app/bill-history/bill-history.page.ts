@@ -106,6 +106,9 @@ export class BillHistoryPage implements OnInit {
         let pdfName = Object(result).FileName;
         console.log("here");
         this.downloadPdf(pdf, pdfName);
+      } else {
+        this.toast.present('The Bill you trying to download is unavailable at the moment. Sorry for the inconvenience.' +
+          ' Please try again later. Please contact Support Team. Error: Bill not available to download yet.');
       }
       this.loading.dismiss();
     }, error => {

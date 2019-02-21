@@ -28,6 +28,7 @@ export class BillService {
 
     return new Promise((resolve, reject) => {
       if (this.platform.is('mobile')) {
+        this.nativeHTTP.setDataSerializer('json');
         this.nativeHTTP.post(
           this.config.apiEndpointMobile + 'Bill.svc/rest/BillList',
           (param),
@@ -40,10 +41,7 @@ export class BillService {
           resolve(JSON.parse(result.data));
         }, error => {
           console.log(error);
-          if (error.error.charAt(0) != '{') {
-            error.error = error.error.substr(1);
-          }
-          reject(JSON.parse(error));
+          reject(this.returnErrorState(error));
         });
       } else {
         this.httpclient.post(
@@ -97,11 +95,7 @@ export class BillService {
           resolve(JSON.parse(result.data));
         }).catch(error => {
           console.log(error);
-          if (error.error.charAt(0) != '{') {
-            error.error = error.error.substr(1);
-          }
-          console.log(error);
-          reject(JSON.parse(error.error));
+          reject(this.returnErrorState(error));
         });
       } else {
         return this.httpclient.post(
@@ -132,6 +126,7 @@ export class BillService {
     };
     return new Promise((resolve, reject) => {
       if (this.platform.is('mobile')) {
+        this.nativeHTTP.setDataSerializer('json');
         this.nativeHTTP.post(
           this.config.apiEndpointMobile + 'Bill.svc/rest/BillList',
           request_param,
@@ -144,10 +139,7 @@ export class BillService {
           resolve(JSON.parse(result.data));
         }, error => {
           console.log(error);
-          if (error.error.charAt(0) != '{') {
-            error.error = error.error.substr(1);
-          }
-          reject(JSON.parse(error.error));
+          reject(this.returnErrorState(error));
         });
       } else {
         this.httpclient.post(
@@ -177,6 +169,7 @@ export class BillService {
 
     return new Promise((resolve, reject) => {
       if (this.platform.is('mobile')) {
+        this.nativeHTTP.setDataSerializer('json');
         this.nativeHTTP.get(
           this.config.apiEndpointMobile + param,
           {},
@@ -189,10 +182,7 @@ export class BillService {
           resolve(JSON.parse(result.data));
         }, error => {
           console.log(error);
-          if (error.error.charAt(0) != '{') {
-            error.error = error.error.substr(1);
-          }
-          reject(JSON.parse(error.error));
+          reject(this.returnErrorState(error));
         });
       } else {
         this.httpclient.get<any>(
@@ -217,6 +207,17 @@ export class BillService {
     //   .pipe(
 
     //   );
+  }
+
+  returnErrorState(error) {
+    console.log(error.error.includes('he host could not be resolved'));
+    if (error.error.charAt(0) != '{' && !error.error.includes('he host could not be resolved')) {
+      console.log('why come here');
+      error.error = error.error.substr(1);
+      return (JSON.parse(error.error));
+    } else {
+      return (error.error);
+    }
   }
 
 

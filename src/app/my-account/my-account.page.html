@@ -16,27 +16,35 @@
   <ion-row class="first-row">
     <ion-col size="1"></ion-col>
     <ion-col size="5">
-      <ion-row class="normal-margin">
-        <span class="amount-span">
-          {{ 'account_number' | translate }}
-        </span>
-      </ion-row>
-      <ion-row class="normal-margin">
-        <span class="dollar-amount-span">
-          {{billData.accountNumber}}
-        </span>
+      <ion-row class="full-height">
+        <ion-row class="auto-margin">
+          <ion-row class="normal-margin">
+            <span class="amount-span">
+              {{ 'account_number' | translate }}
+            </span>
+          </ion-row>
+          <ion-row class="normal-margin">
+            <span class="dollar-amount-span">
+              {{billData.accountNumber}}
+            </span>
+          </ion-row>
+        </ion-row>
       </ion-row>
     </ion-col>
     <ion-col size="5">
-      <ion-row class="normal-margin">
-        <span class="amount-span">
-          {{ 'amount_owing' | translate }}
-        </span>
-      </ion-row>
-      <ion-row class="normal-margin">
-        <span class="dollar-amount-span">
-          ${{billData.billAmount}}
-        </span>
+      <ion-row class="full-height">
+        <ion-row class="auto-margin">
+          <ion-row class="normal-margin">
+            <span class="amount-span">
+              {{ 'amount_owing' | translate }}
+            </span>
+          </ion-row>
+          <ion-row class="normal-margin">
+            <span class="dollar-amount-span">
+              ${{billData.billAmount}}
+            </span>
+          </ion-row>
+        </ion-row>
       </ion-row>
     </ion-col>
   </ion-row>
@@ -103,7 +111,7 @@
     </ion-col>
   </ion-row>
 
-  <ion-row class="my-normal">
+  <ion-row class="my-normal" margin-bottom>
     <ion-col size="1">
     </ion-col>
     <ion-col size="10">

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
 import { LoadingService } from 'src/service/loading.service';
 import { ToastService } from 'src/service/toast.service';
 import { TranslateServiceService } from 'src/service/translate-service.service';
@@ -8,20 +8,18 @@ import { PaymentService } from 'src/service/payment.service';
 import { AuthService } from 'src/service/auth.service';
 
 @Component({
-  selector: 'app-new-payment',
-  templateUrl: './new-payment.page.html',
-  styleUrls: ['./new-payment.page.scss'],
+  selector: 'app-payment-update',
+  templateUrl: './payment-update.page.html',
+  styleUrls: ['./payment-update.page.scss'],
 })
-export class NewPaymentPage implements OnInit {
+export class PaymentUpdatePage implements OnInit {
 
 
-  public payData = { "name": "", "method": "", "cardnum": "", "exm": "1", "exy": new Date().getFullYear() };
+  public payData = { "name": "", "paymentId": 0, "number": "", "exm": "1", "exy": new Date().getFullYear() };
   public expireMonth: any[];
   public expireYear: any[];
 
   public userId = "";
-
-  selType = new FormControl('', [Validators.required]);
 
   selExm = new FormControl('', [Validators.required]);
 
@@ -34,11 +32,16 @@ export class NewPaymentPage implements OnInit {
     public translate: TranslateServiceService,
     public paymentService: PaymentService,
     public authService: AuthService,
+    private modalCtrl: ModalController,
   ) { }
 
   ngOnInit() {
     this.expireMonth = new Array();
     this.expireYear = new Array();
+
+    this.payData.paymentId = parseInt(localStorage.getItem('paymentID'));
+    this.payData.number = localStorage.getItem('paymentCardNumber');
+
     console.log('ionViewDidLoad NewPaymentPage');
     for (let i = 1; i < 13; i++) {
       this.expireMonth.push(i);
@@ -51,31 +54,31 @@ export class NewPaymentPage implements OnInit {
   }
 
   goback() {
-    this.navCtrl.pop();
+    // this.navCtrl.pop();
+    this.modalCtrl.dismiss('');
   }
 
   paymentSubmit(comProfileForm) {
-    if (comProfileForm.valid && this.selType.valid && this.selExm.valid) {
+    if (comProfileForm.valid && this.selExm.valid) {
 
-      let add_param = {
+      let addParam = {
         "name": this.payData.name,
-        "number": this.payData.cardnum,
+        "paymentId": this.payData.paymentId,
+        "number": this.payData.number,
         "expireDate": this.payData.exy + "-" + this.setTwostring(this.payData.exm) + "-" + new Date().getDate() + "T00:00:00"
       };
 
       this.loading.present();
-      this.paymentService.accountPaymentMethodAdd(add_param).then(data => {
+      this.paymentService.accountPaymentMethodUpdate(addParam).then(data => {
         console.log(data);
         this.loading.dismiss();
-        // this.navCtrl.push(PaymentMethodPage);
-        this.navCtrl.navigateRoot('my-account');
+        this.modalCtrl.dismiss({ name: this.payData.name, expireDate: addParam.expireDate });
       }, error => {
         console.log(error);
         if (Object(error).Code.Name == 'InvalidSessionKeyException') {
           this.authService.createRandomSessionKey().then(result => {
             if (result) {
               console.log(result);
-              // localStorage.setItem('sessionKey', Object(result));
               this.paymentSubmit(comProfileForm);
             }
           }, error => {
@@ -90,7 +93,7 @@ export class NewPaymentPage implements OnInit {
     }
   }
 
-  submitAddPayment(){
+  submitAddPayment() {
     console.log('Trigger Option');
     document.getElementById("trigersubmit").click()
   }
@@ -104,11 +107,11 @@ export class NewPaymentPage implements OnInit {
     this.payData.exm = (new Date().getMonth() + 1).toString();
   }
 
-  setTwostring(input_val) {
-    if (parseInt(input_val) < 10) {
-      return "0" + input_val;
+  setTwostring(inputVal) {
+    if (parseInt(inputVal) < 10) {
+      return "0" + inputVal;
     } else {
-      return input_val;
+      return inputVal;
     }
   }
 

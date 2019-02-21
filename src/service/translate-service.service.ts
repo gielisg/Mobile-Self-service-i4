@@ -14,6 +14,7 @@ export class TranslateServiceService {
 
   translaterService() {
     if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
+      localStorage.setItem("set_lng", "en");
       this.translate.use('en');
     } else {
       this.translate.use(localStorage.getItem("set_lng"));

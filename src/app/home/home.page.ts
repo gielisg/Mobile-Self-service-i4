@@ -24,14 +24,14 @@ export class HomePage implements OnInit {
   constructor(
     public navCtrl: NavController,
     public rooter: Router,
-    public loading: LoadingService,
-    public toast: ToastService,
-    public file: File,
-    public plt: Platform,
-    public translate: TranslateServiceService,
-    public menu: MenuController,
-    public authservice: AuthService,
-    public billservice: BillService,
+    private loading: LoadingService,
+    private toast: ToastService,
+    private file: File,
+    private plt: Platform,
+    private translate: TranslateServiceService,
+    private menu: MenuController,
+    private authservice: AuthService,
+    private billservice: BillService,
   ) {
   }
 
@@ -85,6 +85,9 @@ export class HomePage implements OnInit {
           let pdfName = Object(result).FileName;
           console.log("here");
           this.downloadPdf(pdf, pdfName);
+        } else {
+          this.toast.present('The Bill you trying to download is unavailable at the moment. Sorry for the inconvenience.' +
+            ' Please try again later. Please contact Support Team. Error: Bill not available to download yet.');
         }
 
         this.loading.dismiss();
@@ -114,20 +117,22 @@ export class HomePage implements OnInit {
 
   ionicInit() {
     this.translate.translaterService();
+
+    this.menu.enable(true, 'first');
+    if (typeof (localStorage.getItem('set_lng')) == 'undefined' || localStorage.getItem('set_lng') == '' || localStorage.getItem('set_lng') == null) {
+      this.switchMode = true;
+    } else {
+      if (localStorage.getItem('set_lng') == 'en') {
+        this.switchMode = true;
+      } else {
+        this.switchMode = false;
+      }
+    }
+
     this.loading.present();
     this.billservice.getBill().then(data => {
       if (data) {
         // console.log(data);
-        this.menu.enable(true, 'first');
-        if (typeof (localStorage.getItem('set_lng')) == 'undefined' || localStorage.getItem('set_lng') == '' || localStorage.getItem('set_lng') == null) {
-          this.switchMode = true;
-        } else {
-          if (localStorage.getItem('set_lng') == 'en') {
-            this.switchMode = true;
-          } else {
-            this.switchMode = false;
-          }
-        }
         this.billData.billAmount = Object(data).Items[0].AmountDue;
         this.billData.billNumber = Object(data).Items[0].Number;
         this.billData.billDate = this.set_date(Object(data).Items[0].DueDate.split('T')[0]);

@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
@@ -18,6 +18,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateServiceService } from 'src/service/translate-service.service';
 import { AuthService } from 'src/service/auth.service';
+import { PaymentUpdatePage } from '../payment-update/payment-update.page';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -32,12 +33,14 @@ const routes: Routes = [
 
 @NgModule({
   entryComponents: [
+    PaymentUpdatePage
   ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     MaterialShareModule,
+    ReactiveFormsModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
@@ -50,6 +53,7 @@ const routes: Routes = [
   ],
   declarations: [
     PaymentMethodPage,
+    PaymentUpdatePage
   ],
   providers: [
     TranslateServiceService,

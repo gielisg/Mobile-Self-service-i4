@@ -53,10 +53,7 @@ export class PaymentService {
           resolve(JSON.parse(result.data));
         }, error => {
           console.log(error);
-          if (error.error.charAt(0) != '{') {
-            error.error = error.error.substr(1);
-          }
-          reject(JSON.parse(error.error));
+          reject(this.returnErrorState(error));
         });
       } else {
         this.httpclient.get<any>(
@@ -105,10 +102,7 @@ export class PaymentService {
           resolve(JSON.parse(result.data));
         }, error => {
           console.log(error);
-          if (error.error.charAt(0) != '{') {
-            error.error = error.error.substr(1);
-          }
-          reject(JSON.parse(error.error));
+          reject(this.returnErrorState(error));
         });
       } else {
         this.httpclient.get<any>(
@@ -158,10 +152,7 @@ export class PaymentService {
           resolve(JSON.parse(result.data));
         }, error => {
           console.log(error);
-          if (error.error.charAt(0) != '{') {
-            error.error = error.error.substr(1);
-          }
-          reject(JSON.parse(error.error));
+          reject(this.returnErrorState(error));
         });
       } else {
         this.httpclient.post<any>(
@@ -198,6 +189,8 @@ export class PaymentService {
       })
     };
 
+    console.log(param);
+
     // return this.httpclient.put(
     //   this.config.apiEndpointWeb + 'Payment.svc/rest/AccountPaymentMethodCancel',
     //   JSON.stringify(param), httpOptions)
@@ -209,7 +202,7 @@ export class PaymentService {
         this.nativeHTTP.put(
           this.config.apiEndpointMobile + 'Payment.svc/rest/AccountPaymentMethodCancel',
           param,
-          httpOptions
+          {}
         ).then(result => {
           console.log(result);
           if (result.data.charAt(0) != '{') {
@@ -218,10 +211,7 @@ export class PaymentService {
           resolve(JSON.parse(result.data));
         }, error => {
           console.log(error);
-          if (error.error.charAt(0) != '{') {
-            error.error = error.error.substr(1);
-          }
-          reject(JSON.parse(error.error));
+          reject(this.returnErrorState(error));
         });
       } else {
         this.httpclient.put<any>(
@@ -266,10 +256,7 @@ export class PaymentService {
           resolve(JSON.parse(result.data));
         }, error => {
           console.log(error);
-          if (error.error.charAt(0) != '{') {
-            error.error = error.error.substr(1);
-          }
-          reject(JSON.parse(error.error));
+          reject(this.returnErrorState(error));
         });
       } else {
         this.httpclient.put<any>(
@@ -321,10 +308,7 @@ export class PaymentService {
           resolve(JSON.parse(result.data));
         }, error => {
           console.log(error);
-          if (error.error.charAt(0) != '{') {
-            error.error = error.error.substr(1);
-          }
-          reject(JSON.parse(error.error));
+          reject(this.returnErrorState(error));
         });
       } else {
         this.httpclient.put<any>(
@@ -380,10 +364,7 @@ export class PaymentService {
           resolve(JSON.parse(result.data));
         }, error => {
           console.log(error);
-          if (error.error.charAt(0) != '{') {
-            error.error = error.error.substr(1);
-          }
-          reject(JSON.parse(error.error));
+          reject(this.returnErrorState(error));
         });
       } else {
         this.httpclient.post<any>(
@@ -431,10 +412,7 @@ export class PaymentService {
           resolve(JSON.parse(result.data));
         }, error => {
           console.log(error);
-          if (error.error.charAt(0) != '{') {
-            error.error = error.error.substr(1);
-          }
-          reject(JSON.parse(error.error));
+          reject(this.returnErrorState(error));
         });
       } else {
         this.httpclient.get<any>(
@@ -449,4 +427,17 @@ export class PaymentService {
       }
     });
   }
+
+
+  returnErrorState(error) {
+    if (error.error.charAt(0) != '{' && error.status != 'he host could not be resolved') {
+      error.error = error.error.substr(1);
+    }
+    if (error.status == 1) {
+      return (error.error);
+    } else {
+      return (JSON.parse(error.error));
+    }
+  }
+
 }

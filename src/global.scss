@@ -37,6 +37,10 @@ ion-row {
     margin: auto;
 }
 
+.auto-margin {
+    margin: auto;
+}
+
 .username-row {
     margin-top: 20%;
     width: 90%;
@@ -476,13 +480,17 @@ select {
     }
 }
 
-.content-class {
+.pay-notification {
     background: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0px;
+    left: 0px;
     .main-row {
-        margin-top: 50%;
-        background-color: white;
+        margin: auto;
+        background-color: transparent;
         padding-top: 0px !important;
         border: none;
+        width: 90%;
     }
     .title-row {
         height: 60px;

@@ -31,10 +31,6 @@ export class AppComponent {
 
     console.log(this.navCtrl);
 
-    let sessionKey = "l+NEJBIcQ47YZO3A|+PkL8Q+GIxxSdW//X35ZSQ==|UIVrThW3kmVtCtEuSCYAVbEpRopK8OVUSbVO4dIz/Tjk0H1/pyI=";
-
-    localStorage.setItem('sessionKey', sessionKey);
-
     events.subscribe('user:created', (user, time) => {
       this.ionicInit();
     });
@@ -45,14 +41,29 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      // let status bar overlay webview
+      this.statusBar.overlaysWebView(false);
+      
+      // set status bar to white
+      // this.statusBar.backgroundColorByHexString('#0cd1e8');
+
+      // this.statusBar.styleBlackOpaque();
+      // this.statusBar.styleBlackTranslucent();
+
+      this.statusBar.styleLightContent();
+
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      // this.splashScreen.hide();
+      
+      // set status bar to white
+      this.statusBar.backgroundColorByHexString('#0cd1e8');
     });
   }
 
   openPage(page) {
-    if (page.title == 'asdfasdf') {
-      alert("click");
+    if (page.component == 'settings') {
+      this.menuCtrl.close('first');
+      this.navCtrl.navigateRoot(page.component);
     } else {
       this.translate.get('logout').subscribe(
         value => {

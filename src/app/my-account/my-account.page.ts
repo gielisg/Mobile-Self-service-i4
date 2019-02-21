@@ -38,6 +38,13 @@ export class MyAccountPage implements OnInit {
   ionicInit() {
 
     this.translate.translaterService();
+    
+    if (localStorage.getItem("set_lng") == "en") {
+      this.switchMode = true;
+    } else {
+      this.switchMode = false;
+    }
+
     this.loading.present();
 
     this.billService.getBillList()
@@ -48,11 +55,6 @@ export class MyAccountPage implements OnInit {
           this.billData.billDate = this.setDate(Object(data).Items[0].DueDate.split("T")[0]);
           this.billData.accountNumber = Object(data).Items[0].ContactCode;
           this.billData.billNumber = Object(data).Items[0].Number;
-          if (localStorage.getItem("set_lng") == "en") {
-            this.switchMode = true;
-          } else {
-            this.switchMode = false;
-          }
 
         }
         this.loading.dismiss();
@@ -135,6 +137,9 @@ export class MyAccountPage implements OnInit {
           let pdfName = Object(result).FileName;
           console.log("here");
           this.downloadPdf(pdf, pdfName);
+        } else {
+          this.toast.present('The Bill you trying to download is unavailable at the moment. Sorry for the inconvenience.' +
+            ' Please try again later. Please contact Support Team. Error: Bill not available to download yet.');
         }
 
         this.loading.dismiss();

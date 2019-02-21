@@ -5,6 +5,7 @@ import { AuthService } from 'src/service/auth.service';
 import { PaymentService } from 'src/service/payment.service';
 import { ModalController, NavController, AlertController } from '@ionic/angular';
 import { TranslateServiceService } from 'src/service/translate-service.service';
+import { PaymentUpdatePage } from '../payment-update/payment-update.page';
 
 @Component({
   selector: 'app-payment-method',
@@ -141,6 +142,29 @@ export class PaymentMethodPage implements OnInit {
     let arraySam2 = arraySam1.split("-");
     let returnVal = arraySam2[1] + "/" + arraySam2[0].substr(2);
     return returnVal;
+  }
+
+  async viewAndUpdate(paymentID, cardNum) {
+    console.log(paymentID);
+    localStorage.setItem('paymentID', paymentID);
+    localStorage.setItem('paymentCardNumber', cardNum);
+    let updatePayment = await this.modalCtrl.create({
+      component: PaymentUpdatePage
+    });
+    updatePayment.onDidDismiss().then(result => {
+      console.log(result.data);
+      if (result.data != null && typeof (result.data) != "undefined" && result.data != '') {
+        for (let list of this.detailData) {
+          if (list.paymentId == paymentID) {
+            list.name = result.data.name;
+            list.expiry = this.getExpiryDate(result.data.expireDate);
+          }
+        }
+      } else {
+        console.log('didn\'t change any part of them');
+      }
+    });
+    await updatePayment.present();
   }
 
 }

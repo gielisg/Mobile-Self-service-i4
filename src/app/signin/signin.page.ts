@@ -5,6 +5,7 @@ import { NavController, MenuController } from '@ionic/angular';
 import { LoadingService } from '../../service/loading.service';
 import { ToastService } from '../../service/toast.service';
 import { AuthService } from 'src/service/auth.service';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 @Component({
   selector: 'app-signin',
@@ -27,14 +28,24 @@ export class SigninPage implements OnInit {
     public loading: LoadingService,
     public toast: ToastService,
     public authservice: AuthService,
+    private splashScreen: SplashScreen,
   ) { }
 
   ngOnInit() {
     // this.ionicInit();
     console.log(localStorage.getItem("logged"));
+    console.log(this.splashScreen);
+
+    if (this.splashScreen) {
+      console.log("this.splashScreen");
+
+      this.splashScreen.hide();
+    }
+    console.log(this.splashScreen);
+
     if (localStorage.getItem("logged") != null && localStorage.getItem("logged") != "") {
       this.translate.translaterService();
-      this.navCtrl.navigateForward('home');
+      this.navCtrl.navigateRoot('home');
     } else {
       this.ionicInit();
     }
@@ -59,7 +70,7 @@ export class SigninPage implements OnInit {
             if (data) {
               localStorage.setItem("logged", JSON.stringify(this.userData));
               this.authservice.fillLoggedUser(this.userData.username, this.userData.password, data);
-              this.navCtrl.navigateForward('home');
+              this.navCtrl.navigateRoot('home');
             }
             this.loading.dismiss();
 

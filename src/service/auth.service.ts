@@ -128,18 +128,15 @@ export class AuthService {
         this.nativeHTTP.post(
           this.config.apiEndpointMobile + 'Authentication.svc/rest/AuthenticateSimpleCreateSessionAndAuthenticateContact',
           // {userData},
-          (params),
+          params,
           // (request_param),
           {
           },
         ).then(result => {
           console.log(result.data);
-          console.log(result.data.charAt(0));
-          console.log(typeof (result.data.charAt(0)));
           if (result.data.charAt(0) != '{') {
             result.data = result.data.substr(1);
           }
-          console.log(JSON.parse(result.data));
           localStorage.setItem('sessionKey', JSON.parse(result.data));
           resolve(JSON.parse(result.data));
         }).catch(error => {
@@ -166,6 +163,17 @@ export class AuthService {
 
   }
 
+  returnErrorState(error) {
+    if (error.error.charAt(0) != '{' && error.status != 'he host could not be resolved') {
+      error.error = error.error.substr(1);
+    }
+    if (error.status == 1) {
+      return (error.error);
+    } else {
+      return (JSON.parse(error.error));
+    }
+  }
+
   getAccountDetail() {
 
     let sendParam = 'Contact.svc/rest/Contact?SessionKey=' + encodeURIComponent(localStorage.getItem("sessionKey")) +
@@ -185,10 +193,7 @@ export class AuthService {
           resolve(JSON.parse(result.data));
         }, error => {
           console.log(error);
-          if (error.error.charAt(0) != '{') {
-            error.error = error.error.substr(1);
-          }
-          reject(JSON.parse(error.error));
+          reject(this.returnErrorState(error));
         });
       } else {
         console.log('web');
@@ -240,10 +245,7 @@ export class AuthService {
           resolve(result.data);
         }, error => {
           console.log(error);
-          if (error.error.charAt(0) != '{') {
-            error.error = error.error.substr(1);
-          }
-          reject(JSON.parse(error.error));
+          reject(this.returnErrorState(error));
         });
       } else {
         this.httpclient.put<any>(
@@ -286,10 +288,7 @@ export class AuthService {
           resolve(result.data);
         }, error => {
           console.log(error);
-          if (error.error.charAt(0) != '{') {
-            error.error = error.error.substr(1);
-          }
-          reject(JSON.parse(error.error));
+          reject(this.returnErrorState(error));
         });
       } else {
         this.httpclient.put<any>(
@@ -340,10 +339,7 @@ export class AuthService {
           resolve(result.data);
         }, error => {
           console.log(error);
-          if (error.error.charAt(0) != '{') {
-            error.error = error.error.substr(1);
-          }
-          reject(JSON.parse(error.error));
+          reject(this.returnErrorState(error));
         });
       } else {
         this.httpclient.put<any>(
@@ -396,10 +392,7 @@ export class AuthService {
           resolve(result.data);
         }, error => {
           console.log(error);
-          if (error.error.charAt(0) != '{') {
-            error.error = error.error.substr(1);
-          }
-          reject(JSON.parse(error.error));
+          reject(this.returnErrorState(error));
         });
       } else {
         this.httpclient.get<any>(

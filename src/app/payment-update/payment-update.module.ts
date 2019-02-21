@@ -1,16 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PayNowCheckPage } from './pay-now-check.page';
+import { PaymentUpdatePage } from './payment-update.page';
+import { MaterialShareModule } from '../materialshare.module';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateServiceService } from 'src/service/translate-service.service';
+import { AuthService } from 'src/service/auth.service';
+import { PaymentService } from 'src/service/payment.service';
+import { LoadingService } from 'src/service/loading.service';
+import { ToastService } from 'src/service/toast.service';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -20,7 +25,7 @@ export function createTranslateLoader(http: HttpClient) {
 const routes: Routes = [
   {
     path: '',
-    component: PayNowCheckPage
+    component: PaymentUpdatePage
   }
 ];
 
@@ -29,6 +34,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    ReactiveFormsModule,
+    MaterialShareModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
@@ -39,9 +46,13 @@ const routes: Routes = [
     }),
     RouterModule.forChild(routes)
   ],
-  declarations: [PayNowCheckPage],
+  declarations: [PaymentUpdatePage],
   providers: [
     TranslateServiceService,
+    PaymentService,
+    LoadingService,
+    ToastService,
+    AuthService,
   ]
 })
-export class PayNowCheckPageModule { }
+export class PaymentUpdatePageModule { }

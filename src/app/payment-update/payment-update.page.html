@@ -6,7 +6,7 @@
       </ion-button>
     </ion-buttons>
     <ion-title size="large">
-      {{ 'new_payment_method' | translate }}
+      {{ 'update_payment' | translate }}
       <br>
       <span size="small">
         {{userId}}
@@ -20,7 +20,7 @@
 
   <ion-row class="">
     <form #paymentData="ngForm" id="paymentData" (ngSubmit)="paymentSubmit(paymentData)" novalidate>
-      <ion-row class="payment-row">
+      <!-- <ion-row class="payment-row">
         <span class="payment-title-span">
           {{ 'payment_method' | translate }}
         </span>
@@ -43,7 +43,7 @@
             </mat-error>
           </mat-form-field>
         </ion-col>
-      </ion-row>
+      </ion-row> -->
 
       <ion-row class="payment-row">
         <span class="payment-title-span">
@@ -61,10 +61,9 @@
           </mat-error>
 
         </mat-form-field>
-        <!-- <ion-input class="payment-input" [(ngModel)]="payData.name" placeholder="Your name"></ion-input> -->
       </ion-row>
 
-      <ion-row class="payment-row">
+      <!-- <ion-row class="payment-row">
         <span class="payment-title-span">
           {{ 'credit_card_num' | translate }}
         </span>
@@ -81,8 +80,7 @@
 
         </mat-form-field>
 
-        <!-- <ion-input class="payment-input" [(ngModel)]="payData.cardnum" placeholder="16 Digit Credit Card Number"></ion-input> -->
-      </ion-row>
+      </ion-row> -->
 
       <ion-row class="payment-row">
         <span class="payment-title-span">
@@ -137,7 +135,7 @@
       <ion-col size="5">
         <ion-row class="button-row">
           <button ion-button class="button-style1" (click)="submitAddPayment()">
-            {{ 'add' | translate }}
+            {{ 'update' | translate }}
           </button>
         </ion-row>
       </ion-col>

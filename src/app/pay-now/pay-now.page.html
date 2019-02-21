@@ -12,15 +12,15 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
-  <ion-row class="pay-now-row">
+  <ion-row class="pay-now-row" padding-top padding-start padding-end>
     <span class="payment-title-span">
       {{ 'payment_method' | translate }}
     </span>
   </ion-row>
 
-  <form #paymentForm="ngForm" id="paymentForm" (ngSubmit)="paymentSubmit(paymentForm)" novalidate>
+  <form #paymentForm="ngForm" id="paymentForm" (ngSubmit)="paymentSubmit(paymentForm)" novalidate padding-bottom padding-start padding-end>
     <ion-row class="pay-now-row">
       <ion-col col-12>
         <mat-form-field>
@@ -74,5 +74,21 @@
     </ion-row>
 
   </form>
+
+  <ion-row class="full-height pay-notification" *ngIf="cancenEnable">
+    <ion-row class="main-row">
+      <ion-row class="title-row">
+        <span class="title-span">
+          {{'payment_submit_successfully' | translate}}
+        </span>
+      </ion-row>
+
+      <ion-row class="button-row">
+        <button ion-button class="button-class" (click)="gotoPaymenthistory()">
+          Ok
+        </button>
+      </ion-row>
+    </ion-row>
+  </ion-row>
 
 </ion-content>

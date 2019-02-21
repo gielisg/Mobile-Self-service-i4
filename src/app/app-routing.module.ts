@@ -14,7 +14,6 @@ const routes: Routes = [
   { path: 'bill-history', loadChildren: './bill-history/bill-history.module#BillHistoryPageModule' },
   { path: 'transaction-history', loadChildren: './transaction-history/transaction-history.module#TransactionHistoryPageModule' },
   { path: 'pay-now', loadChildren: './pay-now/pay-now.module#PayNowPageModule' },
-  { path: 'pay-now-check', loadChildren: './pay-now-check/pay-now-check.module#PayNowCheckPageModule' },
   { path: 'payment-method', loadChildren: './payment-method/payment-method.module#PaymentMethodPageModule' },
   { path: 'new-payment', loadChildren: './new-payment/new-payment.module#NewPaymentPageModule' },
   { path: 'call-history', loadChildren: './call-history/call-history.module#CallHistoryPageModule' },
@@ -24,6 +23,7 @@ const routes: Routes = [
   { path: 'settings', loadChildren: './settings/settings.module#SettingsPageModule' },
   { path: 'topup-history', loadChildren: './topup-history/topup-history.module#TopupHistoryPageModule' },
   { path: 'top-up', loadChildren: './top-up/top-up.module#TopUpPageModule' },
+  { path: 'payment-update', loadChildren: './payment-update/payment-update.module#PaymentUpdatePageModule' },
 ];
 
 @NgModule({

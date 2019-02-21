@@ -14,7 +14,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateServiceService } from 'src/service/translate-service.service';
 import { PaymentService } from 'src/service/payment.service';
-import { PayNowCheckPage } from '../pay-now-check/pay-now-check.page';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -30,7 +29,6 @@ const routes: Routes = [
 
 @NgModule({
   entryComponents: [
-    PayNowCheckPage
   ],
   imports: [
     CommonModule,
@@ -49,7 +47,6 @@ const routes: Routes = [
   ],
   declarations: [
     PayNowPage,
-    PayNowCheckPage,
   ],
   providers: [
     TranslateServiceService,
