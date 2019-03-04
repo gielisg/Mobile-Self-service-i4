@@ -4,6 +4,8 @@ import { LoadingService } from 'src/service/loading.service';
 import { ToastService } from 'src/service/toast.service';
 import { TranslateService } from '@ngx-translate/core';
 import { TranslateServiceService } from 'src/service/translate-service.service';
+import { TransactionService } from 'src/service/transaction.service';
+import { AuthService } from 'src/service/auth.service';
 
 @Component({
   selector: 'app-transaction-history',
@@ -12,14 +14,7 @@ import { TranslateServiceService } from 'src/service/translate-service.service';
 })
 export class TransactionHistoryPage implements OnInit {
 
-  public setDefault = [
-    { "tranNum": "3014657", "type": "receipt", "date": "12 / 18", "amount": "0.01", "status": "precessing" },
-    { "tranNum": "5275851", "type": "receipt", "date": "12 / 18", "amount": "0.01", "status": "precessing" },
-    { "tranNum": "8548948", "type": "receipt", "date": "02 / 18", "amount": "0.01", "status": "precessing" },
-    { "tranNum": "3879948", "type": "receipt", "date": "01 / 19", "amount": "0.01", "status": "precessing" },
-    { "tranNum": "2438789", "type": "receipt", "date": "07 / 19", "amount": "0.01", "status": "precessing" },
-    { "tranNum": "3878978", "type": "receipt", "date": "06 / 19", "amount": "0.01", "status": "precessing" }
-  ];
+  public setDefault: any[];
 
   public transactionList: any[];
   public showMoreState: boolean;
@@ -29,6 +24,8 @@ export class TransactionHistoryPage implements OnInit {
     public loading: LoadingService,
     public toast: ToastService,
     public translate: TranslateServiceService,
+    private tranService: TransactionService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -41,24 +38,93 @@ export class TransactionHistoryPage implements OnInit {
 
   ionicInit() {
     this.transactionList = new Array();
+    this.setDefault = new Array();
     this.showMoreState = true;
-    for (let list of this.setDefault) {
-      this.transactionList.push(list);
-    }
+
     this.translate.translaterService();
+
+    this.loading.present();
+
+    this.tranService.getTransactionHistory().then((data: any) => {
+      console.log(data);
+      for (let list of data.Items) {
+        this.setDefault.push(list);
+        // console.log(list.Number);
+      }
+      // console.log(this.setDefault);
+      this.addMoreAction();
+      this.loading.dismiss();
+
+    }, error => {
+      console.log(error);
+      if (Object(error).Code.Name == 'InvalidSessionKeyException') {
+        this.authService.createRandomSessionKey().then(result => {
+          if (result) {
+            console.log(result);
+            // localStorage.setItem('sessionKey', result);
+            this.ionicInit();
+          }
+        }, error => {
+          console.log(error);
+        });
+      }
+      this.loading.dismiss();
+    });
+
   }
 
   addMoreAction() {
-    if (this.transactionList.length + this.setDefault.length < 25) {
-      for (let list of this.setDefault) {
-        this.transactionList.push(list);
+    if (this.transactionList.length < this.setDefault.length) {
+      // for (let list of this.setDefault) {
+      //   this.transactionList.push(list);
+      // }
+      if (this.setDefault.length - this.transactionList.length > 25) {
+        console.log('here1');
+        let arrayNum = 0;
+        if (this.transactionList.length == 0) {
+          arrayNum = 0;
+        } else {
+          arrayNum = this.transactionList.length - 1;
+        }
+        console.log(arrayNum);
+        console.log(this.transactionList.length);
+        for (let i = arrayNum; i <= arrayNum + 25; i++) {
+          console.log('here2');
+          console.log(i);
+          let param = { "tranNum": "", "type": "", "date": "12 / 18", "amount": "0.01", "status": "precessing" };
+          param.tranNum = this.setDefault[i].Number;
+          param.type = this.setDefault[i].Type.Name;
+          param.amount = this.setDefault[i].Total;
+          param.status = this.setDefault[i].Status.Name;
+          param.date = this.setDefault[i].Date.split('T')[0].split('-')[1] + ' / ' + this.setDefault[i].Date.split('T')[0].split('-')[2];
+          this.transactionList.push(param);
+        }
+      } else {
+        console.log('here3');
+        let arrayNum = 0;
+        if (this.transactionList.length == 0) {
+          arrayNum = 0;
+        } else {
+          arrayNum = this.transactionList.length - 1;
+        }
+        for (let i = arrayNum; i < this.setDefault.length; i++) {
+          let param = { "tranNum": "", "type": "", "date": "12 / 18", "amount": "0.01", "status": "precessing" };
+          param.tranNum = this.setDefault[i].Number;
+          param.type = this.setDefault[i].Type.Name;
+          param.amount = this.setDefault[i].Total;
+          param.status = this.setDefault[i].Status.Name;
+          param.date = this.setDefault[i].Date.split('T')[0].split('-')[1] + ' / ' + this.setDefault[i].Date.split('T')[0].split('-')[2];
+          this.transactionList.push(param);
+        }
       }
+
       this.showMoreState = true;
     } else {
+      console.log('here4');
       this.showMoreState = false;
     }
 
-    if (this.transactionList.length > 25) {
+    if (this.transactionList.length >= this.setDefault.length) {
       this.showMoreState = false;
     }
 

@@ -1,10 +1,5 @@
 <ion-header class="header-class">
   <ion-toolbar color="dark" mode="ios">
-    <!-- <ion-buttons mode="ios" slot="secondary">
-      <ion-button (click)="gotoSignin()">
-        <ion-icon slot="icon-only" color="light" size="default" name="ios-menu"></ion-icon>
-      </ion-button>
-    </ion-buttons> -->
     <ion-title size="large">{{ 'home' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -28,8 +23,7 @@
     </ion-row>
   </ion-row>
   <ion-row [ngClass]="{'download-pay':switchMode == true, 'rus-pay':switchMode == false}">
-    <!-- <ion-col col-1>
-    </ion-col> -->
+
     <ion-col size="6">
       <ion-row class="button-row">
         <button mat-button class="button-style1" (click)="clickDownload()">
@@ -44,8 +38,6 @@
         </button>
       </ion-row>
     </ion-col>
-    <!-- <ion-col col-1>
-    </ion-col> -->
   </ion-row>
 
   <ion-row class="my-detail">

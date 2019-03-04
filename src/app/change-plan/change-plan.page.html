@@ -29,8 +29,8 @@
       <ion-row class="payment-row">
         <ion-col>
           <mat-form-field>
-            <mat-select placeholder="{{ 'select' | translate }}" [formControl]="newState" [(ngModel)]="changeState.newState"
-              class="select_class" required>
+            <mat-select placeholder="{{ 'select' | translate }}" [formControl]="newState"
+              [(ngModel)]="changeState.newState" class="select_class" required>
               <mat-option value="saver1">
                 {{ 'saver1' | translate }}
               </mat-option>
@@ -68,6 +68,7 @@
               <mat-option value="Paypal">
                 {{ 'paypal' | translate }}
               </mat-option>
+
             </mat-select>
             <mat-error *ngIf="Reason.hasError('required')">{{ 'choose_type_of_payment' | translate }}</mat-error>
           </mat-form-field>
@@ -106,10 +107,6 @@
           <mat-form-field class="example-full-width">
             <input matInput class="payment-input" type="text" #title="ngModel" [(ngModel)]="changeState.note"
               placeholder="{{ 'type_here' | translate }}." name="Note" />
-
-            <!-- <mat-error id="matLoginError2">
-            <span>Creadit Card Number is required</span>
-          </mat-error> -->
 
           </mat-form-field>
         </ion-col>

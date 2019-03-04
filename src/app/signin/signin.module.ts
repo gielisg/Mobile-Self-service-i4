@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
@@ -15,6 +15,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateServiceService } from 'src/service/translate-service.service';
 import { AuthService } from 'src/service/auth.service';
+import { ForgotPasswordPage } from '../forgot-password/forgot-password.page';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -29,11 +30,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  entryComponents: [
+    ForgotPasswordPage,
+  ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     MaterialShareModule,
+    ReactiveFormsModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
@@ -48,6 +53,9 @@ const routes: Routes = [
     TranslateServiceService,
     AuthService,
   ],
-  declarations: [SigninPage]
+  declarations: [
+    SigninPage,
+    ForgotPasswordPage,
+  ]
 })
 export class SigninPageModule { }

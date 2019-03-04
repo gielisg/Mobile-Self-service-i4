@@ -41,6 +41,7 @@ export class PaymentUpdatePage implements OnInit {
 
     this.payData.paymentId = parseInt(localStorage.getItem('paymentID'));
     this.payData.number = localStorage.getItem('paymentCardNumber');
+    this.payData.name = localStorage.getItem('paymentUserName');
 
     console.log('ionViewDidLoad NewPaymentPage');
     for (let i = 1; i < 13; i++) {
@@ -94,7 +95,6 @@ export class PaymentUpdatePage implements OnInit {
   }
 
   submitAddPayment() {
-    console.log('Trigger Option');
     document.getElementById("trigersubmit").click()
   }
 

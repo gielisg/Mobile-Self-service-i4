@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { Platform, Events, NavController, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -43,7 +43,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       // let status bar overlay webview
       this.statusBar.overlaysWebView(false);
-      
+
       // set status bar to white
       // this.statusBar.backgroundColorByHexString('#0cd1e8');
 
@@ -54,7 +54,7 @@ export class AppComponent {
 
       this.statusBar.styleDefault();
       // this.splashScreen.hide();
-      
+
       // set status bar to white
       this.statusBar.backgroundColorByHexString('#0cd1e8');
     });

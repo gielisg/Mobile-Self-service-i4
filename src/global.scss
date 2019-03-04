@@ -74,6 +74,21 @@ ion-row {
     }
 }
 
+.forgot-row {
+    margin-top: 20px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    .forgot-password {
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: auto;
+        font-size: 18px;
+        color: blue;
+        cursor: pointer;
+    }
+}
+
 .example-form {
     min-width: 150px;
     max-width: 500px;
@@ -118,8 +133,8 @@ ion-row {
         }
     }
     ion-title {
-        font-size: 20px;
-        text-overflow: ellipsis !important;
+        font-size: 20px; // text-overflow: ellipsis !important;
+        white-space: nowrap !important;
         span {
             font-size: 13px;
         }
@@ -365,10 +380,11 @@ select {
             color: white;
             border-radius: 10px;
             text-transform: initial;
-            width: 80%;
+            width: 100%;
             margin-left: auto;
             margin-top: auto;
             margin-bottom: auto;
+            margin: 3px 0px;
             .download-image {
                 width: 20px;
                 height: 20px;
@@ -436,6 +452,7 @@ select {
 
 .pay-now-row {
     margin-top: 5%;
+    position: relative;
     .payment-title-span {
         width: 100%;
         font-size: 17px;
@@ -523,10 +540,6 @@ select {
     font-weight: bold;
 }
 
-.payment-row {
-    margin-top: 5%;
-}
-
 .payment-input {
     width: 100%;
 }
@@ -568,10 +581,16 @@ select {
 }
 
 .receipt-span {
-    text-align: right;
+    text-align: left;
     font-size: 16px;
     font-weight: bold;
     width: 100%;
+}
+
+.date-span {
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .payment-row {
@@ -593,6 +612,26 @@ select {
     .normal-border {
         border-bottom: 1px solid #ddd;
     }
+}
+
+.forgot-password-row {
+    margin-top: 5%;
+    .payment-title-span {
+        width: 100%;
+        font-size: 17px;
+        color: #3982a3;
+        font-weight: bold;
+    }
+}
+
+.forgot-detail-row {
+    position: relative;
+}
+
+.error-message {
+    margin-top: -15px;
+    color: #f44336;
+    font-size: 12px;
 }
 
 .cal-error {

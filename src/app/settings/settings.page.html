@@ -48,23 +48,8 @@
     </ion-col>
     <ion-col size="6">
       <ion-row class="full-height lng-setmode">
-        <!-- <mat-form-field class="select-class">
-          <mat-select [formControl]="selectFormControl" [(ngModel)]="selectLng" required>
-            <mat-option value="en" (click)="selectedLng()">
-              {{ 'english' | translate }}
-            </mat-option>
-
-            <mat-option value="ru" (click)="selectedLng()">
-              {{ 'russian' | translate }}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="selectFormControl.hasError('required')">
-            {{ 'choose_type_of_payment' | translate }}
-          </mat-error>
-        </mat-form-field> -->
-        <!-- <mat-form-field class="select-class"> -->
-        <ion-select class="select-class" (ionChange)="selectedLng()" [formControl]="selectFormControl" [(ngModel)]="selectLng"
-          required>
+        <ion-select class="select-class" (ionChange)="selectedLng()" [formControl]="selectFormControl"
+          [(ngModel)]="selectLng" required>
           <ion-select-option value="en" (click)="selectedLng()">
             {{ 'english' | translate }}
           </ion-select-option>
@@ -73,7 +58,6 @@
             {{ 'russian' | translate }}
           </ion-select-option>
         </ion-select>
-        <!-- </mat-form-field> -->
       </ion-row>
     </ion-col>
   </ion-row>

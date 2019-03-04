@@ -20,7 +20,8 @@
     </span>
   </ion-row>
 
-  <form #paymentForm="ngForm" id="paymentForm" (ngSubmit)="paymentSubmit(paymentForm)" novalidate padding-bottom padding-start padding-end>
+  <form #paymentForm="ngForm" id="paymentForm" (ngSubmit)="paymentSubmit(paymentForm)" novalidate padding-bottom
+    padding-start padding-end>
     <ion-row class="pay-now-row">
       <ion-col col-12>
         <mat-form-field>
@@ -42,14 +43,51 @@
 
     <ion-row class="pay-now-row">
       <span class="payment-title-span">
-        {{ 'amount' | translate }}
+        {{ 'total_amount' | translate }}
       </span>
     </ion-row>
 
     <ion-row class="pay-now-row">
+
       <span class="payment-amount-span">
-        ${{payAmount}}
+        ${{totalAmount}}
       </span>
+
+    </ion-row>
+
+    <ion-row class="pay-now-row">
+      <mat-checkbox class="example-margin" [(ngModel)]="checked" name="checked">Do you want to pay custom amount?
+      </mat-checkbox>
+    </ion-row>
+
+    <ion-row class="pay-now-row" *ngIf="checked">
+      <span class="payment-title-span">
+        {{ 'amount' | translate }}
+      </span>
+    </ion-row>
+
+    <ion-row class="pay-now-row" *ngIf="checked">
+
+      <mat-form-field class="example-full-width">
+
+        <span matPrefix>$ &nbsp;</span>
+        <input matInput class="payment-input" type="number" [formControl]="customAmount" min="0" [(ngModel)]="payAmount"
+          required placeholder="{{ 'amount' | translate }}" name="payAmount" />
+
+        <mat-error *ngIf="customAmount.hasError('required')">
+          <span>{{ 'payment_amount_required' | translate }}</span>
+        </mat-error>
+
+        <!-- <mat-error *ngIf="!customAmount.hasError('required') && payAmount > totalAmount">
+          <span>{{ 'choose_type_of_payment' | translate }}</span>
+        </mat-error> -->
+
+      </mat-form-field>
+
+      <ion-row class="error-message" *ngIf="!customAmount.hasError('required') && payAmount > totalAmount">
+        <span>{{ 'payment_amount_over' | translate }}</span>
+      </ion-row>
+
     </ion-row>
 
     <ion-row class="add-cancel">

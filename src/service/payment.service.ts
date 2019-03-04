@@ -2,7 +2,6 @@ import { Injectable, Inject } from '@angular/core';
 import { APP_CONFIG, IAppConfig } from '../model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs';
 import { Platform } from '@ionic/angular';
 import { HTTP } from '@ionic-native/http/ngx';
 
@@ -27,10 +26,6 @@ export class PaymentService {
       this.startDate = new Date().toISOString();
     }
     console.log(this.startDate);
-
-    // let tempDate = this.startDate;
-    // this.startDate = tempDate.split("T")[0].split("-")[0] + "-" + tempDate.split("T")[0].split("-")[1] + "-" + (parseInt(tempDate.split("T")[0].split("-")[2]) + 1).toString();
-    // this.startDate = this.startDate + "T" + "00:00:00";
   }
 
   getPaymentAvailList() {
@@ -67,27 +62,14 @@ export class PaymentService {
         });
       }
     })
-    // return this.httpclient.get(
-    //   this.config.apiEndpointWeb +
-    //   'Payment.svc/rest/AccountPaymentMethodListValid?SessionKey=' +
-    //   encodedSessionKey + "&ContactCode=" +
-    //   JSON.parse(localStorage.getItem('currentUser')).username)
-    //   .pipe(
-    //   );
   }
+
   accountPaymentMethod(paymentId) {
     let encodedSessionKey = encodeURIComponent(localStorage.getItem("sessionKey"));
     let param = 'Payment.svc/rest/AccountPaymentMethod?SessionKey=' +
       encodedSessionKey + "&Id=" + paymentId +
       "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username;
 
-    // return this.httpclient.get(
-    //   this.config.apiEndpointWeb +
-    //   'Payment.svc/rest/AccountPaymentMethod?SessionKey=' +
-    //   encodedSessionKey + "&Id=" + paymentId +
-    //   "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username)
-    //   .pipe(
-    //   );
     return new Promise((resolve, reject) => {
       if (this.platform.is('mobile')) {
         this.nativeHTTP.get(
@@ -127,15 +109,16 @@ export class PaymentService {
         "AccountNumber": accountMethod.number,
         "ExpiryDate": accountMethod.expireDate,
         "PaymentMethod": {
-          "Code": "MC",
+          "Code": accountMethod.cardType,
           "Type": {
-            "Code": "C",
+            "Code": accountMethod.cardCodeType,
           }
         },
         "StartDate": this.startDate,
         "SubscriberOwns": true,
         "Source": "",
         "CreateOption": "NewOnly",
+        "Default": "True",
       }
     };
     return new Promise((resolve, reject) => {
@@ -167,11 +150,6 @@ export class PaymentService {
         });
       }
     });
-    // return this.httpclient.post(
-    //   this.config.apiEndpointWeb + 'Payment.svc/rest/AccountPaymentMethodAdd',
-    //   JSON.stringify(param))
-    //   .pipe(
-    //   );
   }
 
   accountPaymentMethodCancel(paymentId) {
@@ -191,12 +169,6 @@ export class PaymentService {
 
     console.log(param);
 
-    // return this.httpclient.put(
-    //   this.config.apiEndpointWeb + 'Payment.svc/rest/AccountPaymentMethodCancel',
-    //   JSON.stringify(param), httpOptions)
-    //   .pipe(
-    //   );
-
     return new Promise((resolve, reject) => {
       if (this.platform.is('mobile')) {
         this.nativeHTTP.put(
@@ -205,10 +177,14 @@ export class PaymentService {
           {}
         ).then(result => {
           console.log(result);
-          if (result.data.charAt(0) != '{') {
-            result.data = result.data.substr(1);
+          if (result.data == "") {
+            resolve(result.data);
+          } else {
+            if (result.data.charAt(0) != '{') {
+              result.data = result.data.substr(1);
+            }
+            resolve(JSON.parse(result.data));
           }
-          resolve(JSON.parse(result.data));
         }, error => {
           console.log(error);
           reject(this.returnErrorState(error));
@@ -229,6 +205,38 @@ export class PaymentService {
     });
   }
 
+  accountPaymentMethodDefault() {
+    let sendParam = 'Payment.svc/rest/AccountPaymentMethodDefault?SessionKey=' + encodeURIComponent(localStorage.getItem("sessionKey")) +
+      '&ContactCode=' + JSON.parse(localStorage.getItem('currentUser')).username;
+    return new Promise((resolve, reject) => {
+      if (this.platform.is('mobile')) {
+        this.nativeHTTP.get(
+          this.config.apiEndpointMobile + sendParam,
+          {},
+          {}
+        ).then(result => {
+          console.log(result);
+          if (result.data.charAt(0) != '{') {
+            result.data = result.data.substr(1);
+          }
+          resolve(JSON.parse(result.data));
+        }, error => {
+          console.log(error);
+          reject(this.returnErrorState(error));
+        });
+      } else {
+        console.log('web');
+        console.log(this.config.apiEndpointWeb + sendParam);
+        this.httpclient.get<any>(this.config.apiEndpointWeb + sendParam)
+          .subscribe(result => {
+            resolve(result);
+          }, error => {
+            reject(error.error);
+          })
+      }
+    });
+  }
+
   accountPaymentMethodMakeDefault(paymentId) {
     let param = {
       "SessionKey": localStorage.getItem("sessionKey"),
@@ -236,11 +244,6 @@ export class PaymentService {
       "StartDate": this.startDate,
       "StatusCode": "O"
     };
-    // return this.httpclient.put(
-    //   this.config.apiEndpointWeb + 'Payment.svc/rest/AccountPaymentMethodMakeDefault',
-    //   JSON.stringify(param))
-    //   .pipe(
-    //   );
 
     return new Promise((resolve, reject) => {
       if (this.platform.is('mobile')) {
@@ -273,6 +276,84 @@ export class PaymentService {
     });
   }
 
+
+  setAccountBalanceByCard(balanceData) {
+
+    let sendParam = 'Payment.svc/rest/PaymentRequestSimpleByCreditCard?SessionKey=' + encodeURIComponent(localStorage.getItem("sessionKey")) +
+      '&ContactCode=' + JSON.parse(localStorage.getItem('currentUser')).username +
+      '&CardNumber=' + balanceData.cardNum + '&CardName=' + balanceData.name + '&ExpiryDate=' + balanceData.expireDate + '&Amount=' + balanceData.amount;
+    return new Promise((resolve, reject) => {
+      if (this.platform.is('mobile')) {
+        this.nativeHTTP.get(
+          this.config.apiEndpointMobile + sendParam,
+          {},
+          {}
+        ).then(result => {
+          console.log(result);
+          if (result.data.charAt(0) != '{') {
+            result.data = result.data.substr(1);
+          }
+          resolve(JSON.parse(result.data));
+        }, error => {
+          console.log(error);
+          reject(this.returnErrorState(error));
+        });
+      } else {
+        console.log('web');
+        console.log(this.config.apiEndpointWeb + sendParam);
+        this.httpclient.get<any>(this.config.apiEndpointWeb + sendParam)
+          .subscribe(result => {
+            resolve(result);
+          }, error => {
+            reject(error.error);
+          })
+      }
+    });
+  }
+
+  setAccountBalanceByDefault(amount) {
+
+    // let amountParam = {
+    //   "SessionKey": (localStorage.getItem("sessionKey")),
+    //   "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
+    //   "Amount": amount,
+    // }
+
+    let sendParam = 'Payment.svc/rest/PaymentRequestSimpleByDefaultPaymentMethod?SessionKey=' + encodeURIComponent(localStorage.getItem("sessionKey")) +
+      '&ContactCode=' + JSON.parse(localStorage.getItem('currentUser')).username +
+      '&Amount=' + amount;
+
+    // let sendParam = 'Payment.svc/rest/PaymentRequestSimpleByDefaultPaymentMethod?' + JSON.stringify(amountParam);
+
+    return new Promise((resolve, reject) => {
+      if (this.platform.is('mobile')) {
+        this.nativeHTTP.get(
+          this.config.apiEndpointMobile + sendParam,
+          {},
+          {}
+        ).then(result => {
+          console.log(result);
+          if (result.data.charAt(0) != '{') {
+            result.data = result.data.substr(1);
+          }
+          resolve(JSON.parse(result.data));
+        }, error => {
+          console.log(error);
+          reject(this.returnErrorState(error));
+        });
+      } else {
+        console.log('web');
+        console.log(this.config.apiEndpointWeb + sendParam);
+        this.httpclient.get<any>(this.config.apiEndpointWeb + sendParam)
+          .subscribe(result => {
+            resolve(result);
+          }, error => {
+            reject(error.error);
+          })
+      }
+    });
+  }
+
   accountPaymentMethodUpdate(accountMethod) {
     let param = {
       "SessionKey": localStorage.getItem("sessionKey"),
@@ -289,11 +370,6 @@ export class PaymentService {
         "SubscriberOwns": true,
       }
     };
-    // return this.httpclient.put(
-    //   this.config.apiEndpointWeb + 'Payment.svc/rest/AccountPaymentMethodUpdate',
-    //   JSON.stringify(param))
-    //   .pipe(
-    //   );
     return new Promise((resolve, reject) => {
       if (this.platform.is('mobile')) {
         this.nativeHTTP.put(
@@ -345,11 +421,6 @@ export class PaymentService {
         "SendEmail": false,
       }
     };
-    // return this.httpclient.post(
-    //   this.config.apiEndpointWeb + 'Payment.svc/rest/PaymentRequestCreate',
-    //   JSON.stringify(param))
-    //   .pipe(
-    //   );
     return new Promise((resolve, reject) => {
       if (this.platform.is('mobile')) {
         this.nativeHTTP.post(
@@ -387,15 +458,6 @@ export class PaymentService {
       encodedSessionKey + "&ContactCode=" +
       JSON.parse(localStorage.getItem('currentUser')).username +
       "&PaymentMethodTypeCode=C";
-
-    // return this.httpclient.get(
-    //   this.config.apiEndpointWeb +
-    //   'Payment.svc/rest/PaymentMethodFromAccountNumberAndType?SessionKey=' +
-    //   encodedSessionKey + "&ContactCode=" +
-    //   JSON.parse(localStorage.getItem('currentUser')).username +
-    //   "&PaymentMethodTypeCode=C")
-    //   .pipe(
-    //   );
 
 
     return new Promise((resolve, reject) => {

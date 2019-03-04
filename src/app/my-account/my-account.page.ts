@@ -38,7 +38,7 @@ export class MyAccountPage implements OnInit {
   ionicInit() {
 
     this.translate.translaterService();
-    
+
     if (localStorage.getItem("set_lng") == "en") {
       this.switchMode = true;
     } else {
@@ -47,48 +47,47 @@ export class MyAccountPage implements OnInit {
 
     this.loading.present();
 
-    this.billService.getBillList()
-      .then(data => {
-        console.log(data);
-        if (data) {
-          this.billData.billAmount = Object(data).Items[0].AmountDue;
-          this.billData.billDate = this.setDate(Object(data).Items[0].DueDate.split("T")[0]);
-          this.billData.accountNumber = Object(data).Items[0].ContactCode;
-          this.billData.billNumber = Object(data).Items[0].Number;
+    this.billService.getBillList().then(data => {
+      console.log(data);
+      if (data) {
+        this.billData.billAmount = Object(data).Items[0].AmountDue;
+        this.billData.billDate = this.setDate(Object(data).Items[0].DueDate.split("T")[0]);
+        this.billData.accountNumber = Object(data).Items[0].ContactCode;
+        this.billData.billNumber = Object(data).Items[0].Number;
+      }
+      this.loading.dismiss();
 
-        }
-        this.loading.dismiss();
-
-      },
-        error => {
-          console.log(error);
-          if (Object(error).Code.Name == 'InvalidSessionKeyException') {
-            this.authService.createRandomSessionKey().then(result => {
-              if (result) {
-                console.log(result);
-                // localStorage.setItem('sessionKey', result);
-                this.ionicInit();
-              }
-            }, error => {
-              console.log(error);
-            });
+    }, error => {
+      console.log(error);
+      if (Object(error).Code.Name == 'InvalidSessionKeyException') {
+        this.authService.createRandomSessionKey().then(result => {
+          if (result) {
+            console.log(result);
+            // localStorage.setItem('sessionKey', result);
+            this.ionicInit();
           }
-          this.loading.dismiss();
+        }, error => {
+          console.log(error);
         });
+      }
+      this.loading.dismiss();
+    });
   }
+
   gotoBillHistory() {
     this.navCtrl.navigateForward('bill-history');
   }
+
   gotoTransactionHistory() {
     this.navCtrl.navigateForward('transaction-history');
   }
+
   gotoPaymentHistory() {
     this.navCtrl.navigateForward('payment-method');
   }
+
   gotoPayNow() {
-    console.log(this.billData.billAmount);
     localStorage.setItem('paynowAmount', this.billData.billAmount)
-    // console.log('paynowAmount', this.billData.billAmount);
     // this.navCtrl.push(PayNowPage, { navParams: this.billData.billAmount });
     this.navCtrl.navigateForward('pay-now');
   }
@@ -127,44 +126,40 @@ export class MyAccountPage implements OnInit {
 
     this.loading.present();
 
-    this.billService.getBillFile(this.billData.billNumber)
-      .then(result => {
-        console.log(result);
+    this.billService.getBillFile(this.billData.billNumber).then(result => {
+      console.log(result);
 
-        if (Object(result).Content != null && typeof (Object(result).Content) != "undefined") {
-          console.log("here");
-          var pdf = 'data:application/pdf;base64,' + Object(result).Content.$value;
-          let pdfName = Object(result).FileName;
-          console.log("here");
-          this.downloadPdf(pdf, pdfName);
-        } else {
-          this.toast.present('The Bill you trying to download is unavailable at the moment. Sorry for the inconvenience.' +
-            ' Please try again later. Please contact Support Team. Error: Bill not available to download yet.');
-        }
+      if (Object(result).Content != null && typeof (Object(result).Content) != "undefined") {
+        var pdf = 'data:application/pdf;base64,' + Object(result).Content.$value;
+        let pdfName = Object(result).FileName;
+        this.downloadPdf(pdf, pdfName);
+      } else {
+        this.toast.present('The Bill you trying to download is unavailable at the moment. Sorry for the inconvenience.' +
+          ' Please try again later. Please contact Support Team. Error: Bill not available to download yet.');
+      }
 
-        this.loading.dismiss();
+      this.loading.dismiss();
 
-      }, error => {
-        console.log(error);
-        if (Object(error).Code.Name == 'InvalidSessionKeyException') {
-          this.authService.createRandomSessionKey().then(result => {
-            if (result) {
-              console.log(result);
-              // localStorage.setItem('sessionKey', result);
-              this.clickDownload();
-            }
-          }, error => {
-            console.log(error);
-          });
-        }
-        this.loading.dismiss();
-      });
+    }, error => {
+      console.log(error);
+      if (Object(error).Code.Name == 'InvalidSessionKeyException') {
+        this.authService.createRandomSessionKey().then(result => {
+          if (result) {
+            console.log(result);
+            // localStorage.setItem('sessionKey', result);
+            this.clickDownload();
+          }
+        }, error => {
+          console.log(error);
+        });
+      }
+      this.loading.dismiss();
+    });
   }
 
-
   setDate(value) {
-    let array_sam = value.split("-");
-    return array_sam[1] + "-" + array_sam[2] + "-" + array_sam[0];
+    let arraySam = value.split("-");
+    return arraySam[1] + "-" + arraySam[2] + "-" + arraySam[0];
   }
 
   openMenu() {
@@ -218,6 +213,10 @@ export class MyAccountPage implements OnInit {
       byteArrays.push(byteArray);
     }
     return new Blob(byteArrays, { type: contentType });
+  }
+
+  gotoAccountBalance() {
+    this.navCtrl.navigateForward('account-balance');
   }
 
 

@@ -17,6 +17,7 @@ import { MaterialShareModule } from '../materialshare.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TransactionService } from 'src/service/transaction.service';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -52,6 +53,7 @@ const routes: Routes = [
     LoadingService,
     ToastService,
     TranslateServiceService,
+    TransactionService,
   ]
 })
 export class TransactionHistoryPageModule { }

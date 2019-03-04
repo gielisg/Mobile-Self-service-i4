@@ -53,7 +53,6 @@ export class MyDetailPage implements OnInit {
 
   ionicInit() {
 
-    console.log(localStorage.getItem("set_lng"));
     this.translate.translaterService();
 
     this.addressList = new Array();
@@ -90,7 +89,6 @@ export class MyDetailPage implements OnInit {
       }
       this.loading.dismiss();
     }, error => {
-      console.log("error");
       console.log(error);
       if (Object(error).Code.Name == 'InvalidSessionKeyException') {
         this.authService.createRandomSessionKey().then(result => {
@@ -261,7 +259,6 @@ export class MyDetailPage implements OnInit {
       console.log(result);
       this.loading.dismiss();
     }, error => {
-      console.log("error");
       console.log(error);
       if (Object(error).Code.Name == 'InvalidSessionKeyException') {
         var user = this.authService.getLoggedUser();
@@ -286,7 +283,6 @@ export class MyDetailPage implements OnInit {
       console.log(result);
       this.loading.dismiss();
     }, error => {
-      console.log("error");
       console.log(error);
       if (Object(error).Code.Name == 'InvalidSessionKeyException') {
         var user = this.authService.getLoggedUser();
@@ -311,7 +307,6 @@ export class MyDetailPage implements OnInit {
       console.log(result);
       this.loading.dismiss();
     }, error => {
-      console.log("error");
       console.log(error);
       if (Object(error).Code.Name == 'InvalidSessionKeyException') {
         var user = this.authService.getLoggedUser();
@@ -339,7 +334,6 @@ export class MyDetailPage implements OnInit {
       console.log(result);
       this.loading.dismiss();
     }, error => {
-      console.log("error");
       console.log(error);
       if (Object(error).Code.Name == 'InvalidSessionKeyException') {
         var user = this.authService.getLoggedUser();

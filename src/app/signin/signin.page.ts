@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { TranslateServiceService } from '../../service/translate-service.service';
-import { NavController, MenuController } from '@ionic/angular';
+import { NavController, MenuController, ModalController } from '@ionic/angular';
 import { LoadingService } from '../../service/loading.service';
 import { ToastService } from '../../service/toast.service';
 import { AuthService } from 'src/service/auth.service';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { ForgotPasswordPage } from '../forgot-password/forgot-password.page';
 
 @Component({
   selector: 'app-signin',
@@ -29,6 +30,7 @@ export class SigninPage implements OnInit {
     public toast: ToastService,
     public authservice: AuthService,
     private splashScreen: SplashScreen,
+    private modalCtrl: ModalController,
   ) { }
 
   ngOnInit() {
@@ -90,6 +92,16 @@ export class SigninPage implements OnInit {
 
   gotoSignup() {
     this.navCtrl.navigateForward('signup');
+  }
+
+  async gotoForgot() {
+    let modal = await this.modalCtrl.create({
+      component: ForgotPasswordPage,
+    });
+    modal.onDidDismiss().then(result => {
+      console.log(result);
+    });
+    await modal.present();
   }
 
 }

@@ -45,8 +45,6 @@ export class TopUpPage implements OnInit {
       this.showError = true;
     }
 
-    console.log(this.showError);
-    console.log(this.topData.startDate);
     this.confirmError = true;
 
 
@@ -79,7 +77,6 @@ export class TopUpPage implements OnInit {
   }
 
   addNew() {
-    console.log(this.topData.startDate);
     if (this.setMethod.valid && this.selType.valid && this.topData.startDate != null && this.topData.startDate != "") {
       let tempTotal = { "topup": "", "startDate": "", "method": "" };
       tempTotal.method = this.topData.method;
@@ -107,17 +104,11 @@ export class TopUpPage implements OnInit {
   }
 
   ionchangeDate() {
-    console.log(this.showError);
-    console.log(this.confirmError);
-    console.log(this.topData.startDate);
     if (this.confirmError && this.topData.startDate == "") {
       this.showError = true;
     } else {
       this.showError = false;
     }
-    console.log(this.showError);
-    console.log(this.confirmError);
-    console.log(this.topData.startDate);
   }
 
   ionicInit() {
@@ -126,13 +117,11 @@ export class TopUpPage implements OnInit {
 
   setDate(value) {
     let arraySam = value.split("-");
-    console.log(arraySam);
     return arraySam[1] + "/" + arraySam[2] + "/" + arraySam[0];
   }
 
   setTime(value) {
     let arraySam = value.split(":");
-    console.log(arraySam);
     let returnVal = "";
     if (parseInt(arraySam[0]) > 12) {
       if (parseInt(arraySam[0]) - 12 < 10) {

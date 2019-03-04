@@ -10,21 +10,6 @@
     </ion-title>
   </ion-toolbar>
 
-  <!-- <ion-row mode="ios" color="secondary" class="header-row1">
-    <ion-col size="2">
-      <ion-row class="full-height">
-        <ion-icon name="md-menu" size="default" (click)="openMenu()" class="header-icon"></ion-icon>
-      </ion-row>
-    </ion-col>
-    <ion-col size="8">
-      <ion-row class="full-height">
-        <span class="header-span">
-          {{ 'my_detail' | translate }}
-        </span>
-      </ion-row>
-    </ion-col>
-  </ion-row> -->
-
 </ion-header>
 
 <ion-content padding>
@@ -165,10 +150,7 @@
               <mat-form-field class="example-full-width" *ngIf="changeState.phone">
                 <input matInput type="number" [formControl]="phoneFormCtrl" placeholder="{{ 'phone_number' | translate }}"
                   [(ngModel)]="userData.phone" required name="phone">
-                <!-- <mat-error>
-                {{ 'phone_number_is_required' | translate }}
-              </mat-error> -->
-
+                  
                 <mat-error *ngIf="phoneFormCtrl.hasError('pattern') && !phoneFormCtrl.hasError('required')">
                   {{ 'valid_phone_number' | translate }}
                 </mat-error>

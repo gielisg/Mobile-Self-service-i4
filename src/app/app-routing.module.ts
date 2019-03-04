@@ -24,6 +24,8 @@ const routes: Routes = [
   { path: 'topup-history', loadChildren: './topup-history/topup-history.module#TopupHistoryPageModule' },
   { path: 'top-up', loadChildren: './top-up/top-up.module#TopUpPageModule' },
   { path: 'payment-update', loadChildren: './payment-update/payment-update.module#PaymentUpdatePageModule' },
+  { path: 'forgot-password', loadChildren: './forgot-password/forgot-password.module#ForgotPasswordPageModule' },
+  { path: 'account-balance', loadChildren: './account-balance/account-balance.module#AccountBalancePageModule' },
 ];
 
 @NgModule({

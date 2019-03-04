@@ -6,8 +6,8 @@
   <form #signInData="ngForm" id="signInData" (ngSubmit)="signInSubmit(signInData)" novalidate>
     <ion-row class="username-row">
       <mat-form-field class="example-full-width">
-        <input matInput type="text" placeholder="{{ 'username' | translate }}" [(ngModel)]="userData.username"
-          required name="username">
+        <input matInput type="text" placeholder="{{ 'username' | translate }}" [(ngModel)]="userData.username" required
+          name="username">
         <mat-error>
           {{ 'username_is_required' | translate }}
         </mat-error>
@@ -25,6 +25,15 @@
 
       </mat-form-field>
     </ion-row>
+
+
+    <ion-row class="forgot-row">
+      <!-- {{ 'not_a_member' | translate }}? -->
+      <span class="forgot-password" (click)="gotoForgot()">
+        {{ 'forgot_password' | translate }}?
+      </span>
+    </ion-row>
+
     <ion-row class="login-row">
       <button mat-mini-fab>
         {{ 'login' | translate }}
@@ -32,14 +41,14 @@
     </ion-row>
   </form>
 
-  <ion-row class="signup-row">
+  <!-- <ion-row class="signup-row">
     <span class="sign-up-span">
       {{ 'not_a_member' | translate }}?
       <span class="sign-up-page" (click)="gotoSignup()">
         &nbsp;{{ 'create_account' | translate }}
       </span>
     </span>
-  </ion-row>
+  </ion-row> -->
 
 
 

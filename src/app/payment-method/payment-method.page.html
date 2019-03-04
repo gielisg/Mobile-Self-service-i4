@@ -25,7 +25,7 @@
 
 
   <ion-row [ngClass]="{'main-row':i == 0, 'other-row':i != 0}" *ngFor="let list of detailData; let i = index">
-    <ion-row class="first-row" (click)="viewAndUpdate(list.paymentId, list.number)">
+    <ion-row class="first-row">
       <ion-col size="4" text-left>
         <ion-row class="full-height">
           <span class="name-span">
@@ -61,7 +61,7 @@
     </ion-row>
 
     <ion-row class="bill-second-row">
-      <ion-col size="4" text-left (click)="viewAndUpdate(list.paymentId, list.number)">
+      <ion-col size="4" text-left>
         <ion-row class="full-height">
           <span class="name-span">
             {{ 'expiry' | translate }}
@@ -71,7 +71,7 @@
           </span>
         </ion-row>
       </ion-col>
-      <ion-col size="4" (click)="viewAndUpdate(list.paymentId, list.number)">
+      <ion-col size="4">
         <ion-row class="full-height">
           <span class="name-span">
             {{ 'status' | translate }}
@@ -84,9 +84,17 @@
 
       <ion-col size="4" text-right>
         <ion-row class="full-height">
-          <button mat-button class="down-button-class" (click)="deleteItem(i)">
-            {{ 'delete' | translate }}
-          </button>
+          <ion-row>
+            <button mat-button class="down-button-class"
+              (click)="viewAndUpdate(list.paymentId, list.number, list.name)">
+              {{ 'update' | translate }}
+            </button>
+          </ion-row>
+          <ion-row>
+            <button mat-button class="down-button-class" color="danger" (click)="deleteItem(i)">
+              {{ 'cancel_UP' | translate }}
+            </button>
+          </ion-row>
         </ion-row>
       </ion-col>
     </ion-row>

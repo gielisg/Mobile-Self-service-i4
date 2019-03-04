@@ -42,39 +42,34 @@ export class BillHistoryPage implements OnInit {
     this.loading.present();
     this.translate.translaterService();
 
-    this.billService.getBillList()
-      .then(
-        data => {
-          if (data) {
-            // this.userData.email = localStorage.getItem("user_email");
-            this.detailData = Array();
-            for (let list of Object(data).Items) {
-              let arrayData = { "billNum": "", "dueDate": "", "amountOwin": "" };
-              arrayData.billNum = list.Number.replace(/ /g, '');
-              arrayData.amountOwin = list.AmountDue;
-              arrayData.dueDate = (list.DueDate.split("T")[0]);
-              this.detailData.push(arrayData);
+    this.billService.getBillList().then(data => {
+      if (data) {
+        this.detailData = Array();
+        for (let list of Object(data).Items) {
+          let arrayData = { "billNum": "", "dueDate": "", "amountOwin": "" };
+          arrayData.billNum = list.Number.replace(/ /g, '');
+          arrayData.amountOwin = list.AmountDue;
+          arrayData.dueDate = (list.DueDate.split("T")[0]);
+          this.detailData.push(arrayData);
 
-            }
-            this.convertBillList();
+        }
+        this.convertBillList();
+      }
+      this.loading.dismiss();
+    }, error => {
+      console.log(error);
+      if (Object(error).Code.Name == 'InvalidSessionKeyException') {
+        this.authService.createRandomSessionKey().then(result => {
+          if (result) {
+            console.log(result);
+            this.ionicInit();
           }
-          this.loading.dismiss();
-        },
-        error => {
+        }, error => {
           console.log(error);
-          if (Object(error).Code.Name == 'InvalidSessionKeyException') {
-            this.authService.createRandomSessionKey().then(result => {
-              if (result) {
-                console.log(result);
-                // localStorage.setItem('sessionKey', Object(result));
-                this.ionicInit();
-              }
-            }, error => {
-              console.log(error);
-            });
-          }
-          this.loading.dismiss();
         });
+      }
+      this.loading.dismiss();
+    });
   }
 
   convertBillList() {
@@ -85,7 +80,6 @@ export class BillHistoryPage implements OnInit {
     }
   }
 
-
   download(index) {
     let billDownload = { "billNum": "", "dueDate": "", "amountOwin": "", "status": "download_bill", "index": "" };
     billDownload.billNum = this.detailData[index].billNum;
@@ -95,16 +89,11 @@ export class BillHistoryPage implements OnInit {
 
     this.loading.present();
 
-
     this.billService.getBillFile(this.detailData[index].billNum).then(result => {
       console.log(result);
-
       if (Object(result).Content != null && typeof (Object(result).Content) != "undefined") {
-        console.log("here");
         var pdf = 'data:application/pdf;base64,' + Object(result).Content.$value;
-        console.log(Object(result).Content.$value);
         let pdfName = Object(result).FileName;
-        console.log("here");
         this.downloadPdf(pdf, pdfName);
       } else {
         this.toast.present('The Bill you trying to download is unavailable at the moment. Sorry for the inconvenience.' +

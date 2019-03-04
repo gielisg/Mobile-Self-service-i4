@@ -144,10 +144,11 @@ export class PaymentMethodPage implements OnInit {
     return returnVal;
   }
 
-  async viewAndUpdate(paymentID, cardNum) {
+  async viewAndUpdate(paymentID, cardNum, paymentName) {
     console.log(paymentID);
     localStorage.setItem('paymentID', paymentID);
     localStorage.setItem('paymentCardNumber', cardNum);
+    localStorage.setItem('paymentUserName', paymentName);
     let updatePayment = await this.modalCtrl.create({
       component: PaymentUpdatePage
     });

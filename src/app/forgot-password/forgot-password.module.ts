@@ -5,34 +5,29 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PayNowPage } from './pay-now.page';
-import { MaterialShareModule } from '../materialshare.module';
+import { ForgotPasswordPage } from './forgot-password.page';
 
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateServiceService } from 'src/service/translate-service.service';
-import { PaymentService } from 'src/service/payment.service';
-import { LoadingService } from 'src/service/loading.service';
-import { AuthService } from 'src/service/auth.service';
-import { ToastService } from 'src/service/toast.service';
+import { MaterialShareModule } from '../materialshare.module';
 
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
+
 const routes: Routes = [
   {
     path: '',
-    component: PayNowPage
+    component: ForgotPasswordPage
   }
 ];
 
 @NgModule({
-  entryComponents: [
-  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -49,15 +44,9 @@ const routes: Routes = [
     }),
     RouterModule.forChild(routes)
   ],
-  declarations: [
-    PayNowPage,
-  ],
+  declarations: [ForgotPasswordPage],
   providers: [
     TranslateServiceService,
-    PaymentService,
-    LoadingService,
-    AuthService,
-    ToastService,
   ]
 })
-export class PayNowPageModule { }
+export class ForgotPasswordPageModule { }

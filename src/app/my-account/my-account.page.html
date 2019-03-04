@@ -11,7 +11,6 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content padding>
   <ion-row class="first-row">
     <ion-col size="1"></ion-col>
@@ -63,8 +62,6 @@
   </ion-row>
 
   <ion-row [ngClass]="{'download-pay':switchMode == true, 'rus-pay':switchMode == false}">
-    <!-- <ion-col size="1">
-    </ion-col> -->
     <ion-col size="6">
       <ion-row class="button-row">
         <button mat-button class="button-style1" (click)="clickDownload()">
@@ -79,11 +76,23 @@
         </button>
       </ion-row>
     </ion-col>
-    <!-- <ion-col size="1">
-    </ion-col> -->
   </ion-row>
 
   <ion-row class="my-detail">
+    <ion-col size="1">
+    </ion-col>
+    <ion-col size="10">
+      <ion-row class="button-row">
+        <button mat-button class="button-style1" (click)="gotoAccountBalance()">
+          {{ 'account_balance' | translate }}
+        </button>
+      </ion-row>
+    </ion-col>
+    <ion-col size="1">
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="my-normal">
     <ion-col size="1">
     </ion-col>
     <ion-col size="10">

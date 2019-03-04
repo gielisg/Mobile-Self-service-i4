@@ -15,17 +15,13 @@ import { AuthService } from 'src/service/auth.service';
 export class NewPaymentPage implements OnInit {
 
 
-  public payData = { "name": "", "method": "", "cardnum": "", "exm": "1", "exy": new Date().getFullYear() };
+  public payData = { "name": "", "method": "", "cardnum": "", "exm": "", "exy": '' };
   public expireMonth: any[];
   public expireYear: any[];
 
+  private defaultState = true;
+
   public userId = "";
-
-  selType = new FormControl('', [Validators.required]);
-
-  selExm = new FormControl('', [Validators.required]);
-
-  selExy = new FormControl('', [Validators.required]);
 
   constructor(
     public navCtrl: NavController,
@@ -37,17 +33,8 @@ export class NewPaymentPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.expireMonth = new Array();
-    this.expireYear = new Array();
-    console.log('ionViewDidLoad NewPaymentPage');
-    for (let i = 1; i < 13; i++) {
-      this.expireMonth.push(i);
-    }
-
-    for (let i = new Date().getFullYear(); i < 2050; i++) {
-      this.expireYear.push(i);
-    }
     this.ionicInit();
+    this.selectMethod();
   }
 
   goback() {
@@ -55,16 +42,49 @@ export class NewPaymentPage implements OnInit {
   }
 
   paymentSubmit(comProfileForm) {
-    if (comProfileForm.valid && this.selType.valid && this.selExm.valid) {
-
-      let add_param = {
+    if (comProfileForm.valid) {
+      this.loading.present();
+      // if (this.payData.method == "Paypal") {
+      //   this.paymentService.accountPaymentMethodDefault().then(result => {
+      //     console.log(result);
+      //     this.loading.dismiss();
+      //     this.navCtrl.navigateRoot('my-account');
+      //   }, error => {
+      //     console.log(error);
+      //     if (Object(error).Code.Name == 'InvalidSessionKeyException') {
+      //       this.authService.createRandomSessionKey().then(result => {
+      //         if (result) {
+      //           console.log(result);
+      //           // localStorage.setItem('sessionKey', Object(result));
+      //           this.paymentSubmit(comProfileForm);
+      //         }
+      //       }, error => {
+      //         console.log(error);
+      //       });
+      //     } else {
+      //       this.toast.present(Object(error).Message);
+      //     }
+      //     this.loading.dismiss();
+      //   });
+      // } else {
+      let addParam = {
         "name": this.payData.name,
+        "cardType": '',
+        "cardCodeType": '',
         "number": this.payData.cardnum,
         "expireDate": this.payData.exy + "-" + this.setTwostring(this.payData.exm) + "-" + new Date().getDate() + "T00:00:00"
       };
-
-      this.loading.present();
-      this.paymentService.accountPaymentMethodAdd(add_param).then(data => {
+      if (this.payData.method == 'credit') {
+        addParam.cardType = 'CC';
+        addParam.cardCodeType = 'C';
+      } else if (this.payData.method == 'debit') {
+        addParam.cardType = 'DD';
+        addParam.cardCodeType = 'D';
+      } else {
+        addParam.cardType = 'MC';
+        addParam.cardCodeType = 'C';
+      }
+      this.paymentService.accountPaymentMethodAdd(addParam).then(data => {
         console.log(data);
         this.loading.dismiss();
         // this.navCtrl.push(PaymentMethodPage);
@@ -88,27 +108,63 @@ export class NewPaymentPage implements OnInit {
         this.loading.dismiss();
       });
     }
+    // }
   }
 
-  submitAddPayment(){
-    console.log('Trigger Option');
-    document.getElementById("trigersubmit").click()
+  submitAddPayment() {
+    document.getElementById("trigersubmit").click();
   }
 
   ionicInit() {
 
     this.translate.translaterService();
 
-    this.userId = JSON.parse(localStorage.getItem('currentUser')).username;
+    this.expireMonth = new Array();
+    this.expireYear = new Array();
+    console.log('ionViewDidLoad NewPaymentPage');
+    for (let i = 1; i < 13; i++) {
+      this.expireMonth.push(i);
+    }
 
-    this.payData.exm = (new Date().getMonth() + 1).toString();
+    for (let i = new Date().getFullYear(); i < 2050; i++) {
+      this.expireYear.push(i);
+    }
+    this.userId = JSON.parse(localStorage.getItem('currentUser')).username;
   }
 
-  setTwostring(input_val) {
-    if (parseInt(input_val) < 10) {
-      return "0" + input_val;
+  setTwostring(inputVal) {
+    if (parseInt(inputVal) < 10) {
+      return "0" + inputVal;
     } else {
-      return input_val;
+      return inputVal;
+    }
+  }
+
+  selectMethod() {
+    this.defaultState = false;
+    // if (this.payData.method == "Paypal") {
+    //   this.defaultState = true;
+    // } else if (this.payData.method == "Visa") {
+    //   this.defaultState = false;
+    // } else {
+    //   this.defaultState = true;
+    // }
+  }
+
+  selectExpireYear() {
+    if (parseInt(this.payData.exy) == new Date().getFullYear()) {
+      if (parseInt(this.payData.exm) == new Date().getMonth() + 1) {
+        this.payData.exm = '';
+      }
+      this.expireMonth = new Array();
+      for (let i = new Date().getMonth() + 1; i < 13; i++) {
+        this.expireMonth.push(i);
+      }
+    } else {
+      this.expireMonth = new Array();
+      for (let i = new Date().getMonth() + 1; i < 13; i++) {
+        this.expireMonth.push(i);
+      }
     }
   }
 
