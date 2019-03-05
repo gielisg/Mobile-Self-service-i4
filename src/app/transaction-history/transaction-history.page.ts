@@ -79,7 +79,6 @@ export class TransactionHistoryPage implements OnInit {
       //   this.transactionList.push(list);
       // }
       if (this.setDefault.length - this.transactionList.length > 25) {
-        console.log('here1');
         let arrayNum = 0;
         if (this.transactionList.length == 0) {
           arrayNum = 0;
@@ -89,7 +88,6 @@ export class TransactionHistoryPage implements OnInit {
         console.log(arrayNum);
         console.log(this.transactionList.length);
         for (let i = arrayNum; i <= arrayNum + 25; i++) {
-          console.log('here2');
           console.log(i);
           let param = { "tranNum": "", "type": "", "date": "12 / 18", "amount": "0.01", "status": "precessing" };
           param.tranNum = this.setDefault[i].Number;
@@ -100,7 +98,6 @@ export class TransactionHistoryPage implements OnInit {
           this.transactionList.push(param);
         }
       } else {
-        console.log('here3');
         let arrayNum = 0;
         if (this.transactionList.length == 0) {
           arrayNum = 0;
@@ -120,7 +117,6 @@ export class TransactionHistoryPage implements OnInit {
 
       this.showMoreState = true;
     } else {
-      console.log('here4');
       this.showMoreState = false;
     }
 

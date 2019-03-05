@@ -13,7 +13,7 @@ export interface IAppConfig {
 }
 
 export const AppConfig: IAppConfig = {
-    apiEndpointWeb: "/SelcommWS/1.0267/",
+    apiEndpointWeb: "https://ua.selcomm.com/SelcommWS/1.0267/",
     apiEndpointMobile: "https://ua.selcomm.com/SelcommWS/1.0267/",
     WebPrivateKey: "1234567890",
     DatabaseUserCode: "webuser",

@@ -103,7 +103,7 @@ export class PayNowPage implements OnInit {
         this.paymentService.setAccountBalanceByCard(parseFloat(this.payAmount)).then(result => {
           console.log(result);
           this.loading.dismiss();
-          this.navCtrl.pop();
+          this.cancenEnable = true;
         }, error => {
           console.log(error);
           if (Object(error).Code.Name == 'InvalidSessionKeyException') {

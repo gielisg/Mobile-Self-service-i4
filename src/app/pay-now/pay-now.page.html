@@ -78,10 +78,6 @@
           <span>{{ 'payment_amount_required' | translate }}</span>
         </mat-error>
 
-        <!-- <mat-error *ngIf="!customAmount.hasError('required') && payAmount > totalAmount">
-          <span>{{ 'choose_type_of_payment' | translate }}</span>
-        </mat-error> -->
-
       </mat-form-field>
 
       <ion-row class="error-message" *ngIf="!customAmount.hasError('required') && payAmount > totalAmount">

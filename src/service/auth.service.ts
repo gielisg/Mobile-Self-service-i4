@@ -33,7 +33,7 @@ export class AuthService {
     console.log(params);
 
     return new Promise((resolve, reject) => {
-      if (this.platform.is('mobile')) {
+      if (this.platform.is('android') || this.platform.is('ios')) {
         console.log('mobile');
         this.nativeHTTP.setDataSerializer('json');
         this.nativeHTTP.post(
@@ -103,16 +103,6 @@ export class AuthService {
 
   createRandomSessionKey() {
 
-    // return this.httpclient.post(this.config.apiEndpointWeb + 'Authentication.svc/rest/AuthenticateSimpleCreateSessionAndAuthenticateContact',
-    //   JSON.stringify({
-    //     PrivateKey: this.config.WebPrivateKey,
-    //     DatabaseUserCode: this.config.DatabaseUserCode,
-    //     DatabasePassword: this.config.DatabasePassword,
-    //     UserCode: JSON.parse(localStorage.getItem('currentUser')).username,
-    //     Password: JSON.parse(localStorage.getItem('currentUser')).password
-    //   })).pipe(
-    //   );
-
     let params = {
       PrivateKey: this.config.WebPrivateKey,
       DatabaseUserCode: this.config.DatabaseUserCode,
@@ -122,7 +112,7 @@ export class AuthService {
     };
 
     return new Promise((resolve, reject) => {
-      if (this.platform.is('mobile')) {
+      if (this.platform.is('android') || this.platform.is('ios')) {
         console.log('mobile');
         this.nativeHTTP.setDataSerializer('json');
         this.nativeHTTP.post(
@@ -180,7 +170,7 @@ export class AuthService {
       '&ContactCode=' + JSON.parse(localStorage.getItem('currentUser')).username +
       '&LoadAddress=true&LoadContactPhones=true&LoadContactEmailAddresses=true&RefreshCache=true';
     return new Promise((resolve, reject) => {
-      if (this.platform.is('mobile')) {
+      if (this.platform.is('android') || this.platform.is('ios')) {
         this.nativeHTTP.get(
           this.config.apiEndpointMobile + sendParam,
           {},
@@ -232,7 +222,7 @@ export class AuthService {
     };
     console.log(JSON.stringify(param));
     return new Promise((resolve, reject) => {
-      if (this.platform.is('mobile')) {
+      if (this.platform.is('android') || this.platform.is('ios')) {
         this.nativeHTTP.put(
           this.config.apiEndpointMobile + 'Address.svc/rest/AddressUpdateByContact',
           (param),
@@ -275,7 +265,7 @@ export class AuthService {
       }
     }
     return new Promise((resolve, reject) => {
-      if (this.platform.is('mobile')) {
+      if (this.platform.is('android') || this.platform.is('ios')) {
         this.nativeHTTP.put(
           this.config.apiEndpointMobile + 'Email.svc/rest/EmailAddressUpdate',
           (param),
@@ -326,7 +316,7 @@ export class AuthService {
     }
 
     return new Promise((resolve, reject) => {
-      if (this.platform.is('mobile')) {
+      if (this.platform.is('android') || this.platform.is('ios')) {
         this.nativeHTTP.put(
           this.config.apiEndpointMobile + 'ContactPhone.svc/rest/ContactPhoneUpdate',
           (param),
@@ -379,7 +369,7 @@ export class AuthService {
 
 
     return new Promise((resolve, reject) => {
-      if (this.platform.is('mobile')) {
+      if (this.platform.is('android') || this.platform.is('ios')) {
         this.nativeHTTP.get(
           this.config.apiEndpointMobile + param,
           {},
