@@ -81,8 +81,8 @@ export class SigninPage implements OnInit {
             this.userData.username = "";
             this.userData.password = "";
             console.log(error);
-            if (error.message != null) {
-              this.toast.present(error.message);
+            if (error.Message != null) {
+              this.toast.present(error.Message);
             }
             this.loading.dismiss();
           });

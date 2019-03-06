@@ -87,7 +87,7 @@ export class PaymentMethodPage implements OnInit {
         arraySam.paymentId = list.Id;
         arraySam.name = list.AccountName;
         arraySam.number = list.AccountNumber;
-        arraySam.type = list.PaymentMethod.Type.Description;
+        arraySam.type = list.PaymentMethod.Description;
         if (list.ExpiryDate != null) {
           arraySam.expiry = this.getExpiryDate(list.ExpiryDate);
         }

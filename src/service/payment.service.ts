@@ -25,6 +25,7 @@ export class PaymentService {
     } else {
       this.startDate = new Date().toISOString();
     }
+    // this.startDate = new Date().toISOString().split('T')[0] + 'T00:00:00';
     console.log(this.startDate);
   }
 
@@ -116,11 +117,12 @@ export class PaymentService {
         },
         "StartDate": this.startDate,
         "SubscriberOwns": true,
-        "Source": "",
+        "Source": "3",
         "CreateOption": "AlwaysCreate",
-        "Default": "false",
+        "Default": "true",
       }
     };
+    console.log(param);
     return new Promise((resolve, reject) => {
       if (this.platform.is('android') || this.platform.is('ios')) {
         this.nativeHTTP.post(
