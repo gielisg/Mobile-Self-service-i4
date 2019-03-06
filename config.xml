@@ -3,7 +3,7 @@
     <name>Self Service</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.10.176:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -101,6 +101,7 @@
     </plugin>
     <plugin name="cordova-plugin-advanced-http" spec="2.0.4" />
     <plugin name="cordova-plugin-statusbar" spec="2.4.2" />
+    <allow-navigation href="http://192.168.10.176:8100" sessionid="245637f2" />
     <engine name="android" spec="7.0.0" />
     <engine name="windows" spec="6.0.1" />
 </widget>

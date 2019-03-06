@@ -74,6 +74,7 @@ export class TransactionHistoryPage implements OnInit {
   }
 
   addMoreAction() {
+    this.loading.present();
     if (this.transactionList.length < this.setDefault.length) {
       // for (let list of this.setDefault) {
       //   this.transactionList.push(list);
@@ -84,9 +85,10 @@ export class TransactionHistoryPage implements OnInit {
           arrayNum = 0;
         } else {
           arrayNum = this.transactionList.length - 1;
+          setTimeout(() => {
+            this.loading.dismiss();
+          }, 1500);
         }
-        console.log(arrayNum);
-        console.log(this.transactionList.length);
         for (let i = arrayNum; i <= arrayNum + 25; i++) {
           console.log(i);
           let param = { "tranNum": "", "type": "", "date": "12 / 18", "amount": "0.01", "status": "precessing" };
@@ -103,6 +105,9 @@ export class TransactionHistoryPage implements OnInit {
           arrayNum = 0;
         } else {
           arrayNum = this.transactionList.length - 1;
+          setTimeout(() => {
+            this.loading.dismiss();
+          }, 1500);
         }
         for (let i = arrayNum; i < this.setDefault.length; i++) {
           let param = { "tranNum": "", "type": "", "date": "12 / 18", "amount": "0.01", "status": "precessing" };

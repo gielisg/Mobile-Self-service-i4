@@ -117,8 +117,8 @@ export class PaymentService {
         "StartDate": this.startDate,
         "SubscriberOwns": true,
         "Source": "",
-        "CreateOption": "NewOnly",
-        "Default": "True",
+        "CreateOption": "AlwaysCreate",
+        "Default": "false",
       }
     };
     return new Promise((resolve, reject) => {
