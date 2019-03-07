@@ -65,27 +65,22 @@ export class SigninPage implements OnInit {
       let status = "login";
       this.userData.status = status;
 
-      this.authservice.login(this.userData.username, this.userData.password)
-
-        .then(
-          data => {
-            if (data) {
-              localStorage.setItem("logged", JSON.stringify(this.userData));
-              this.authservice.fillLoggedUser(this.userData.username, this.userData.password, data);
-              this.navCtrl.navigateRoot('home');
-            }
-            this.loading.dismiss();
-
-          },
-          error => {
-            this.userData.username = "";
-            this.userData.password = "";
-            console.log(error);
-            if (error.Message != null) {
-              this.toast.present(error.Message);
-            }
-            this.loading.dismiss();
-          });
+      this.authservice.login(this.userData.username, this.userData.password).then(data => {
+        if (data) {
+          localStorage.setItem("logged", JSON.stringify(this.userData));
+          this.authservice.fillLoggedUser(this.userData.username, this.userData.password, data);
+          this.navCtrl.navigateRoot('home');
+        }
+        this.loading.dismiss();
+      }, error => {
+        this.userData.username = "";
+        this.userData.password = "";
+        console.log(error);
+        if (error.Message != null) {
+          this.toast.present(error.Message);
+        }
+        this.loading.dismiss();
+      });
 
     }
   }
