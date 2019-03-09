@@ -68,7 +68,7 @@ export class PayNowPage implements OnInit {
   // }
 
   paymentSubmit(paymentForm) {
-    if (paymentForm.valid && !this.cancenEnable && this.customAmount.valid && this.payAmount <= this.totalAmount) {
+    if (paymentForm.valid && !this.cancenEnable && (!this.checked || this.checked && this.customAmount.valid) && this.payAmount <= this.totalAmount) {
 
       this.loading.present();
 
@@ -132,6 +132,10 @@ export class PayNowPage implements OnInit {
   changeCheck() {
     console.log(this.checked);
     this.customCheck = this.checked;
+  }
+
+  submitPayment() {
+    document.getElementById("trigersubmit").click();
   }
 
 

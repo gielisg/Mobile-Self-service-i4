@@ -356,7 +356,7 @@ select {
         background-color: white;
     }
     .other-row {
-        margin-top: 4vh;
+        margin-top: 3vh;
         border: 1px solid #ddd;
         border-radius: 10px;
         padding: 5px;
@@ -566,7 +566,7 @@ select {
     .more-button-Row {
         position: absolute;
         bottom: 5px;
-        width: 100%;
+        width: 100% !important;
         margin-left: -16px;
         .more-button {
             width: 50%;
@@ -594,7 +594,7 @@ select {
 }
 
 .payment-row {
-    margin-top: 4vh;
+    margin-top: 2vh;
     .payment-title-span {
         width: 100%;
         font-size: 17px;
@@ -674,6 +674,8 @@ select {
 .setting-content {
     .each-seting {
         background-color: white;
+        border: none;
+        border-radius: 0px;
         border-bottom: 2px solid #ddd;
         height: 50px;
     }
@@ -686,9 +688,11 @@ select {
     }
     .lock-image {
         width: 20px;
-        height: 20px;
-        margin: auto;
+        height: 20px; // margin: auto;
+        margin-top: auto;
+        margin-bottom: auto;
         opacity: 0.5;
+        margin-left: 15px;
     }
     .change-password {
         margin-top: auto;
@@ -696,8 +700,7 @@ select {
         font-size: 17px;
         cursor: pointer;
         color: black;
-        opacity: 0.5;
-        width: 100%;
+        opacity: 0.5; // width: 100%;
     }
     .app-version-span {
         padding-left: 15px;
@@ -716,9 +719,11 @@ select {
         font-size: 17px;
     }
     .select-class {
-        width: 100%;
+        width: 100px;
         max-width: 100%;
         font-size: 16px;
+        margin-top: auto;
+        margin-bottom: auto;
         .mat-form-field-infix {
             padding: 0px !important;
         }
@@ -727,7 +732,7 @@ select {
         margin-top: 10px;
     }
     .sel-lng {
-        padding-left: 10px;
+        padding-left: 10px; // width: 100%;
     }
 }
 
@@ -767,6 +772,17 @@ select {
     margin-bottom: 10vh;
 }
 
+.mat-checkbox-layout {
+    white-space: initial !important;
+}
+
+app-service-bundle {
+    .main-row {
+        border: none;
+        border-radius: 0px;
+    }
+}
+
 @media screen and (min-width: 1200px) {
     ion-row {
         width: 60% !important;
@@ -778,6 +794,109 @@ select {
             width: 50% !important;
         }
     }
+    ion-menu {
+        ion-row {
+            width: 100% !important;
+        }
+    }
+    app-my-detail {
+        ion-row {
+            ion-col {
+                ion-row {
+                    width: 100% !important;
+                }
+            }
+        }
+    }
+    .contact-phone {
+        width: 100% !important;
+    }
+    app-bill-history {
+        .main-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+        .other-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+    }
+    app-transaction-history {
+        .normal-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+        .other-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+    }
+    app-payment-method {
+        .main-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+        .other-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+    }
+    .new-payment-name {
+        ion-row {
+            width: 100% !important;
+        }
+    }
+    app-my-service {
+        .main-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+    }
+    app-call-history {
+        .main-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+        .other-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+    }
+    app-topup-history {
+        .main-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+        .other-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+    }
+    app-service-detail {
+        .main-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+    }
+    app-service-bundle {
+        .other-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 1200px) {
@@ -785,6 +904,109 @@ select {
         width: 70% !important;
         margin-left: auto !important;
         margin-right: auto !important;
+    }
+    ion-menu {
+        ion-row {
+            width: 100% !important;
+        }
+    }
+    app-my-detail {
+        ion-row {
+            ion-col {
+                ion-row {
+                    width: 100% !important;
+                }
+            }
+        }
+    }
+    .contact-phone {
+        width: 100% !important;
+    }
+    app-bill-history {
+        .main-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+        .other-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+    }
+    app-transaction-history {
+        .normal-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+        .other-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+    }
+    app-payment-method {
+        .main-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+        .other-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+    }
+    .new-payment-name {
+        ion-row {
+            width: 100% !important;
+        }
+    }
+    app-my-service {
+        .main-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+    }
+    app-call-history {
+        .main-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+        .other-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+    }
+    app-topup-history {
+        .main-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+        .other-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+    }
+    app-service-detail {
+        .main-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
+    }
+    app-service-bundle {
+        .other-row {
+            ion-row {
+                width: 100% !important;
+            }
+        }
     }
 }
 
@@ -794,10 +1016,20 @@ select {
         margin-left: auto !important;
         margin-right: auto !important;
     }
+    ion-menu {
+        ion-row {
+            width: 100% !important;
+        }
+    }
 }
 
 @media screen and (min-width: 768px) {
     .modal-wrapper {
+        ion-row {
+            width: 100% !important;
+        }
+    }
+    ion-menu {
         ion-row {
             width: 100% !important;
         }
@@ -809,6 +1041,11 @@ select {
         width: 90% !important;
         margin-left: auto !important;
         margin-right: auto !important;
+    }
+    ion-menu {
+        ion-row {
+            width: 100% !important;
+        }
     }
 }
 
@@ -826,5 +1063,11 @@ select {
         width: 100% !important;
         max-width: 100% !important;
         min-width: 100% !important;
+    }
+    ion-menu {
+        .menu-list {
+            margin: auto;
+            text-align: center;
+        }
     }
 }

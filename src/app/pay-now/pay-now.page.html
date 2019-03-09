@@ -85,29 +85,30 @@
       </ion-row>
 
     </ion-row>
-
-    <ion-row class="add-cancel">
-      <ion-col size="1">
-      </ion-col>
-      <ion-col size="5">
-        <ion-row class="button-row">
-          <button mat-button class="button-style2" (click)="goback()">
-            {{ 'cancel_UP' | translate }}
-          </button>
-        </ion-row>
-      </ion-col>
-      <ion-col size="5">
-        <ion-row class="button-row">
-          <button mat-button class="button-style1">
-            {{ 'pay' | translate }}
-          </button>
-        </ion-row>
-      </ion-col>
-      <ion-col size="1">
-      </ion-col>
-    </ion-row>
+    <button ion-button style="display:none" id="trigersubmit">Triger Submit</button>
 
   </form>
+
+  <ion-row class="add-cancel">
+    <ion-col size="1">
+    </ion-col>
+    <ion-col size="5">
+      <ion-row class="button-row">
+        <button mat-button class="button-style2" (click)="goback()">
+          {{ 'cancel_UP' | translate }}
+        </button>
+      </ion-row>
+    </ion-col>
+    <ion-col size="5">
+      <ion-row class="button-row">
+        <button mat-button class="button-style1" (click)="submitPayment()">
+          {{ 'pay' | translate }}
+        </button>
+      </ion-row>
+    </ion-col>
+    <ion-col size="1">
+    </ion-col>
+  </ion-row>
 
   <ion-row class="full-height pay-notification" *ngIf="cancenEnable">
     <ion-row class="main-row">

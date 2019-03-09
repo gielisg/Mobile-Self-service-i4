@@ -27,7 +27,7 @@ export class BillService {
     let param = { "SessionKey": (localStorage.getItem("sessionKey")) };
 
     return new Promise((resolve, reject) => {
-      if (this.platform.is('android') || this.platform.is('ios')) {
+      if (this.platform.is('cordova')) {
         this.nativeHTTP.setDataSerializer('json');
         this.nativeHTTP.post(
           this.config.apiEndpointMobile + 'Bill.svc/rest/BillList',
@@ -81,7 +81,7 @@ export class BillService {
 
     return new Promise((resolve, reject) => {
       console.log(this.platform);
-      if (this.platform.is('android') || this.platform.is('ios')) {
+      if (this.platform.is('cordova')) {
         this.nativeHTTP.setDataSerializer('json');
         this.nativeHTTP.post(
           this.config.apiEndpointMobile + 'Bill.svc/rest/BillList',
@@ -126,7 +126,7 @@ export class BillService {
       }
     };
     return new Promise((resolve, reject) => {
-      if (this.platform.is('android') || this.platform.is('ios')) {
+      if (this.platform.is('cordova')) {
         this.nativeHTTP.setDataSerializer('json');
         this.nativeHTTP.post(
           this.config.apiEndpointMobile + 'Bill.svc/rest/BillList',
@@ -169,7 +169,7 @@ export class BillService {
       "&BillNumber=" + billNumber + "&BillType=pdf";
 
     return new Promise((resolve, reject) => {
-      if (this.platform.is('android') || this.platform.is('ios')) {
+      if (this.platform.is('cordova')) {
         this.nativeHTTP.setDataSerializer('json');
         this.nativeHTTP.get(
           this.config.apiEndpointMobile + param,

@@ -28,7 +28,7 @@ export class TransactionService {
       "TransactionType": "R",
     };
     return new Promise((resolve, reject) => {
-      if (this.platform.is('android') && this.platform.is('ios')) {
+      if (this.platform.is('cordova')) {
         this.nativeHTTP.post(
           this.config.apiEndpointMobile + 'Financial.svc/rest/FinancialTransactionListByReceipt',
           param,

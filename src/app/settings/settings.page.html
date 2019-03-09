@@ -15,38 +15,52 @@
 <ion-content class="setting-content">
 
   <ion-row class="main-row each-seting">
-    <ion-col size="2">
-      <ion-row class="full-height">
-        <img src="assets/imgs/lock.png" class="lock-image" alt="">
-      </ion-row>
-    </ion-col>
-    <ion-col size="10">
+    <!-- <ion-col size="2"> -->
+    <ion-row class="full-height">
+      <img src="assets/imgs/lock.png" class="lock-image" alt="">
+      &nbsp;&nbsp;
+      <span class="change-password">{{ 'change_password' | translate }}</span>
+    </ion-row>
+    <!-- </ion-col> -->
+    <!-- <ion-col size="10">
       <ion-row class="full-height" (click)="gotoChangePass()">
         <span class="change-password">{{ 'change_password' | translate }}</span>
       </ion-row>
-    </ion-col>
+    </ion-col> -->
   </ion-row>
 
   <ion-row class="each-seting">
-    <ion-col size="2">
-      <ion-row class="full-height">
-        <img src="assets/imgs/pin_code.png" class="lock-image" alt="">
-      </ion-row>
-    </ion-col>
-    <ion-col size="10">
+    <!-- <ion-col size="2"> -->
+    <ion-row class="full-height">
+      <img src="assets/imgs/pin_code.png" class="lock-image" alt="">
+      &nbsp;&nbsp;
+      <span class="change-password">{{ 'change_pin' | translate }}</span>
+    </ion-row>
+    <!-- </ion-col> -->
+    <!-- <ion-col size="10">
       <ion-row class="full-height">
         <span class="change-password">{{ 'change_pin' | translate }}</span>
       </ion-row>
-    </ion-col>
+    </ion-col> -->
   </ion-row>
 
   <ion-row class="each-seting">
-    <ion-col size="6">
-      <ion-row class=" full-height">
+    <!-- <ion-col size="6"> -->
+      <ion-row class="full-height">
         <span class="change-password sel-lng">{{ 'select_language' | translate }}</span>
+        <ion-select class="select-class lng-setmode" (ionChange)="selectedLng()" [formControl]="selectFormControl"
+          [(ngModel)]="selectLng" required>
+          <ion-select-option value="en" (click)="selectedLng()">
+            {{ 'english' | translate }}
+          </ion-select-option>
+
+          <ion-select-option value="ru" (click)="selectedLng()">
+            {{ 'russian' | translate }}
+          </ion-select-option>
+        </ion-select>
       </ion-row>
-    </ion-col>
-    <ion-col size="6">
+    <!-- </ion-col> -->
+    <!-- <ion-col size="6">
       <ion-row class="full-height lng-setmode">
         <ion-select class="select-class" (ionChange)="selectedLng()" [formControl]="selectFormControl"
           [(ngModel)]="selectLng" required>
@@ -59,7 +73,7 @@
           </ion-select-option>
         </ion-select>
       </ion-row>
-    </ion-col>
+    </ion-col> -->
   </ion-row>
 
 </ion-content>

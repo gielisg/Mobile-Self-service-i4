@@ -36,7 +36,7 @@ export class PaymentService {
       JSON.parse(localStorage.getItem('currentUser')).username;
 
     return new Promise((resolve, reject) => {
-      if (this.platform.is('android') || this.platform.is('ios')) {
+      if (this.platform.is('cordova')) {
         this.nativeHTTP.get(
           this.config.apiEndpointMobile + param,
           {},
@@ -72,7 +72,7 @@ export class PaymentService {
       "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username;
 
     return new Promise((resolve, reject) => {
-      if (this.platform.is('android') || this.platform.is('ios')) {
+      if (this.platform.is('cordova')) {
         this.nativeHTTP.get(
           this.config.apiEndpointMobile + param,
           {},
@@ -124,7 +124,7 @@ export class PaymentService {
     };
     console.log(param);
     return new Promise((resolve, reject) => {
-      if (this.platform.is('android') || this.platform.is('ios')) {
+      if (this.platform.is('cordova')) {
         this.nativeHTTP.post(
           this.config.apiEndpointMobile + 'Payment.svc/rest/AccountPaymentMethodAdd',
           param,
@@ -172,7 +172,7 @@ export class PaymentService {
     console.log(param);
 
     return new Promise((resolve, reject) => {
-      if (this.platform.is('android') || this.platform.is('ios')) {
+      if (this.platform.is('cordova')) {
         this.nativeHTTP.put(
           this.config.apiEndpointMobile + 'Payment.svc/rest/AccountPaymentMethodCancel',
           param,
@@ -211,7 +211,7 @@ export class PaymentService {
     let sendParam = 'Payment.svc/rest/AccountPaymentMethodDefault?SessionKey=' + encodeURIComponent(localStorage.getItem("sessionKey")) +
       '&ContactCode=' + JSON.parse(localStorage.getItem('currentUser')).username;
     return new Promise((resolve, reject) => {
-      if (this.platform.is('android') || this.platform.is('ios')) {
+      if (this.platform.is('cordova')) {
         this.nativeHTTP.get(
           this.config.apiEndpointMobile + sendParam,
           {},
@@ -248,7 +248,7 @@ export class PaymentService {
     };
 
     return new Promise((resolve, reject) => {
-      if (this.platform.is('android') || this.platform.is('ios')) {
+      if (this.platform.is('cordova')) {
         this.nativeHTTP.put(
           this.config.apiEndpointMobile + 'Payment.svc/rest/AccountPaymentMethodMakeDefault',
           param,
@@ -285,7 +285,7 @@ export class PaymentService {
       '&ContactCode=' + JSON.parse(localStorage.getItem('currentUser')).username +
       '&CardNumber=' + balanceData.cardNum + '&CardName=' + balanceData.name + '&ExpiryDate=' + balanceData.expireDate + '&Amount=' + balanceData.amount;
     return new Promise((resolve, reject) => {
-      if (this.platform.is('android') || this.platform.is('ios')) {
+      if (this.platform.is('cordova')) {
         this.nativeHTTP.get(
           this.config.apiEndpointMobile + sendParam,
           {},
@@ -328,7 +328,7 @@ export class PaymentService {
     // let sendParam = 'Payment.svc/rest/PaymentRequestSimpleByDefaultPaymentMethod?' + JSON.stringify(amountParam);
 
     return new Promise((resolve, reject) => {
-      if (this.platform.is('android') || this.platform.is('ios')) {
+      if (this.platform.is('cordova')) {
         this.nativeHTTP.get(
           this.config.apiEndpointMobile + sendParam,
           {},
@@ -373,7 +373,7 @@ export class PaymentService {
       }
     };
     return new Promise((resolve, reject) => {
-      if (this.platform.is('android') || this.platform.is('ios')) {
+      if (this.platform.is('cordova')) {
         this.nativeHTTP.put(
           this.config.apiEndpointMobile + 'Payment.svc/rest/AccountPaymentMethodUpdate',
           param,
@@ -424,7 +424,7 @@ export class PaymentService {
       }
     };
     return new Promise((resolve, reject) => {
-      if (this.platform.is('android') || this.platform.is('ios')) {
+      if (this.platform.is('cordova')) {
         this.nativeHTTP.post(
           this.config.apiEndpointMobile + 'Payment.svc/rest/PaymentRequestCreate',
           param,
@@ -463,7 +463,7 @@ export class PaymentService {
 
 
     return new Promise((resolve, reject) => {
-      if (this.platform.is('android') || this.platform.is('ios')) {
+      if (this.platform.is('cordova')) {
         this.nativeHTTP.get(
           this.config.apiEndpointMobile + param,
           {},

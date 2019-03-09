@@ -52,8 +52,8 @@ export class TransactionHistoryPage implements OnInit {
         // console.log(list.Number);
       }
       // console.log(this.setDefault);
-      this.addMoreAction();
       this.loading.dismiss();
+      this.addMoreAction();
 
     }, error => {
       console.log(error);
@@ -74,7 +74,6 @@ export class TransactionHistoryPage implements OnInit {
   }
 
   addMoreAction() {
-    this.loading.present();
     if (this.transactionList.length < this.setDefault.length) {
       // for (let list of this.setDefault) {
       //   this.transactionList.push(list);
@@ -85,6 +84,7 @@ export class TransactionHistoryPage implements OnInit {
           arrayNum = 0;
         } else {
           arrayNum = this.transactionList.length - 1;
+          this.loading.present();
           setTimeout(() => {
             this.loading.dismiss();
           }, 1500);
@@ -105,6 +105,7 @@ export class TransactionHistoryPage implements OnInit {
           arrayNum = 0;
         } else {
           arrayNum = this.transactionList.length - 1;
+          this.loading.present();
           setTimeout(() => {
             this.loading.dismiss();
           }, 1500);
