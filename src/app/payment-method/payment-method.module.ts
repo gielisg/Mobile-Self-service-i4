@@ -21,7 +21,8 @@ import { AuthService } from 'src/service/auth.service';
 import { PaymentUpdatePage } from '../payment-update/payment-update.page';
 
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+  // return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 const routes: Routes = [

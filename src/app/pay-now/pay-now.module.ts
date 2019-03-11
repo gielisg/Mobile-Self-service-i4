@@ -20,7 +20,8 @@ import { ToastService } from 'src/service/toast.service';
 
 
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+  // return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 const routes: Routes = [

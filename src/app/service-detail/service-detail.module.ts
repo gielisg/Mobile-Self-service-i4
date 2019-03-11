@@ -14,7 +14,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateServiceService } from 'src/service/translate-service.service';
 
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+  // return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 const routes: Routes = [

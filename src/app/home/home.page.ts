@@ -37,6 +37,7 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.ionicInit();
+    console.log(window.location.href);
   }
 
   ionViewDidLoad() {

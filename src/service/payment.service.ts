@@ -492,6 +492,44 @@ export class PaymentService {
     });
   }
 
+  paymentSurcharge(paymentMethodCode) {
+    let encodedSessionKey = encodeURIComponent(localStorage.getItem("sessionKey"));
+    let param = 'Payment.svc /rest/PaymentSurcharge?SessionKey=' +
+      encodedSessionKey + "&PaymentMethodCode=" + paymentMethodCode  + "&PaymentSource=" + "3" + "&ContactCode=" +
+      JSON.parse(localStorage.getItem('currentUser')).username +
+      "&RefreshCache=true";
+
+
+    return new Promise((resolve, reject) => {
+      if (this.platform.is('cordova')) {
+        this.nativeHTTP.get(
+          this.config.apiEndpointMobile + param,
+          {},
+          {}
+        ).then(result => {
+          console.log(result);
+          if (result.data.charAt(0) != '{') {
+            result.data = result.data.substr(1);
+          }
+          resolve(JSON.parse(result.data));
+        }, error => {
+          console.log(error);
+          reject(this.returnErrorState(error));
+        });
+      } else {
+        this.httpclient.get<any>(
+          this.config.apiEndpointWeb + param
+        ).subscribe(result => {
+          console.log(result);
+          resolve(result);
+        }, error => {
+          console.log(error);
+          reject(error.error);
+        });
+      }
+    });
+  }
+
 
   returnErrorState(error) {
     if (error.error.charAt(0) != '{' && error.status != 'he host could not be resolved') {

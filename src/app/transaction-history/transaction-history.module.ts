@@ -21,7 +21,8 @@ import { TransactionService } from 'src/service/transaction.service';
 
 
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+  // return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 const routes: Routes = [

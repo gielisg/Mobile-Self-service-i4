@@ -18,7 +18,8 @@ import { File } from '@ionic-native/file/ngx';
 
 
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+  // return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
