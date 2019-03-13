@@ -29,8 +29,6 @@ export class AppComponent {
     public menuCtrl: MenuController
   ) {
 
-    console.log(this.navCtrl);
-
     events.subscribe('user:created', (user, time) => {
       this.ionicInit();
     });

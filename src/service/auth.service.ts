@@ -33,7 +33,7 @@ export class AuthService {
     console.log(params);
 
     return new Promise((resolve, reject) => {
-      if (this.platform.is('cordova')) {
+      if (this.platform.is('cordova') && (this.platform.is("android") || this.platform.is("ios"))) {
         console.log('mobile');
         this.nativeHTTP.setDataSerializer('json');
         this.nativeHTTP.post(
@@ -44,7 +44,6 @@ export class AuthService {
         ).then(result => {
           console.log(result.data);
           console.log(result.data.charAt(0));
-          console.log(typeof (result.data.charAt(0)));
           if (result.data.charAt(0) != '{') {
             result.data = result.data.substr(1);
           }
@@ -112,7 +111,7 @@ export class AuthService {
     };
 
     return new Promise((resolve, reject) => {
-      if (this.platform.is('cordova')) {
+      if (this.platform.is('cordova') && (this.platform.is("android") || this.platform.is("ios"))) {
         console.log('mobile');
         this.nativeHTTP.setDataSerializer('json');
         this.nativeHTTP.post(
@@ -170,7 +169,7 @@ export class AuthService {
       '&ContactCode=' + JSON.parse(localStorage.getItem('currentUser')).username +
       '&LoadAddress=true&LoadContactPhones=true&LoadContactEmailAddresses=true&RefreshCache=true';
     return new Promise((resolve, reject) => {
-      if (this.platform.is('cordova')) {
+      if (this.platform.is('cordova') && (this.platform.is("android") || this.platform.is("ios"))) {
         this.nativeHTTP.get(
           this.config.apiEndpointMobile + sendParam,
           {},
@@ -222,7 +221,7 @@ export class AuthService {
     };
     console.log(JSON.stringify(param));
     return new Promise((resolve, reject) => {
-      if (this.platform.is('cordova')) {
+      if (this.platform.is('cordova') && (this.platform.is("android") || this.platform.is("ios"))) {
         this.nativeHTTP.put(
           this.config.apiEndpointMobile + 'Address.svc/rest/AddressUpdateByContact',
           (param),
@@ -265,7 +264,7 @@ export class AuthService {
       }
     }
     return new Promise((resolve, reject) => {
-      if (this.platform.is('cordova')) {
+      if (this.platform.is('cordova') && (this.platform.is("android") || this.platform.is("ios"))) {
         this.nativeHTTP.put(
           this.config.apiEndpointMobile + 'Email.svc/rest/EmailAddressUpdate',
           (param),
@@ -316,7 +315,7 @@ export class AuthService {
     }
 
     return new Promise((resolve, reject) => {
-      if (this.platform.is('cordova')) {
+      if (this.platform.is('cordova') && (this.platform.is("android") || this.platform.is("ios"))) {
         this.nativeHTTP.put(
           this.config.apiEndpointMobile + 'ContactPhone.svc/rest/ContactPhoneUpdate',
           (param),
@@ -369,7 +368,7 @@ export class AuthService {
 
 
     return new Promise((resolve, reject) => {
-      if (this.platform.is('cordova')) {
+      if (this.platform.is('cordova') && (this.platform.is("android") || this.platform.is("ios"))) {
         this.nativeHTTP.get(
           this.config.apiEndpointMobile + param,
           {},
